@@ -649,7 +649,8 @@ details > summary:hover { color: var(--color-destaque_interativo_hover); }
 .u-retic .gu-marca { background: radial-gradient(circle, var(--color-tinta_azul) 1.2px, transparent 1.5px) 0 0 / 5px 5px, var(--color-superficie); }
 .u-retic .u-peito { fill: url(#retic-camisa); }
 .u-vazio .u-peito { fill: var(--color-superficie); stroke-dasharray: 1.5 1.2; }
-.u-apagado { opacity: .3; }
+.u-apagado svg, .u-apagado .gu-marca { opacity: .3; }
+.u-apagado .gu-rot { color: var(--color-texto_suave); }
 .legenda-graf { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-bottom: 14px; font-family: var(--font-family-mono); font-size: 12.5px; }
 .leg-item { display: inline-flex; align-items: center; gap: 6px; }
 .leg-chave { width: 16px; height: 16px; border: 1.5px solid var(--color-tinta_azul); background: var(--color-superficie); display: inline-block; }
@@ -676,7 +677,8 @@ details > summary:hover { color: var(--color-destaque_interativo_hover); }
 .gc-tit { font-family: var(--font-family-display); font-weight: 700; text-transform: uppercase; font-size: 1.2rem; line-height: 1.05; }
 .gc-txt { font-size: 14px; line-height: 1.45; }
 .gc-status { font-family: var(--font-family-mono); font-size: 11.5px; font-weight: 600; }
-.gc-item.apagado { opacity: .3; }
+.gc-item.apagado { border-color: var(--color-linha); color: var(--color-texto_suave); }
+.gc-item.apagado .eyebrow, .gc-item.apagado .gc-status { color: var(--color-texto_suave); }
 .gc-item.ativo { box-shadow: 4px 4px 0 var(--color-tinta_azul); }
 .gc-item.dano { border-color: var(--color-alerta); box-shadow: 4px 4px 0 var(--color-alerta); }
 
@@ -715,3 +717,16 @@ figure.grafico { margin: var(--space-space_8) 0 0; }
 
 /* âncoras não ficam escondidas sob o cabeçalho fixo */
 [id] { scroll-margin-top: calc(env(safe-area-inset-top, 0px) + 76px); }
+
+/* ===== Revisão final (Etapa 4): alvos de toque ≥ 44px e regiões roláveis acessíveis ===== */
+a.logos { min-height: 44px; }
+.rodape ul a { min-height: 44px; }
+.nota-fonte a:not(.btn) { display: inline-flex; align-items: center; min-height: 44px; }
+[data-rolavel]:focus-visible { box-shadow: inset 0 0 0 3px var(--color-foco_teclado); }
+/* indicador de posição: no celular o estádio rola de lado, como na home (seção F) */
+.posicao .moldura-pos { overflow-x: auto; }
+.posicao .moldura-pos .estadio-svg { min-width: 720px; }
+@media (max-width: 759px) { .posicao .selo-ilustrativo { position: sticky; left: 8px; top: auto; right: auto; display: inline-block; margin: 8px; } }
+/* esquema da r1: o passo atual ganha marca-texto; nada fica invisível */
+.esq .grupo.atual .marca-texto { opacity: 1; }
+.esq .marca-texto { opacity: 0; transition: opacity var(--motion-duration-duracao_media) var(--motion-easing-easing_padrao); }

@@ -103,7 +103,7 @@
       
       <div class="graf-caixa"><div id="g-casos" style="position:relative"><p class="legenda">Carregando o gráfico…</p></div></div>
       <p class="nota-fonte legenda">
-        <span>Fonte: Fontes sugeridas: Ministério Público de Goiás (Operação Penalidade Máxima); STJD; CPI da Câmara sobre manipulação (2023); CPI das Bets do Senado. <span class="pendente">[A APURAR]</span></span>
+        <span>Fonte: Fontes sugeridas: Ministério Público de Goiás (Operação Penalidade Máxima); STJD; CPI da Câmara sobre manipulação (2023); CPI das Bets do Senado. <span class="pendente">[A APURAR]. Coleta: out/2026.</span></span>
         <a href="../metodologia.html#dados">Nota metodológica</a>
         <a class="btn btn-secundario btn-pequeno" href="../data/r4-casos-manipulacao.csv" download><svg class="icone" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg> Baixar dados (CSV)</a>
       </p>
@@ -180,16 +180,16 @@ const R = iniciarReportagem();
 /* ---------- Scrollytelling: cartões de naming rights ---------- */
 graficoDeCSV('r4-naming-rights.csv', $('#g-nomes'), linhas => {
   Graficos.cartoes($('#g-nomes'), linhas, {
-    eyebrow: 'tipo', titulo: 'propriedade', status: 'status', grupo: 'regiao',
+    eyebrow: 'tipo', titulo: 'propriedade', status: 'situacao', grupo: 'regiao',
     texto: l => l.nome_comercial + ' · ' + l.local + (l.inicio ? ' · desde ' + l.inicio : '') + (l.fim ? ' · até ' + l.fim : '')
   });
   const itens = $$('.gc-item', $('#g-nomes'));
   Scrolly.iniciar($('#scrolly-nomes'), n => itens.forEach((li, i) => {
     const l = linhas[i];
-    const ativo = n === 1 ? l.tipo === 'competição' : n === 2 ? l.regiao === 'Nordeste' : n === 3 ? l.propriedade === 'Estádio dos Aflitos' : l.status.includes('suspenso');
+    const ativo = n === 1 ? l.tipo === 'competição' : n === 2 ? l.regiao === 'Nordeste' : n === 3 ? l.propriedade === 'Estádio dos Aflitos' : l.situacao.includes('suspenso');
     li.className = 'gc-item ' + (ativo ? (n === 4 ? 'dano' : 'ativo') : 'apagado');
   }));
-}, $('#tab-nomes'), [['propriedade', 'Propriedade'], ['nome_comercial', 'Nome comercial'], ['local', 'Local'], ['inicio', 'Início'], ['fim', 'Fim'], ['status', 'Situação'], ['fonte', 'Fonte']]);
+}, $('#tab-nomes'), [['propriedade', 'Propriedade'], ['nome_comercial', 'Nome comercial'], ['local', 'Local'], ['inicio', 'Início'], ['fim', 'Fim'], ['situacao', 'Situação'], ['fonte', 'Fonte'], ['status', 'Status']]);
 
 /* ---------- Tabela de casos (a apurar) ---------- */
 graficoDeCSV('r4-casos-manipulacao.csv', $('#g-casos'), linhas => {

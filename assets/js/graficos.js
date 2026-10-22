@@ -156,8 +156,8 @@ Graficos.linhaDoTempo = function (el, dados, o) {
     else f = '<polygon points="' + f1(cx) + ',' + (cy - 9) + ' ' + f1(cx + 8.5) + ',' + (cy + 6) + ' ' + f1(cx - 8.5) + ',' + (cy + 6) + '" fill="' + preench + '" stroke="' + borda + '" stroke-width="1.5"/>';
     const xr = d.data_fim ? (cx + X(d.data_fim)) / 2 : cx;
     const rot = d.rotulo_curto ? '<text x="' + f1(d.data_fim ? xr : xr + (d.rotulo_lado === 'esq' ? -13 : 13)) + '" y="' + (d.data_fim ? cy - 13 : cy + 5) + '" text-anchor="' + (d.data_fim ? 'middle' : d.rotulo_lado === 'esq' ? 'end' : 'start') + '" font-size="' + (13 * k) + '" font-weight="600" fill="var(--color-texto)">' + esc(d.rotulo_curto) + '</text>' : '';
-    s += '<g class="marca" tabindex="0" data-i="' + i + '" data-id="' + esc(d.id) + '" aria-label="' + esc(d.data_texto + ': ' + d.evento) + '">' +
-      '<circle class="alvo" cx="' + f1(xr) + '" cy="' + cy + '" r="16"/><circle class="anel-marca" cx="' + f1(xr) + '" cy="' + cy + '" r="14"/>' + f + '</g>' + rot;
+    s += '<g class="marca" role="img" tabindex="0" data-i="' + i + '" data-id="' + esc(d.id) + '" aria-label="' + esc(d.data_texto + ': ' + d.evento) + '">' +
+      '<circle class="alvo" cx="' + f1(xr) + '" cy="' + cy + '" r="22"/><circle class="anel-marca" cx="' + f1(xr) + '" cy="' + cy + '" r="14"/>' + f + '</g>' + rot;
   });
   s += '</svg><div class="tooltip" hidden></div>';
   el.innerHTML = s;

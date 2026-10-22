@@ -234,10 +234,20 @@ function desenharEsquema() {
 }
 desenharEsquema();
 function mostrarPasso(n) {
-  $$('#svg-esquema .grupo').forEach(g => { g.style.opacity = (+g.dataset.g <= n || movimentoReduzido()) ? 1 : 0; });
-  $$('.passo-rep').forEach(p => p.classList.toggle('ativo', +p.dataset.passo === n));
+  /* Todas as partes do esquema ficam sempre visíveis (seção H: nada fica invisível esperando
+     a rolagem). O passo atual ganha um marca-texto amarelo por trás. */
+  $$('#svg-esquema .grupo').forEach(g => {
+    if (!g.querySelector('.marca-texto')) {
+      const b = g.getBBox(), r = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+      r.setAttribute('class', 'marca-texto');
+      r.setAttribute('x', b.x - 8); r.setAttribute('y', b.y - 6);
+      r.setAttribute('width', b.width + 16); r.setAttribute('height', b.height + 12);
+      r.setAttribute('fill', 'var(--color-faixa_amarela)'); r.setAttribute('fill-opacity', '0.45');
+      g.insertBefore(r, g.firstChild);
+    }
+    g.classList.toggle('atual', +g.dataset.g === n);
+  });
 }
-
 Scrolly.iniciar($('#scrolly-esquema'), mostrarPasso);
 
 /* ---------- Gráfico: linha do tempo dos marcos legais ---------- */

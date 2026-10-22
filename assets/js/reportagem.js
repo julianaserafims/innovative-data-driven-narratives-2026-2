@@ -38,6 +38,7 @@ async function graficoDeCSV(nome, elGrafico, desenhar, tabela, colunas) {
   if (!linhas) { erroGrafico(elGrafico); return null; }
   desenhar(linhas);
   if (tabela && colunas) Graficos.tabela(tabela, linhas, colunas);
+  tornarRolaveisFocaveis();
   return linhas;
 }
 
@@ -92,6 +93,7 @@ function iniciarReportagem() {
   const svgCam = $('#svg-camera');
   ativarEstadio(svgCam, null);
   $('#' + R.hotspot_estadio, svgCam).classList.add('atual');
+  svgCam.setAttribute('inert', '');   /* ilustração: os números desta figura não são clicáveis */
   const vbFim = VISTAS_CAMERA[R.hotspot_estadio], vbIni = [0, 0, 960, 540];
   setTimeout(() => animar(1200, k => enquadrar(svgCam, vbIni.map((v, i) => v + (vbFim[i] - v) * k)), () => {
     $('#camera-legenda').textContent = 'Você está no setor ' + R.numero + ': ' + SETOR.area.toLowerCase() + '. ' + SETOR.microcopy;
@@ -111,6 +113,7 @@ function iniciarReportagem() {
   ativarEstadio(svgPos, null);
   $('#' + R.hotspot_estadio, svgPos).classList.add('atual');
   const morf = prepararMorfose(svgPos);
+  centralizarRolagem(svgPos.parentElement);
   const legPos = $('#legenda-pos');
   legPos.textContent = 'O estádio do dossiê. Role até aqui para ver o caminho das seis reportagens.';
   let feito = false;
@@ -122,8 +125,8 @@ function iniciarReportagem() {
   };
   if (movimentoReduzido() || !('IntersectionObserver' in window)) transformar();
   else {
-    const io = new IntersectionObserver(e => { if (e[0].isIntersecting) { io.disconnect(); transformar(); } }, { threshold: 0.5 });
-    io.observe(svgPos);
+    const io = new IntersectionObserver(e => { if (e[0].isIntersecting) { io.disconnect(); transformar(); } }, { threshold: 0.4 });
+    io.observe(svgPos.parentElement);   /* observa a moldura: no celular o SVG é mais largo que a tela */
   }
   atualizarVisitados();
   return R;

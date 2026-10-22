@@ -652,9 +652,29 @@ function ligarEntrada(alvo) {
   }));
 }
 
+/* Áreas com rolagem lateral (estádio, tabelas, gráficos largos) recebem foco de teclado
+   e um nome, para quem navega sem mouse conseguir rolá-las com as setas (WCAG 2.1.1). */
+function tornarRolaveisFocaveis() {
+  $$('.estadio-rolagem, .c-rolagem, .graf-rolagem, .tab-rolagem, .tl-rolagem, .moldura-pos, #g-matriz').forEach(el => {
+    if (el.dataset.rolavel) return;
+    el.dataset.rolavel = '1';
+    el.tabIndex = 0;
+    el.setAttribute('role', 'region');
+    const fig = el.closest('figure, section, details');
+    let tit = fig && fig.querySelector('h2, h3, summary');
+    if (!tit) {                                  /* sem figura: usa o intertítulo anterior */
+      let ant = el.previousElementSibling;
+      while (ant && !/^H[23]$/.test(ant.tagName)) ant = ant.previousElementSibling;
+      tit = ant || el.querySelector('caption');
+    }
+    el.setAttribute('aria-label', 'Área com rolagem lateral' + (tit ? ': ' + tit.textContent.trim() : ''));
+  });
+}
+
 function iniciarComum() {
   montarMenu();
   atualizarVisitados();
+  tornarRolaveisFocaveis();
 }
 
 
