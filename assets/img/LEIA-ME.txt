@@ -1,0 +1,5 @@
+Coloque aqui os logos oficiais (ufpe.svg, cac.svg, cin.svg).
+Depois, em assets/js/site.js, na função montarCasca, troque cada
+<span class="logo-ph" aria-hidden="true">UFPE</span>
+por
+<img src="${RAIZ}assets/img/ufpe.svg" alt="UFPE" height="32">

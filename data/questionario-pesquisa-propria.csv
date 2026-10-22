@@ -1,0 +1,23 @@
+id_pergunta,bloco,pergunta,tipo,opcoes
+q2,perfil,Onde você mora?,aberta,
+q3,perfil,Qual sua idade?,unica,"Menos de 18|18 a 24|25 a 34|35 a 44|45 a 54|55 ou mais"
+q4,perfil,Qual seu gênero?,aberta,
+q5,perfil,Você acompanha futebol?,unica,"Sim, bastante|Sim, ocasionalmente|Pouco|Não acompanho"
+q6,perfil,Você torce para algum time? Qual(is)?,aberta,
+q8,influencia,Você já apostou em uma casa de apostas esportivas?,unica,"Sim, no passado|Não, mas já pensei em apostar|Não, nunca tive interesse"
+q9,influencia,Quando você começou a apostar?,unica,"Menos de 1 ano|1 a 2 anos|2 a 3 anos|Mais de 3 anos|Não se aplica"
+q10,influencia,Com que frequência você costumava apostar?,unica,"Diariamente|Algumas vezes por semana|Uma vez por semana|Algumas vezes por mês|Raramente|Não se aplica"
+q11,influencia,Como você conheceu as bets?,unica,"Redes sociais|Influenciadores|Publicidade na TV/internet|Transmissões esportivas|Patrocínio de clubes|Jogadores|Amigos ou familiares|Outro"
+q12,influencia,Você já conheceu uma bet por meio do seu time ou de algum jogador?,unica,"Sim|Não|Não tenho certeza"
+q13,influencia,O que mais influenciou sua decisão de apostar ou pensar em apostar?,unica,"Curiosidade|Possibilidade de ganhar dinheiro|Promoções|Amigos/família|Influenciadores|Publicidade|Futebol|Clube ou jogador|Outro"
+q14,influencia,A presença das bets no futebol influencia o torcedor a apostar?,unica,"Muito|Um pouco|Pouco|Não influencia|Não sei"
+q15,influencia,Você já teve algum prejuízo significativo com apostas?,unica,"Sim|Não|Prefiro não responder"
+q16,influencia,Você já se arrependeu de alguma aposta?,unica,"Sim|Não|Prefiro não responder"
+q17,proibicao,"Você sabia que uma MP de setembro de 2026 proibiu exploração, oferta, intermediação e publicidade das bets?",unica,"Sim|Não"
+q18,proibicao,O que você acha da proibição das bets no Brasil?,unica,"Sou a favor|Sou contra|Não tenho opinião formada"
+q19,proibicao,A proibição deve ser mantida?,unica,"Sim|Não|Não sei"
+q20,proibicao,A proibição vai mudar a relação do torcedor com as apostas?,unica,"Sim|Não|Não sei"
+q22,proibicao,Os clubes deveriam poder receber patrocínio de casas de apostas?,unica,"Sim|Não|Depende das regras|Não sei"
+q23,proibicao,A saída das bets pode prejudicar financeiramente os clubes?,unica,"Muito|Um pouco|Pouco|Não|Não sei"
+q24,proibicao,Os clubes deveriam buscar outros patrocinadores mesmo com redução de receita?,unica,"Sim|Não|Não sei"
+q25,proibicao,"Conte brevemente sua experiência ou opinião sobre bets, futebol e torcedores.",aberta,

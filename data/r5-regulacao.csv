@@ -1,0 +1,9 @@
+id,data_inicio,data_fim,precisao,data_texto,evento,tipo,fonte,url,status,destaque,rotulo_curto,rotulo_lado
+lei-13756,2018-12-12,,dia,12/12/2018,"Lei 13.756/2018 legaliza a aposta de quota fixa e deixa a regulamentação para depois",executivo,Planalto,https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13756.htm,OK,sim,Lei 13.756,dir
+lei-14790,2023-12-29,,dia,29/12/2023,"Lei 14.790/2023 regulamenta o setor, inclui jogos online e cria regras de licença, impostos e publicidade",executivo,Planalto,https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2023/lei/l14790.htm,OK,,Lei 14.790,esq
+portaria-1231,2024-07-31,,dia,31/07/2024,"Portaria SPA/MF 1.231/2024: publicidade, jogo responsável, fim do cartão de crédito e do bônus de boas-vindas",executivo,Dossiê IEPS; Congresso em Foco,,OK,,,
+cpi-instalada,2024-11-15,,mes,nov/2024,"Senado instala a CPI das Bets",congresso,Dossiê IEPS,,OK,,,
+mercado-regulado,2025-01-15,,mes,jan/2025,"Começa o mercado federal regulado, com empresas autorizadas e domínio .bet.br",executivo,Congresso em Foco,,OK,,,
+mp-1303,2025-06-11,2025-10-08,dia,11/06 a 08/10/2025,"MP 1.303/2025 destinava 6% à seguridade social e à saúde; perdeu a validade sem votação",executivo,Dossiê IEPS,,OK,,,
+cpi-relatorio,2025-06-12,,dia,12/06/2025,"CPI das Bets rejeita por 4 a 3 o relatório que previa 16 indiciamentos e 20 projetos de lei",congresso,Dossiê IEPS,,OK,,,
+mp-1394,2026-09-15,,mes,set/2026,"MP 1.394/2026 proíbe as apostas de quota fixa; o Congresso pode manter, mudar ou rejeitar",executivo,Congresso em Foco; BBC Brasil,,OK,dano,,

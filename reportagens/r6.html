@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Da torcida à aposta: quem paga a conta · Da Sorte ao Declínio</title>
+<meta name="description" content="O torcedor que virou apostador, o dinheiro que sai do orçamento da casa e o custo que fica para a saúde pública.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Azeret+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body data-raiz="../">
+<!-- O cabeçalho, o menu, o aviso de jogo responsável e o rodapé são montados por assets/js/site.js
+     a partir de assets/js/mapa-narrativo.js (edite os créditos lá, uma vez só). -->
+<main id="conteudo" tabindex="-1" data-rep="r6">
+  <!-- ================= ABERTURA: título, linha fina, créditos, data e câmera ================= -->
+  <header class="rep-abertura">
+    <div class="conteiner rep-abertura-grade">
+      <div>
+        <p class="eyebrow" id="eyebrow-rep"><!-- preenchido pelo script: "Reportagem N de 6 · Setor" --></p>
+        <h1 class="titulo-rep">Da torcida à aposta: quem paga a conta</h1>
+        <p class="linha-fina">O torcedor que virou apostador, o dinheiro que sai do orçamento da casa e o custo que fica para a saúde pública.</p>
+        <div class="creditos legenda">
+          <span>Texto e reportagem: <span class="pendente">[A PREENCHER]</span> · Dados: <span class="pendente">[A PREENCHER]</span> · Design e desenvolvimento: <span class="pendente">[A PREENCHER]</span></span>
+          <span>Publicado em <span class="pendente">[A PREENCHER]</span> · Atualizado em <time datetime="2026-10-14">14/10/2026</time> · <span id="tempo-leitura">leitura de alguns minutos</span></span>
+        </div>
+      </div>
+      <figure style="margin:0">
+        <div class="camera"><svg id="svg-camera" class="estadio-svg" viewBox="0 0 960 540" role="group"></svg></div>
+        <figcaption class="legenda camera-legenda" id="camera-legenda">Você está no estádio do dossiê.</figcaption>
+      </figure>
+    </div>
+  </header>
+
+  <div class="conteiner">
+    <aside class="aviso-jr" aria-label="Aviso de jogo responsável" style="margin-top:0">
+      <svg class="icone" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4M12 17h.01"/></svg>
+      <p><strong>Esta reportagem trata de dependência.</strong> Se apostar está difícil de parar, procure o CAPS ou a UBS da sua cidade, ou os Jogadores Anônimos. Em sofrimento emocional, ligue <strong>188</strong> (CVV). Os canais estão no fim da página.</p>
+    </aside>
+    <div class="corpo">
+      <!-- ================= ACHADOS ("o que descobrimos") ================= -->
+      <section class="achados" aria-labelledby="t-achados">
+        <h2 id="t-achados">O que a apuração mostra</h2>
+        <ol>
+          <li>De cada 100 torcedores, cerca de <strong>17</strong> já apostaram em futebol; entre jovens de 16 a 24 anos, cerca de <strong>26</strong>. <span class="legenda">Fonte: Ipsos-Ipec para O Globo (jun/2025).</span></li>
+          <li><strong>10,9 milhões</strong> de brasileiros com 14 anos ou mais têm padrão de jogo de risco ou problemático. <span class="legenda">Fonte: LENAD III (Unifesp), dados de 2023.</span></li>
+          <li>O custo social estimado dos danos das apostas é de <strong>R$ 38,8 bilhões por ano</strong>, quase seis vezes a arrecadação federal do setor em 2025. <span class="legenda">Fonte: Dossiê IEPS (2025).</span></li>
+        </ol>
+      </section>
+
+      <h2>O torcedor que virou apostador</h2>
+      <p>O perfil mais comum de quem aposta em futebol é de homens, jovens, de renda baixa ou média e moradores do interior. Quem ganha até um salário mínimo aposta menos, mas com mais frequência. Entre os homens, 22,9% já apostaram; entre as mulheres, 8%.</p>
+    </div>
+
+    <!-- ================= SCROLLYTELLING: torcida ================= -->
+    <section class="sangra" id="scrolly-torcida" aria-labelledby="t-scrolly-torcida" style="margin-top:var(--space-space_8)">
+      <h2 id="t-scrolly-torcida">De cada 100 torcedores, 17 já apostaram em futebol</h2>
+      <p class="coluna" style="margin-top:var(--space-space_3)">Cada ponto é um torcedor. Os números vêm da pesquisa Ipsos-Ipec de junho de 2025, arredondados para o ponto inteiro mais próximo.</p>
+      <div class="scrolly-rep">
+        <div class="esquema-fixo">
+          <div class="grafico-sticky"><p class="graf-titulo">Torcedores que já apostaram em futebol, 2025</p><div class="legenda-graf" id="leg-torcida"></div><div id="g-torcida"><p class="legenda">Carregando o gráfico…</p></div></div>
+        </div>
+        <div class="passos-rep">
+          <article class="passo-rep" data-passo="1">
+            <p class="eyebrow">Passo 1 de 4</p>
+            <h3>Cem torcedores na arquibancada</h3>
+            <p>A pesquisa ouviu 2.000 pessoas que torcem por algum time, com margem de erro de 2,2 pontos percentuais.</p>
+          </article>
+          <article class="passo-rep" data-passo="2">
+            <p class="eyebrow">Passo 2 de 4</p>
+            <h3>Dezessete já apostaram</h3>
+            <p>São 16,6% dos torcedores. Nos pontos, 17 de 100.</p>
+          </article>
+          <article class="passo-rep" data-passo="3">
+            <p class="eyebrow">Passo 3 de 4</p>
+            <h3>Três apostam sempre</h3>
+            <p>Entre os que já apostaram, 3 de cada 100 torcedores dizem apostar sempre; outros 2 apostam com frequência.</p>
+          </article>
+          <article class="passo-rep" data-passo="4">
+            <p class="eyebrow">Passo 4 de 4</p>
+            <h3>Entre os jovens, um em cada quatro</h3>
+            <p>Na faixa de 16 a 24 anos, 25,5% já apostaram em futebol: 26 pontos de 100.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="grafico" style="margin-top:var(--space-space_3)">
+      <p class="nota-fonte legenda">
+        <span>Fonte: Ipsos-Ipec para O Globo, campo de 5 a 9/06/2025, 2.000 entrevistas, margem de 2,2 p.p.</span>
+        <a href="../metodologia.html#dados">Nota metodológica</a>
+        <a class="btn btn-secundario btn-pequeno" href="../data/r6-perfil-apostador.csv" download><svg class="icone" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg> Baixar dados (CSV)</a>
+      </p>
+      <details>
+        <summary>Ler descrição do gráfico</summary>
+        <p class="coluna">Cem pontos. 17 representam os torcedores que já apostaram em futebol (16,6%). Desses, 3 apostam sempre (3,0%). Entre jovens de 16 a 24 anos, 26 de 100 já apostaram (25,5%).</p>
+        <div class="tab-rolagem"><table class="tabela-dados" id="tab-torcida"><caption class="sr">Perfil do torcedor apostador</caption></table></div>
+      </details>
+    </div>
+
+    <!-- ================= GRÁFICO: renda ================= -->
+    <figure class="grafico" id="fig-renda" aria-labelledby="t-renda">
+      <h3 id="t-renda">Quem ganha de 2 a 5 salários mínimos é quem mais diz já ter apostado</h3>
+      <p class="linha-fina-graf">Torcedores que já apostaram em futebol, por faixa de renda familiar, em %. Junho de 2025.</p>
+      
+      
+      <div class="graf-caixa"><div id="g-renda" style="position:relative"><p class="legenda">Carregando o gráfico…</p></div></div>
+      <p class="nota-fonte legenda">
+        <span>Fonte: Ipsos-Ipec para O Globo (2025).</span>
+        <a href="../metodologia.html#dados">Nota metodológica</a>
+        <a class="btn btn-secundario btn-pequeno" href="../data/r6-perfil-apostador.csv" download><svg class="icone" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg> Baixar dados (CSV)</a>
+      </p>
+      <details>
+        <summary>Ler descrição do gráfico</summary>
+        <p class="coluna">Quatro barras: até 1 salário mínimo, 12,7%; de 1 a 2, 17,0%; de 2 a 5, 20,3%; mais de 5, 15,8%. O risco, porém, é maior entre os mais pobres: segundo o LENAD III, 52,8% de quem ganha até 1 salário mínimo e aposta tem padrão de risco.</p>
+        <div class="tab-rolagem"><table class="tabela-dados" id="tab-renda"><caption class="sr">Quem ganha de 2 a 5 salários mínimos é quem mais diz já ter apostado</caption></table></div>
+      </details>
+    </figure>
+
+    <!-- ================= GRÁFICO: custo ================= -->
+    <figure class="grafico" id="fig-custo" aria-labelledby="t-custo">
+      <h3 id="t-custo">O custo social estimado é quase seis vezes o que o Estado arrecadou</h3>
+      <p class="linha-fina-graf">Custo social anual estimado dos danos das apostas, arrecadação federal do setor e repasse à saúde, em reais. Os períodos são diferentes e estão indicados em cada barra.</p>
+      
+      
+      <div class="graf-caixa"><div id="g-custo" style="position:relative"><p class="legenda">Carregando o gráfico…</p></div></div>
+      <p class="nota-fonte legenda">
+        <span>Fonte: Dossiê IEPS (2025); Receita Federal.</span>
+        <a href="../metodologia.html#dados">Nota metodológica</a>
+        <a class="btn btn-secundario btn-pequeno" href="../data/r6-custo-x-arrecadacao.csv" download><svg class="icone" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg> Baixar dados (CSV)</a>
+      </p>
+      <details>
+        <summary>Ler descrição do gráfico</summary>
+        <p class="coluna">Três barras: custo social anual estimado, R$ 38,8 bilhões; arrecadação federal de fevereiro a setembro de 2025, R$ 6,8 bilhões; repasse efetivo ao Ministério da Saúde até 25/08/2025, R$ 33 milhões.</p>
+        <div class="tab-rolagem"><table class="tabela-dados" id="tab-custo"><caption class="sr">O custo social estimado é quase seis vezes o que o Estado arrecadou</caption></table></div>
+      </details>
+    </figure>
+
+    <div class="corpo">
+      <h2>A conta chega em casa</h2>
+      <p>As apostas online tiraram de R$ 120 bilhões a R$ 141 bilhões do consumo das famílias em 2025, o equivalente a 0,9% a 1,1% do PIB, segundo estimativa do Made-USP citada pelo Nexo. 13% dos inquilinos atrasaram ou deixaram de pagar o aluguel por causa de apostas, e 74% dos entrevistados associam as apostas ao endividamento familiar.</p>
+
+      <!-- ================= CITAÇÃO / DEPOIMENTO ================= -->
+      <blockquote class="citacao">
+        <span class="aspas" aria-hidden="true">“</span>
+        <p>Então, já chegou a vez de eu fazer 8 mil na plataforma, conseguir sacar, porém depositando de 200 a 300 reais em cada plataforma, e a hora que eu fui ver, já perdi os 8 que eu já tinha sacado da plataforma. E vai virando um vício [...] E nisso, eu comecei a ter problema com agiota, porque eu cheguei a pegar dinheiro emprestado.</p>
+        <footer class="legenda">Nome preservado · Pessoa atendida na Rede de Atenção Psicossocial (Raps). Relato publicado no <i>Guia de cuidado para pessoas com problemas relacionados a jogos de apostas</i> (Ministério da Saúde, 2026), licença CC BY-NC-SA 4.0.</footer>
+      </blockquote>
+
+      <h2>Uma questão de saúde pública</h2>
+      <p>O transtorno do jogo é reconhecido como dependência comportamental no DSM-5 e está na CID-11. Entre janeiro de 2018 e maio de 2025, o SUS registrou 10.553 atendimentos por jogo patológico; a projeção do governo é chegar a 21.949 até 2028. <span class="pendente">[CONFERIR: o “aumento de 104%” é do período 2018–2025 ou da projeção?]</span> Para cada pessoa com jogo problemático, cerca de seis pessoas ao redor são afetadas.</p>
+
+      <!-- ================= CITAÇÃO / DEPOIMENTO ================= -->
+      <blockquote class="citacao">
+        <span class="aspas" aria-hidden="true">“</span>
+        <p>Eu fui a alguns serviços e quando informei mais ou menos o meu perfil, as pessoas falaram assim: ‘olha, você não tem tendências suicidas, então não é o caso.’ [...] Mas eu falei: ‘mas eu preciso de ajuda. Eu estou sofrendo com isso.’</p>
+        <footer class="legenda">Nome preservado · Pessoa atendida na Rede de Atenção Psicossocial (Raps). Relato publicado no <i>Guia de cuidado para pessoas com problemas relacionados a jogos de apostas</i> (Ministério da Saúde, 2026), licença CC BY-NC-SA 4.0.</footer>
+      </blockquote>
+
+      <p>A rede pública tem 3.061 CAPS em funcionamento, 177 deles habilitados entre 2024 e 2025. Desde março de 2026, o Ministério da Saúde oferece teleatendimento; até setembro, 27.703 pessoas tinham se cadastrado. Mais de 1 milhão de pessoas se inscreveram na ferramenta nacional de autoexclusão, criada em dezembro de 2025.</p>
+
+      <!-- ================= CITAÇÃO / DEPOIMENTO ================= -->
+      <blockquote class="citacao">
+        <span class="aspas" aria-hidden="true">“</span>
+        <p>O Caps, o grupo em si, está me ajudando bastante [...] e lá a gente vê também que não é simplesmente uma frescura, que realmente é um vício e que precisa ser tratado.</p>
+        <footer class="legenda">Nome preservado · Pessoa atendida na Rede de Atenção Psicossocial (Raps). Relato publicado no <i>Guia de cuidado para pessoas com problemas relacionados a jogos de apostas</i> (Ministério da Saúde, 2026), licença CC BY-NC-SA 4.0.</footer>
+      </blockquote>
+
+    </div>
+
+    <!-- ================= GRÁFICO: pesquisa ================= -->
+    <figure class="grafico" id="fig-pesquisa" aria-labelledby="t-pesquisa">
+      <h3 id="t-pesquisa">Na pesquisa da equipe, as redes sociais aparecem como principal porta de entrada</h3>
+      <p class="linha-fina-graf">Como os respondentes conheceram as bets (pergunta 11 do questionário da equipe). Amostra não probabilística: não representa a população.</p>
+      <p class="selo-dado selo-ficticio">Dado fictício para protótipo · pesquisa da equipe em andamento</p>
+      
+      <div class="graf-caixa"><div id="g-pesquisa" style="position:relative"><p class="legenda">Carregando o gráfico…</p></div></div>
+      <p class="nota-fonte legenda">
+        <span>Fonte: Pesquisa própria da equipe, em andamento.</span>
+        <a href="../metodologia.html#dados">Nota metodológica</a>
+        <a class="btn btn-secundario btn-pequeno" href="../data/r6-pesquisa-propria-q11-FICTICIO.csv" download><svg class="icone" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg> Baixar dados (CSV)</a>
+      </p>
+      <details>
+        <summary>Ler descrição do gráfico</summary>
+        <p class="coluna">Dados fictícios para teste do protótipo. Quando as respostas chegarem, substitua o arquivo CSV pelos totais reais da pergunta 11 e reescreva este título.</p>
+        <div class="tab-rolagem"><table class="tabela-dados" id="tab-pesquisa"><caption class="sr">Na pesquisa da equipe, as redes sociais aparecem como principal porta de entrada</caption></table></div>
+      </details>
+    </figure>
+
+    <!-- ================= CAIXA "EM NÚMEROS" ================= -->
+    <section class="em-numeros-rep" aria-labelledby="t-num">
+      <h2 id="t-num">O custo para a saúde</h2>
+      <ul>
+        <li><span class="dado">10,9 mi</span><span class="rot">de brasileiros com padrão de jogo de risco ou problemático</span><span class="legenda">LENAD III (Unifesp), 2023</span></li>
+        <li><span class="dado">10.553</span><span class="rot">atendimentos no SUS por jogo patológico, jan/2018 a mai/2025</span><span class="legenda">Guia do Ministério da Saúde (2026)</span></li>
+        <li><span class="dado">6</span><span class="rot">pessoas afetadas ao redor de cada pessoa com jogo problemático</span><span class="legenda">Goodwin et al. (2017), via Dossiê IEPS</span></li>
+      </ul>
+    </section>
+
+    <div class="corpo">
+      <section class="ajuda" aria-labelledby="t-ajuda">
+        <h2 id="t-ajuda">Onde pedir ajuda</h2>
+        <ul>
+          <li><strong>CAPS e UBS do SUS:</strong> serviços de porta aberta, sem precisar de encaminhamento.</li>
+          <li><strong>Teleatendimento do Ministério da Saúde</strong> para problemas com jogos e apostas: <span class="pendente">[A CONFIRMAR: canal oficial]</span></li>
+          <li><strong>Autoexclusão nacional</strong> de plataformas de apostas: <span class="pendente">[A CONFIRMAR: endereço oficial]</span></li>
+          <li><strong>Jogadores Anônimos:</strong> grupos de apoio. <span class="pendente">[A CONFIRMAR: contato]</span></li>
+          <li><strong>CVV, 188:</strong> apoio emocional, 24 horas, ligação gratuita.</li>
+        </ul>
+      </section>
+      <p>Esta é a última parada da trajetória: a bola que começou como anúncio na placa termina parada no pé do torcedor.</p>
+
+      <section class="fontes-rep" aria-labelledby="t-fontes">
+        <h2 id="t-fontes">Fontes desta reportagem</h2>
+        <ul>
+          <li>Ipsos-Ipec para O Globo (set/2025) e Quaest para CNN/Itatiaia (2024).</li>
+          <li>LENAD III, caderno Jogos de Aposta (Unifesp).</li>
+          <li>Ministério da Saúde, <i>Guia de cuidado para pessoas com problemas relacionados a jogos de apostas</i> (2026).</li>
+          <li>Dossiê IEPS (2025); Made-USP e Comsefaz/Cicef, via Nexo (set/2026); O Globo (set/2026).</li>
+          <li>Pesquisa própria da equipe (em andamento; dados ainda fictícios no protótipo).</li>
+        </ul>
+      </section>
+
+    </div>
+
+    <!-- ================= NAVEGAÇÃO + POSIÇÃO NA TRAJETÓRIA ================= -->
+    <nav class="nav-rep" aria-labelledby="t-nav">
+      <h2 id="t-nav" style="font-size:var(--fs-h3);color:var(--color-texto)">Continue o dossiê</h2>
+      <div class="nav-rep-grade" id="nav-rep-grade" style="margin-top:var(--space-space_4)"></div>
+      <div class="posicao">
+        <div class="moldura-pos">
+          <svg id="svg-posicao" class="estadio-svg" viewBox="0 0 960 540" role="group"></svg>
+          <span class="selo-ilustrativo">Trajetória ilustrativa · não representa dados</span>
+        </div>
+        <p class="legenda" id="legenda-pos" aria-live="polite" style="margin-top:8px"></p>
+      </div>
+      <div class="voltar">
+        <a class="btn btn-secundario" id="link-home" href="../index.html"><svg class="icone" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Voltar ao estádio</a>
+      </div>
+    </nav>
+
+  </div>
+</main>
+<script src="../assets/js/mapa-narrativo.js"></script>
+<script src="../assets/js/site.js"></script>
+<script src="../assets/js/graficos.js"></script>
+<script src="../assets/js/reportagem.js"></script>
+<script>
+const R = iniciarReportagem();
+
+/* ---------- Scrollytelling: 100 torcedores ---------- */
+graficoDeCSV('r6-perfil-apostador.csv', $('#g-torcida'), linhas => {
+  const v = (rec, cat) => +(linhas.find(l => l.pesquisa === 'O Globo/Ipsos-Ipec' && l.recorte === rec && l.categoria === cat) || {}).valor_pct;
+  const ja = Math.round(v('total torcedores', 'já apostou em futebol')), sempre = Math.round(v('frequência', 'sempre')), jovens = Math.round(v('idade', '16-24 já apostou'));
+  Graficos.legenda($('#leg-torcida'), [['u-solido u-ponto', 'em destaque no passo'], ['u-retic u-ponto', 'já apostou'], ['u-ponto', 'não apostou']]);
+  Graficos.unidades($('#g-torcida'), Array.from({ length: 100 }, () => ({})), { forma: 'ponto', colunas: 10 });
+  Scrolly.iniciar($('#scrolly-torcida'), n => Graficos.reclassificar($('#g-torcida'), Array.from({ length: 100 }, (_, i) => {
+    if (n === 1) return '';
+    if (n === 2) return i < ja ? 'u-solido' : '';
+    if (n === 3) return i < sempre ? 'u-solido' : i < ja ? 'u-retic' : '';
+    return i < jovens ? 'u-solido' : '';
+  })));
+}, $('#tab-torcida'), [['pesquisa', 'Pesquisa'], ['recorte', 'Recorte'], ['categoria', 'Categoria'], ['valor_pct', '%'], ['periodo_campo', 'Campo']]);
+
+/* ---------- Barras por renda ---------- */
+graficoDeCSV('r6-perfil-apostador.csv', $('#g-renda'), linhas => {
+  const renda = linhas.filter(l => l.pesquisa === 'O Globo/Ipsos-Ipec' && l.recorte === 'renda');
+  Graficos.barras($('#g-renda'), renda, { rotulo: 'categoria', valor: 'valor_pct', maximo: 25,
+    formato: v => Graficos.fmt(v, 1) + '%', estilo: l => l.categoria === '2 a 5 SM' ? 'destaque' : '' });
+  $('#tab-renda').innerHTML = '';
+  Graficos.tabela($('#tab-renda'), renda, [['categoria', 'Renda familiar'], ['valor_pct', '% que já apostou'], ['margem_erro_pp', 'Margem (p.p.)']]);
+});
+
+/* ---------- Barras: custo social × arrecadação × repasse ---------- */
+graficoDeCSV('r6-custo-x-arrecadacao.csv', $('#g-custo'), linhas => Graficos.barras($('#g-custo'), linhas, {
+  rotulo: 'indicador', valor: 'valor_rs_bi',
+  formato: v => v < 1 ? 'R$ ' + Graficos.fmt(v * 1000) + ' mi' : 'R$ ' + Graficos.fmt(v, 1) + ' bi',
+  estilo: l => l.indicador.startsWith('Custo') ? 'dano' : '', nota: l => l.periodo
+}), $('#tab-custo'), [['indicador', 'Indicador'], ['valor_rs_bi', 'R$ bilhões'], ['periodo', 'Período'], ['fonte', 'Fonte']]);
+
+/* ---------- Pesquisa própria (DADO FICTÍCIO PARA PROTÓTIPO) ---------- */
+graficoDeCSV('r6-pesquisa-propria-q11-FICTICIO.csv', $('#g-pesquisa'), linhas => Graficos.barras($('#g-pesquisa'), linhas, {
+  rotulo: 'resposta', valor: 'quantidade', formato: v => v + ' respostas (fictício)', estilo: (l, i) => i === 0 ? 'destaque' : ''
+}), $('#tab-pesquisa'), [['resposta', 'Resposta'], ['quantidade', 'Quantidade'], ['observacao', 'Observação']]);
+
+</script>
+</body>
+</html>

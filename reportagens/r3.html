@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>A voz do jogo tem patrocinador · Da Sorte ao Declínio</title>
+<meta name="description" content="Quem narra a partida também anuncia a aposta, e o torcedor ouve as duas coisas no mesmo tom.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Azeret+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body data-raiz="../">
+<!-- O cabeçalho, o menu, o aviso de jogo responsável e o rodapé são montados por assets/js/site.js
+     a partir de assets/js/mapa-narrativo.js (edite os créditos lá, uma vez só). -->
+<main id="conteudo" tabindex="-1" data-rep="r3">
+  <!-- ================= ABERTURA: título, linha fina, créditos, data e câmera ================= -->
+  <header class="rep-abertura">
+    <div class="conteiner rep-abertura-grade">
+      <div>
+        <p class="eyebrow" id="eyebrow-rep"><!-- preenchido pelo script: "Reportagem N de 6 · Setor" --></p>
+        <h1 class="titulo-rep">A voz do jogo tem patrocinador</h1>
+        <p class="linha-fina">Quem narra a partida também anuncia a aposta, e o torcedor ouve as duas coisas no mesmo tom.</p>
+        <div class="creditos legenda">
+          <span>Texto e reportagem: <span class="pendente">[A PREENCHER]</span> · Dados: <span class="pendente">[A PREENCHER]</span> · Design e desenvolvimento: <span class="pendente">[A PREENCHER]</span></span>
+          <span>Publicado em <span class="pendente">[A PREENCHER]</span> · Atualizado em <time datetime="2026-10-14">14/10/2026</time> · <span id="tempo-leitura">leitura de alguns minutos</span></span>
+        </div>
+      </div>
+      <figure style="margin:0">
+        <div class="camera"><svg id="svg-camera" class="estadio-svg" viewBox="0 0 960 540" role="group"></svg></div>
+        <figcaption class="legenda camera-legenda" id="camera-legenda">Você está no estádio do dossiê.</figcaption>
+      </figure>
+    </div>
+  </header>
+
+  <div class="conteiner">
+    <div class="corpo">
+      <p class="selo-dado selo-confirmar">Atenção: a maior parte dos números de mídia desta reportagem ainda está em apuração e aparece marcada</p>
+      <!-- ================= ACHADOS ("o que descobrimos") ================= -->
+      <section class="achados" aria-labelledby="t-achados">
+        <h2 id="t-achados">O que a apuração mostra</h2>
+        <ol>
+          <li>Mais da metade das crianças e adolescentes viu publicidade de apostas na internet: <strong>53%</strong> das pessoas de 9 a 17 anos, e <strong>63%</strong> entre 15 e 17 anos. <span class="legenda">Fonte: TIC Kids Online 2025 (Cetic.br), citado no Dossiê IEPS.</span></li>
+          <li>As menções negativas ao excesso de publicidade de bets cresceram <strong>32 pontos percentuais</strong> entre 2023 e 2024. <span class="legenda">Fonte: Orbit Data Science, citado no Dossiê IEPS.</span></li>
+          <li>Além da camisa, as bets pagam por placas à beira do gramado e por inserções nas próprias transmissões. <span class="legenda">Fonte: Terra.</span></li>
+        </ol>
+      </section>
+
+      <h2>O anúncio entra na narração</h2>
+      <p>A TV aberta e o rádio concentram cerca de 85% da verba das bets em mídia tradicional, e as 15 maiores casas de apostas investiram cerca de R$ 3 bilhões em publicidade no Brasil em 2025. <span class="pendente">[DADO A CONFIRMAR — fontes sugeridas: Ibope Advertising Intelligence; Tunad]</span></p>
+      <p>Na Copa do Mundo de 2026, a CazéTV vendeu pacotes publicitários de cerca de R$ 2 bilhões com o YouTube, dos quais cerca de R$ 555 milhões vieram de bets. Narradores davam palpites e sugeriam cotações ao vivo, o que gerou alertas da Senacon e do Conar. <span class="pendente">[DADO A CONFIRMAR]</span></p>
+    </div>
+
+    <!-- ================= SCROLLYTELLING: verba ================= -->
+    <section class="sangra" id="scrolly-verba" aria-labelledby="t-scrolly-verba" style="margin-top:var(--space-space_8)">
+      <h2 id="t-scrolly-verba">Seis de cada dez reais das bets na TV aberta foram para a Globo</h2>
+      <p class="coluna" style="margin-top:var(--space-space_3)">Verba das casas de apostas na TV aberta no primeiro trimestre de 2026, por emissora. Role para ver cada uma.</p>
+      <div class="scrolly-rep">
+        <div class="esquema-fixo">
+          <div class="grafico-sticky"><p class="selo-dado selo-confirmar" style="margin-bottom:10px">Dado a confirmar · fonte sugerida: Tunad</p><p class="graf-titulo">Verba de bets na TV aberta, 1º trimestre de 2026 (R$ milhões)</p><div id="g-verba"><p class="legenda">Carregando o gráfico…</p></div></div>
+        </div>
+        <div class="passos-rep">
+          <article class="passo-rep" data-passo="1">
+            <p class="eyebrow">Passo 1 de 4</p>
+            <h3>R$ 327,2 milhões em três meses</h3>
+            <p>É o total que as casas de apostas investiram em TV aberta no primeiro trimestre de 2026, segundo o levantamento citado pela equipe.</p>
+          </article>
+          <article class="passo-rep" data-passo="2">
+            <p class="eyebrow">Passo 2 de 4</p>
+            <h3>A Globo leva 59%</h3>
+            <p>Foram R$ 193 milhões, em Brasileirão, Copa do Brasil, Libertadores, inserções fixas e no BBB.</p>
+          </article>
+          <article class="passo-rep" data-passo="3">
+            <p class="eyebrow">Passo 3 de 4</p>
+            <h3>O SBT vem em seguida</h3>
+            <p>Foram R$ 72 milhões em programas de auditório, madrugadas dedicadas e na Bet do Milhão. <span class="pendente">[SEM FONTE]</span>: o valor de um trimestre superaria o que a emissora costumava receber do governo federal em um ano.</p>
+          </article>
+          <article class="passo-rep" data-passo="4">
+            <p class="eyebrow">Passo 4 de 4</p>
+            <h3>Band e as demais</h3>
+            <p>A Band recebeu R$ 19,6 milhões, com cotas máster de programas esportivos. As outras emissoras somam R$ 42,6 milhões, valor calculado pela diferença até o total.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="grafico" style="margin-top:var(--space-space_3)">
+      <p class="nota-fonte legenda">
+        <span>Fonte: Tunad, citado no levantamento “Redes e bets” da equipe; “Outras” calculado pela equipe. <span class="pendente">[SEM FONTE: inserir link do relatório]</span></span>
+        <a href="../metodologia.html#dados">Nota metodológica</a>
+        <a class="btn btn-secundario btn-pequeno" href="../data/r3-verba-tv-1t2026.csv" download><svg class="icone" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg> Baixar dados (CSV)</a>
+      </p>
+      <details>
+        <summary>Ler descrição do gráfico</summary>
+        <p class="coluna">Barras da verba de casas de apostas na TV aberta no primeiro trimestre de 2026: Globo, R$ 193 milhões (59%); SBT, R$ 72 milhões (22%); Band, R$ 19,6 milhões (6%); outras, R$ 42,6 milhões (13%). Total: R$ 327,2 milhões. Dados ainda sem fonte checada.</p>
+        <div class="tab-rolagem"><table class="tabela-dados" id="tab-verba"><caption class="sr">Verba de bets na TV aberta</caption></table></div>
+      </details>
+    </div>
+
+    <!-- ================= GRÁFICO: matriz ================= -->
+    <figure class="grafico" id="fig-matriz" aria-labelledby="t-matriz">
+      <h3 id="t-matriz">Cinco grupos de mídia têm vínculo comercial direto com casas de apostas</h3>
+      <p class="linha-fina-graf">Tipos de vínculo entre veículos de comunicação e casas de apostas registrados pela equipe até setembro de 2026. ● = vínculo registrado; ○ = sem registro no levantamento.</p>
+      <p class="selo-dado selo-confirmar">Dado a confirmar: números ainda sem fonte checada</p>
+      
+      <div class="graf-caixa"><div id="g-matriz" style="position:relative"><p class="legenda">Carregando o gráfico…</p></div></div>
+      <p class="nota-fonte legenda">
+        <span>Fonte: Levantamento “Redes e bets” da equipe. <span class="pendente">[SEM FONTE: conferir cada vínculo]</span></span>
+        <a href="../metodologia.html#dados">Nota metodológica</a>
+        <a class="btn btn-secundario btn-pequeno" href="../data/r3-matriz-midia.csv" download><svg class="icone" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg> Baixar dados (CSV)</a>
+      </p>
+      <details>
+        <summary>Ler descrição do gráfico</summary>
+        <p class="coluna">Matriz de cinco veículos por quatro tipos de vínculo. Globo: marca de apostas associada (BetMGM), patrocínio de programa (BBB) e transmissão esportiva. SBT: plataforma própria (Bet do Milhão) e patrocínio de programas. Band: marca própria (Bandbet) e cotas de programas esportivos. Record: patrocínio de A Fazenda. CazéTV: transmissão da Copa de 2026 e palpites ao vivo na narração.</p>
+        <div class="tab-rolagem"><table class="tabela-dados" id="tab-matriz"><caption class="sr">Cinco grupos de mídia têm vínculo comercial direto com casas de apostas</caption></table></div>
+      </details>
+    </figure>
+
+    <div class="corpo">
+      <h2>Depois da MP, a tela muda de dono</h2>
+      <p>Depois da MP, a Globo mandou remover todos os anúncios de bets, inclusive nas afiliadas; o SBT reformulou as madrugadas; e a Band reestrutura programas esportivos que dependiam de cotas máster. Dias depois, as Loterias Caixa ocuparam o espaço das bets na CazéTV: a MP proíbe as apostas de quota fixa, mas mantém as loterias autorizadas por lei. <span class="pendente">[DADO A CONFIRMAR]</span></p>
+
+      <!-- ================= CITAÇÃO / DEPOIMENTO ================= -->
+      <blockquote class="citacao">
+        <span class="aspas" aria-hidden="true">“</span>
+        <p>Eu costumo falar que é pior do que a droga, porque a droga você tem que ir até lá procurar, buscar e comprar. O jogo não, o jogo você tá assistindo uma televisão, tá passando anúncio do jogo. Você tá no seu Instagram, tem um influencer, tem alguém que tá anunciando o jogo.</p>
+        <footer class="legenda">Nome preservado · Pessoa atendida na Rede de Atenção Psicossocial (Raps). Relato publicado no <i>Guia de cuidado para pessoas com problemas relacionados a jogos de apostas</i> (Ministério da Saúde, 2026), licença CC BY-NC-SA 4.0.</footer>
+      </blockquote>
+
+    </div>
+
+    <!-- ================= CAIXA "EM NÚMEROS" ================= -->
+    <section class="em-numeros-rep" aria-labelledby="t-num">
+      <h2 id="t-num">Quem vê a propaganda</h2>
+      <ul>
+        <li><span class="dado">53%</span><span class="rot">das pessoas de 9 a 17 anos viram publicidade de apostas na internet</span><span class="legenda">TIC Kids Online 2025, via Dossiê IEPS</span></li>
+        <li><span class="dado">63%</span><span class="rot">entre adolescentes de 15 a 17 anos</span><span class="legenda">TIC Kids Online 2025, via Dossiê IEPS</span></li>
+        <li><span class="dado">+32 p.p.</span><span class="rot">nas menções negativas ao excesso de publicidade, de 2023 a 2024</span><span class="legenda">Orbit Data Science, via Dossiê IEPS</span></li>
+      </ul>
+    </section>
+
+    <div class="corpo">
+      <p>Da cabine de imprensa, a câmera desce ao gramado: quando o próprio campeonato ganha nome de bet, o resultado do jogo vira mercadoria.</p>
+
+      <section class="fontes-rep" aria-labelledby="t-fontes">
+        <h2 id="t-fontes">Fontes desta reportagem</h2>
+        <ul>
+          <li>Dossiê IEPS (2025): TIC Kids Online 2025 (Cetic.br) e Orbit Data Science.</li>
+          <li>Terra (set/2026): placas e inserções nas transmissões.</li>
+          <li>Levantamento “Redes e bets” da equipe, que cita Tunad, Ibope Advertising Intelligence, IAB Brasil, Senacon e Conar. <span class="pendente">[INSERIR links de cada fonte]</span></li>
+          <li>Ministério da Saúde, <i>Guia de cuidado para pessoas com problemas relacionados a jogos de apostas</i> (2026).</li>
+        </ul>
+      </section>
+
+    </div>
+
+    <!-- ================= NAVEGAÇÃO + POSIÇÃO NA TRAJETÓRIA ================= -->
+    <nav class="nav-rep" aria-labelledby="t-nav">
+      <h2 id="t-nav" style="font-size:var(--fs-h3);color:var(--color-texto)">Continue o dossiê</h2>
+      <div class="nav-rep-grade" id="nav-rep-grade" style="margin-top:var(--space-space_4)"></div>
+      <div class="posicao">
+        <div class="moldura-pos">
+          <svg id="svg-posicao" class="estadio-svg" viewBox="0 0 960 540" role="group"></svg>
+          <span class="selo-ilustrativo">Trajetória ilustrativa · não representa dados</span>
+        </div>
+        <p class="legenda" id="legenda-pos" aria-live="polite" style="margin-top:8px"></p>
+      </div>
+      <div class="voltar">
+        <a class="btn btn-secundario" id="link-home" href="../index.html"><svg class="icone" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Voltar ao estádio</a>
+      </div>
+    </nav>
+
+  </div>
+</main>
+<script src="../assets/js/mapa-narrativo.js"></script>
+<script src="../assets/js/site.js"></script>
+<script src="../assets/js/graficos.js"></script>
+<script src="../assets/js/reportagem.js"></script>
+<script>
+const R = iniciarReportagem();
+
+/* ---------- Scrollytelling: verba por emissora ---------- */
+graficoDeCSV('r3-verba-tv-1t2026.csv', $('#g-verba'), linhas => {
+  const desenhar = alvo => Graficos.barras($('#g-verba'), linhas, {
+    rotulo: 'emissora', valor: 'valor_1t2026_mi',
+    formato: (v, l) => 'R$ ' + Graficos.fmt(v, v % 1 ? 1 : 0) + ' mi (' + l.participacao_verba_tv_pct + '%)',
+    estilo: l => alvo === null ? '' : (alvo.includes(l.emissora) ? 'destaque' : 'apagado')
+  });
+  Scrolly.iniciar($('#scrolly-verba'), n => desenhar([null, ['Globo'], ['SBT'], ['Band', 'Outras']][n - 1] || null));
+}, $('#tab-verba'), [['emissora', 'Emissora'], ['valor_1t2026_mi', 'R$ milhões'], ['participacao_verba_tv_pct', '% da verba'], ['modelo_de_ativacao', 'Como aparece'], ['status', 'Status']]);
+
+/* ---------- Matriz veículo × tipo de vínculo ---------- */
+graficoDeCSV('r3-matriz-midia.csv', $('#g-matriz'), linhas => {
+  $('#g-matriz').style.overflowX = 'auto';
+  Graficos.matriz($('#g-matriz'), linhas, {
+    linha: 'veiculo', coluna: 'tipo_vinculo', texto: 'descricao', titulo_linha: 'Veículo',
+    colunas: ['Marca de apostas própria ou associada', 'Patrocínio de programa', 'Transmissão esportiva', 'Palpite ao vivo na narração']
+  });
+}, $('#tab-matriz'), [['veiculo', 'Veículo'], ['tipo_vinculo', 'Vínculo'], ['descricao', 'Descrição'], ['fonte_sugerida', 'Fonte sugerida'], ['status', 'Status']]);
+
+</script>
+</body>
+</html>

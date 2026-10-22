@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>O campeonato tem dono · Da Sorte ao Declínio</title>
+<meta name="description" content="Quando a competição inteira tem patrocinador e o resultado vira mercadoria.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Azeret+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body data-raiz="../">
+<!-- O cabeçalho, o menu, o aviso de jogo responsável e o rodapé são montados por assets/js/site.js
+     a partir de assets/js/mapa-narrativo.js (edite os créditos lá, uma vez só). -->
+<main id="conteudo" tabindex="-1" data-rep="r4">
+  <!-- ================= ABERTURA: título, linha fina, créditos, data e câmera ================= -->
+  <header class="rep-abertura">
+    <div class="conteiner rep-abertura-grade">
+      <div>
+        <p class="eyebrow" id="eyebrow-rep"><!-- preenchido pelo script: "Reportagem N de 6 · Setor" --></p>
+        <h1 class="titulo-rep">O campeonato tem dono</h1>
+        <p class="linha-fina">Quando a competição inteira tem patrocinador e o resultado vira mercadoria.</p>
+        <div class="creditos legenda">
+          <span>Texto e reportagem: <span class="pendente">[A PREENCHER]</span> · Dados: <span class="pendente">[A PREENCHER]</span> · Design e desenvolvimento: <span class="pendente">[A PREENCHER]</span></span>
+          <span>Publicado em <span class="pendente">[A PREENCHER]</span> · Atualizado em <time datetime="2026-10-14">14/10/2026</time> · <span id="tempo-leitura">leitura de alguns minutos</span></span>
+        </div>
+      </div>
+      <figure style="margin:0">
+        <div class="camera"><svg id="svg-camera" class="estadio-svg" viewBox="0 0 960 540" role="group"></svg></div>
+        <figcaption class="legenda camera-legenda" id="camera-legenda">Você está no estádio do dossiê.</figcaption>
+      </figure>
+    </div>
+  </header>
+
+  <div class="conteiner">
+    <div class="corpo">
+      <!-- ================= ACHADOS ("o que descobrimos") ================= -->
+      <section class="achados" aria-labelledby="t-achados">
+        <h2 id="t-achados">O que a apuração mostra</h2>
+        <ol>
+          <li>As duas principais competições da CBF levavam o nome de uma casa de apostas antes da MP: o <strong>Brasileirão Betano</strong> e a <strong>Copa Betano do Brasil</strong>. <span class="legenda">Fonte: Terra; Gazeta do Povo.</span></li>
+          <li><strong>Quatro estádios do Nordeste</strong> ganharam nome de bet, entre eles os Aflitos, no Recife, desde março de 2026. <span class="legenda">Fonte: Gazeta do Povo.</span></li>
+          <li>Depois da MP, clubes pediram ao STF para manter os patrocínios até o fim do ano, e clubes paulistas fizeram uma reunião de emergência na Federação Paulista em 28/09/2026. <span class="legenda">Fonte: Gazeta do Povo; Terra.</span></li>
+        </ol>
+      </section>
+
+      <h2>O nome do campeonato</h2>
+      <p>Em 2024, a Betano assumiu os naming rights da Série A no lugar do Assaí, que tinha o nome desde 2018, em contrato plurianual. <span class="pendente">[CONFERIR: link encurtado]</span> A Copa do Brasil também tinha Superbet, Betnacional e Betesporte entre os patrocinadores.</p>
+    </div>
+
+    <!-- ================= SCROLLYTELLING: nomes ================= -->
+    <section class="sangra" id="scrolly-nomes" aria-labelledby="t-scrolly-nomes" style="margin-top:var(--space-space_8)">
+      <h2 id="t-scrolly-nomes">Do campeonato ao estádio do bairro, o nome é da bet</h2>
+      <p class="coluna" style="margin-top:var(--space-space_3)">Cada cartão é uma competição ou estádio que passou a levar o nome de uma casa de apostas. Role para percorrer o mapa.</p>
+      <div class="scrolly-rep">
+        <div class="esquema-fixo">
+          <div class="grafico-sticky"><p class="graf-titulo">Naming rights ligados a casas de apostas</p><div id="g-nomes"><p class="legenda">Carregando o gráfico…</p></div></div>
+        </div>
+        <div class="passos-rep">
+          <article class="passo-rep" data-passo="1">
+            <p class="eyebrow">Passo 1 de 4</p>
+            <h3>As duas maiores competições</h3>
+            <p>Brasileirão e Copa do Brasil passaram a ter o nome de uma casa de apostas no título.</p>
+          </article>
+          <article class="passo-rep" data-passo="2">
+            <p class="eyebrow">Passo 2 de 4</p>
+            <h3>O Nordeste renomeado</h3>
+            <p>Fonte Nova, em Salvador, Arena das Dunas, em Natal, Aflitos, no Recife, e a arena do Feira FC, em Feira de Santana, ganharam nome de bet.</p>
+          </article>
+          <article class="passo-rep" data-passo="3">
+            <p class="eyebrow">Passo 3 de 4</p>
+            <h3>Os Aflitos, no Recife</h3>
+            <p>O estádio do Náutico virou “Estádio Esportes da Sorte Aflitos” em março de 2026.</p>
+          </article>
+          <article class="passo-rep" data-passo="4">
+            <p class="eyebrow">Passo 4 de 4</p>
+            <h3>Depois da MP</h3>
+            <p>O nome da arena do Feira FC foi suspenso depois da MP. As competições mantiveram os nomes até a medida.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="grafico" style="margin-top:var(--space-space_3)">
+      <p class="nota-fonte legenda">
+        <span>Fonte: Gazeta do Povo; Terra. Coleta: out/2026.</span>
+        <a href="../metodologia.html#dados">Nota metodológica</a>
+        <a class="btn btn-secundario btn-pequeno" href="../data/r4-naming-rights.csv" download><svg class="icone" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg> Baixar dados (CSV)</a>
+      </p>
+      <details>
+        <summary>Ler descrição do gráfico</summary>
+        <p class="coluna">Seis propriedades com nome de casa de apostas: Campeonato Brasileiro Série A (Brasileirão Betano, desde 2024, ativo até a MP); Copa do Brasil (Copa Betano do Brasil, ativo até a MP); Arena Fonte Nova, em Salvador (contrato de 4 anos); Estádio dos Aflitos, no Recife (desde mar/2026); Arena das Dunas, em Natal (até 2029); arena do Feira FC, em Feira de Santana (nome suspenso após a MP).</p>
+        <div class="tab-rolagem"><table class="tabela-dados" id="tab-nomes"><caption class="sr">Naming rights ligados a casas de apostas</caption></table></div>
+      </details>
+    </div>
+
+    <!-- ================= GRÁFICO: casos ================= -->
+    <figure class="grafico" id="fig-casos" aria-labelledby="t-casos">
+      <h3 id="t-casos">A investigação sobre manipulação de resultados ainda está aberta neste dossiê</h3>
+      <p class="linha-fina-graf">Casos de manipulação de resultados ligados a apostas investigados no Brasil. Estrutura pronta para a apuração da equipe.</p>
+      <p class="selo-dado selo-confirmar">A apurar: sem dados checados no material da equipe</p>
+      
+      <div class="graf-caixa"><div id="g-casos" style="position:relative"><p class="legenda">Carregando o gráfico…</p></div></div>
+      <p class="nota-fonte legenda">
+        <span>Fonte: Fontes sugeridas: Ministério Público de Goiás (Operação Penalidade Máxima); STJD; CPI da Câmara sobre manipulação (2023); CPI das Bets do Senado. <span class="pendente">[A APURAR]</span></span>
+        <a href="../metodologia.html#dados">Nota metodológica</a>
+        <a class="btn btn-secundario btn-pequeno" href="../data/r4-casos-manipulacao.csv" download><svg class="icone" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg> Baixar dados (CSV)</a>
+      </p>
+      <details>
+        <summary>Ler descrição do gráfico</summary>
+        <p class="coluna">Tabela ainda sem dados verificados. Ela terá, para cada caso, a competição, o período, o órgão que investigou e o desfecho.</p>
+        <div class="tab-rolagem"><table class="tabela-dados" id="tab-casos"><caption class="sr">A investigação sobre manipulação de resultados ainda está aberta neste dossiê</caption></table></div>
+      </details>
+    </figure>
+
+    <div class="corpo">
+      <h2>A integridade em jogo</h2>
+      <p>O Grupo de Trabalho Interministerial sobre saúde mental e jogo problemático propõe materiais educativos para atletas, comissões técnicas e federações, para prevenir a manipulação de resultados. <span class="pendente">[A APURAR: posição da CBF e das federações; jogadores que promoveram bets]</span></p>
+      <p>Depois da MP, os clubes foram ao STF pedir para manter os patrocínios até o fim do ano. Em São Paulo, clubes das Séries A e B se reuniram em caráter de emergência na sede da Federação Paulista de Futebol, em 28 de setembro de 2026, e pediram diálogo com o governo.</p>
+
+      <!-- ================= DEPOIMENTO (a apurar) ================= -->
+      <aside class="depoimento-pendente" aria-label="Depoimento a apurar">
+        <p class="eyebrow">Espaço para depoimento <span class="pendente">[A APURAR]</span></p>
+        <p>Sugestão: um dirigente de federação ou um árbitro sobre a pressão das apostas no resultado. Use o bloco de citação da reportagem 1 como modelo. Só publique depoimentos com consentimento; quando pedido, preserve o nome.</p>
+      </aside>
+
+    </div>
+
+    <!-- ================= CAIXA "EM NÚMEROS" ================= -->
+    <section class="em-numeros-rep" aria-labelledby="t-num">
+      <h2 id="t-num">O campeonato com nome de bet</h2>
+      <ul>
+        <li><span class="dado">2 de 2</span><span class="rot">principais competições da CBF tinham nome de casa de apostas</span><span class="legenda">Terra; Gazeta do Povo</span></li>
+        <li><span class="dado">4</span><span class="rot">estádios do Nordeste com nome de bet</span><span class="legenda">Gazeta do Povo</span></li>
+        <li><span class="dado">2029</span><span class="rot">é quando termina o contrato da Arena das Dunas</span><span class="legenda">Gazeta do Povo</span></li>
+      </ul>
+    </section>
+
+    <div class="corpo">
+      <p>Do gramado, a revisão sobe para a cabine do VAR: o que a lei mudou, e o que ficou de fora.</p>
+
+      <section class="fontes-rep" aria-labelledby="t-fontes">
+        <h2 id="t-fontes">Fontes desta reportagem</h2>
+        <ul>
+          <li>Gazeta do Povo, “Clubes pedem que STF mantenha patrocínio com bets até o fim do ano”.</li>
+          <li>Terra, reunião de emergência na Federação Paulista (28/09/2026).</li>
+          <li>Dossiê IEPS (2025): Grupo de Trabalho Interministerial.</li>
+          <li>Levantamento sobre naming rights da Série A <span class="pendente">[SUBSTITUIR link encurtado]</span>.</li>
+        </ul>
+      </section>
+
+    </div>
+
+    <!-- ================= NAVEGAÇÃO + POSIÇÃO NA TRAJETÓRIA ================= -->
+    <nav class="nav-rep" aria-labelledby="t-nav">
+      <h2 id="t-nav" style="font-size:var(--fs-h3);color:var(--color-texto)">Continue o dossiê</h2>
+      <div class="nav-rep-grade" id="nav-rep-grade" style="margin-top:var(--space-space_4)"></div>
+      <div class="posicao">
+        <div class="moldura-pos">
+          <svg id="svg-posicao" class="estadio-svg" viewBox="0 0 960 540" role="group"></svg>
+          <span class="selo-ilustrativo">Trajetória ilustrativa · não representa dados</span>
+        </div>
+        <p class="legenda" id="legenda-pos" aria-live="polite" style="margin-top:8px"></p>
+      </div>
+      <div class="voltar">
+        <a class="btn btn-secundario" id="link-home" href="../index.html"><svg class="icone" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Voltar ao estádio</a>
+      </div>
+    </nav>
+
+  </div>
+</main>
+<script src="../assets/js/mapa-narrativo.js"></script>
+<script src="../assets/js/site.js"></script>
+<script src="../assets/js/graficos.js"></script>
+<script src="../assets/js/reportagem.js"></script>
+<script>
+const R = iniciarReportagem();
+
+/* ---------- Scrollytelling: cartões de naming rights ---------- */
+graficoDeCSV('r4-naming-rights.csv', $('#g-nomes'), linhas => {
+  Graficos.cartoes($('#g-nomes'), linhas, {
+    eyebrow: 'tipo', titulo: 'propriedade', status: 'status', grupo: 'regiao',
+    texto: l => l.nome_comercial + ' · ' + l.local + (l.inicio ? ' · desde ' + l.inicio : '') + (l.fim ? ' · até ' + l.fim : '')
+  });
+  const itens = $$('.gc-item', $('#g-nomes'));
+  Scrolly.iniciar($('#scrolly-nomes'), n => itens.forEach((li, i) => {
+    const l = linhas[i];
+    const ativo = n === 1 ? l.tipo === 'competição' : n === 2 ? l.regiao === 'Nordeste' : n === 3 ? l.propriedade === 'Estádio dos Aflitos' : l.status.includes('suspenso');
+    li.className = 'gc-item ' + (ativo ? (n === 4 ? 'dano' : 'ativo') : 'apagado');
+  }));
+}, $('#tab-nomes'), [['propriedade', 'Propriedade'], ['nome_comercial', 'Nome comercial'], ['local', 'Local'], ['inicio', 'Início'], ['fim', 'Fim'], ['status', 'Situação'], ['fonte', 'Fonte']]);
+
+/* ---------- Tabela de casos (a apurar) ---------- */
+graficoDeCSV('r4-casos-manipulacao.csv', $('#g-casos'), linhas => {
+  $('#g-casos').innerHTML = '<div class="tab-rolagem"><table class="tabela-dados" id="tab-casos-visivel"></table></div>';
+  Graficos.tabela($('#tab-casos-visivel'), linhas, [['caso', 'Caso'], ['competicao', 'Competição'], ['periodo', 'Período'], ['orgao', 'Órgão'], ['desfecho', 'Desfecho'], ['status', 'Status']]);
+}, $('#tab-casos'), [['caso', 'Caso'], ['fonte_sugerida', 'Fonte sugerida'], ['status', 'Status']]);
+
+</script>
+</body>
+</html>

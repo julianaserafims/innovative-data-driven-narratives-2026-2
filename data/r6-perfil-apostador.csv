@@ -1,0 +1,29 @@
+pesquisa,instituto,periodo_campo,amostra,margem_erro_pp,recorte,categoria,valor_pct,fonte,status
+O Globo/Ipsos-Ipec,Ipsos-Ipec,2025-06-05 a 2025-06-09,2000,2.2,total torcedores,já apostou em futebol,16.6,https://oglobo.globo.com/esportes/futebol-2025/noticia/2025/09/06/homens-jovens-de-baixa-renda-e-do-interior-sao-os-maiores-usuarios-das-bets-mostra-pesquisa.ghtml,OK
+O Globo/Ipsos-Ipec,Ipsos-Ipec,2025-06,2000,2.2,frequência,sempre,3.0,idem,OK
+O Globo/Ipsos-Ipec,Ipsos-Ipec,2025-06,2000,2.2,frequência,frequentemente,1.8,idem,OK
+O Globo/Ipsos-Ipec,Ipsos-Ipec,2025-06,2000,2.2,frequência,às vezes,5.9,idem,OK
+O Globo/Ipsos-Ipec,Ipsos-Ipec,2025-06,2000,2.2,frequência,raramente,5.9,idem,OK
+O Globo/Ipsos-Ipec,Ipsos-Ipec,2025-06,2000,2.2,gênero,homens,22.9,idem,OK
+O Globo/Ipsos-Ipec,Ipsos-Ipec,2025-06,2000,2.2,gênero,mulheres,8.0,idem,OK
+O Globo/Ipsos-Ipec,Ipsos-Ipec,2025-06,2000,2.2,idade,16-24 já apostou,25.5,idem,OK
+O Globo/Ipsos-Ipec,Ipsos-Ipec,2025-06,2000,2.2,idade,16-24 aposta sempre,7.2,idem,OK
+O Globo/Ipsos-Ipec,Ipsos-Ipec,2025-06,2000,2.2,idade,25-44 aposta sempre,3.3,idem,OK
+O Globo/Ipsos-Ipec,Ipsos-Ipec,2025-06,2000,2.2,renda,até 1 SM,12.7,idem,OK
+O Globo/Ipsos-Ipec,Ipsos-Ipec,2025-06,2000,2.2,renda,1 a 2 SM,17.0,idem,OK
+O Globo/Ipsos-Ipec,Ipsos-Ipec,2025-06,2000,2.2,renda,2 a 5 SM,20.3,idem,OK
+O Globo/Ipsos-Ipec,Ipsos-Ipec,2025-06,2000,2.2,renda,mais de 5 SM,15.8,idem,OK
+O Globo/Ipsos-Ipec,Ipsos-Ipec,2025-06,2000,2.2,região,Centro-Oeste,20.3,idem,OK
+O Globo/Ipsos-Ipec,Ipsos-Ipec,2025-06,2000,2.2,região,Nordeste aposta sempre,4.3,idem,OK
+O Globo/Ipsos-Ipec,Ipsos-Ipec,2025-06,2000,2.2,território,interior,17.3,idem,OK
+CNN/Itatiaia/Quaest,Quaest,2024-04-27 a 2024-05-01,5023,1.4,total torcedores,já apostou,15,https://www.cnnbrasil.com.br/esportes/futebol/pesquisa-mostra-que-15-dos-torcedores-dizem-ja-ter-feito-apostas-esportivas/,OK
+CNN/Itatiaia/Quaest,Quaest,2024-04,5023,1.4,idade,16-30,25,idem,OK
+CNN/Itatiaia/Quaest,Quaest,2024-04,5023,1.4,idade,31-50,16,idem,OK
+CNN/Itatiaia/Quaest,Quaest,2024-04,5023,1.4,idade,51+,7,idem,OK
+CNN/Itatiaia/Quaest,Quaest,2024-04,5023,1.4,gênero,homens,22,idem,OK
+CNN/Itatiaia/Quaest,Quaest,2024-04,5023,1.4,gênero,mulheres,9,idem,OK
+CNN/Itatiaia/Quaest,Quaest,2024-04,5023,1.4,renda,até 2 SM,13,idem,OK
+CNN/Itatiaia/Quaest,Quaest,2024-04,5023,1.4,renda,2 a 5 SM,16,idem,OK
+CNN/Itatiaia/Quaest,Quaest,2024-04,5023,1.4,renda,5+ SM,17,idem,OK
+Quaest (população geral),Quaest,2026-04-09 a 2026-04-13,2004,2.0,total,costuma apostar online,9,https://g1.globo.com/economia/noticia/2026/04/17/quaest-apostas.ghtml,OK
+Quaest (população geral),Quaest,2026-04,2004,2.0,total,não costuma apostar,71,idem,OK
