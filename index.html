@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Da Sorte ao Declínio</title>
+<meta name="description" content="Dossiê de jornalismo de dados sobre as casas de apostas no futebol brasileiro, de 2018 a 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Azeret+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body data-raiz="">
+<!-- O cabeçalho, o menu, o aviso de jogo responsável e o rodapé são montados por assets/js/site.js
+     a partir de assets/js/mapa-narrativo.js (edite os créditos lá, uma vez só). -->
+<main id="conteudo" tabindex="-1">
+
+  <!-- ============ 1. ENTRADA ============ -->
+  <section class="hero" aria-labelledby="titulo">
+    <div class="conteiner">
+      <p class="eyebrow">Proposta experimental · Dossiê de jornalismo de dados</p>
+      <h1 id="titulo" class="titulo-display">Da Sorte ao Declínio</h1>
+      <p><span class="faixa">Dossiê das bets no futebol</span></p>
+      <p class="intro">A propaganda chega como bola cheia. A cada setor do futebol que as casas de apostas ocupam, ela sobe menos, até rolar e parar no pé do torcedor. Seis reportagens, seis quiques, de 2018 até a medida provisória de setembro de 2026 que proibiu as bets e ainda está em análise no Congresso.</p>
+      <p class="dica-fones legenda"><svg class="icone" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/></svg> A entrada tem um som curto e opcional. Se puder, use fones.</p>
+      <div class="botoes">
+        <button class="btn btn-primario" type="button" data-iniciar="com-som">Iniciar com som</button>
+        <button class="btn btn-secundario" type="button" data-iniciar="sem-som">Iniciar sem som</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. A BOLA QUE PERDE O QUIQUE ============ -->
+  <section id="trajetoria" class="secao" tabindex="-1" aria-labelledby="t-traj">
+    <div class="conteiner">
+      <div class="cab-secao">
+        <p class="eyebrow">Do encantamento ao custo social</p>
+        <h2 id="t-traj">A bola perde o quique</h2>
+        <p class="linha-fina">Cada quique leva a uma reportagem. Use os botões, as setas do teclado ou toque nos números. O cartão junto da figura mostra o que a apuração já confirmou sobre cada setor.</p>
+      </div>
+      <div class="c-grade">
+        <div>
+          <div class="c-rolagem" id="c-rolagem">
+            <div class="c-figura" id="figura" role="group" aria-label="Trajetória ilustrativa da bola, com seis quiques, um para cada reportagem">
+              <span class="selo-ilustrativo">Trajetória ilustrativa · não representa dados</span>
+              <svg id="svg-traj" viewBox="0 0 960 420" preserveAspectRatio="none" aria-hidden="true" focusable="false"></svg>
+              <ol class="c-pontos" id="c-pontos"></ol>
+              <p class="c-fim" id="c-fim"></p>
+            </div>
+          </div>
+          <p class="dica-arraste legenda">Arraste a figura para os lados ou use os botões.</p>
+          <div class="c-controles">
+            <button class="btn btn-secundario" type="button" id="btn-ant"><svg class="icone" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Quique anterior</button>
+            <button class="btn btn-primario" type="button" id="btn-prox">Próximo quique <svg class="icone" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+            <span class="contador" id="contador" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="c-cartao" id="cartao" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. O MESMO DOSSIÊ VISTO DO ESTÁDIO + LISTA ============ -->
+  <section class="secao" id="estadio" aria-labelledby="t-estadio">
+    <div class="conteiner">
+      <div class="cab-secao">
+        <p class="eyebrow">Outra porta de entrada</p>
+        <h2 id="t-estadio">Os mesmos seis setores, no estádio</h2>
+        <p class="linha-fina">Da beira do campo, cada número é um setor e uma reportagem.</p>
+      </div>
+      <div class="estadio-rolagem" id="rolagem">
+        <svg id="svg-estadio" class="estadio-svg" viewBox="0 0 960 540" role="group"></svg>
+      </div>
+      <p class="dica-arraste legenda">Arraste o estádio para os lados ou use a lista.</p>
+      <div class="painel-leitura" id="painel" aria-live="polite">
+        <span class="pl-cab">Painel de leitura</span>
+        <span class="pl-txt">Passe o mouse, toque ou use a tecla Tab nos números para ler a chamada de cada setor.</span>
+      </div>
+      <h3 class="lista-tit">As seis reportagens em lista, com um achado de cada</h3>
+      <ol class="lista-reportagens" id="lista"></ol>
+    </div>
+  </section>
+</main>
+<script src="assets/js/mapa-narrativo.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/home.js"></script>
+<script>
+/* tudo o que a home faz está em assets/js/home.js */
+</script>
+</body>
+</html>
