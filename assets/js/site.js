@@ -15,6 +15,11 @@ const LINKS_PROTOTIPO = {};
 const RAIZ = (document.body && document.body.dataset.raiz) || '';
 let CAMINHO_REPORTAGENS = RAIZ + 'reportagens/';
 
+/* Aparelho "leve": tela estreita ou só toque (celular). Nele cortamos os efeitos mais caros,
+   principalmente o filtro de pincelada (feTurbulence + feDisplacementMap), que é refeito
+   por software a cada quadro da animação e trava celulares de entrada. */
+const APARELHO_LEVE = window.matchMedia('(max-width: 759px), (hover: none) and (pointer: coarse)').matches;
+
 /* Toda página abre no topo, mesmo quando o navegador (ou o visualizador do artefato)
    tenta devolver a posição de rolagem da visita anterior. Exceção: links com âncora
    de propósito, como "metodologia.html#dados", continuam levando à seção indicada. */
@@ -294,9 +299,12 @@ function desenharEstadio(opcoes) {
   });
   s += '<line x1="0" y1="352" x2="960" y2="352" stroke="' + T + '" stroke-width="2.5"/>';
 
-  /* --- 9.6 Torcida em pontos coloridos (grupo .torcida some na Opção B) --- */
+  /* --- 9.6 Torcida em pontos coloridos (grupo .torcida some na Opção B) ---
+     Mesmo desenho de antes (520 pontos de raio 2,4, mesma semente), mas em 4 <path> por cor
+     em vez de 520 <circle>: ponto = traço de comprimento zero com ponta redonda de 4,8 de largura.
+     Menos nós no DOM = a página abre e anima bem mais rápido no celular. */
   const cores = ['var(--color-tinta_azul)', 'var(--color-alerta)', 'var(--color-faixa_amarela)', 'var(--color-texto)', 'var(--color-tinta_azul)'];
-  s += '<g class="torcida">';
+  const pontosPorCor = cores.map(() => '');
   for (let i = 0; i < 520; i++) {
     let x, y;
     const zona = rnd();
@@ -305,8 +313,10 @@ function desenharEstadio(opcoes) {
     else if (zona < 0.95) { x = 4 + rnd() * 50; y = 250 + rnd() * 200; }
     else { x = 906 + rnd() * 50; y = 250 + rnd() * 200; }
     if (x > 505 && x < 650 && y > 140 && y < 205) continue;          /* deixa a cabine livre */
-    s += '<circle cx="' + f1(x) + '" cy="' + f1(y) + '" r="2.4" fill="' + cores[Math.floor(rnd() * cores.length)] + '"/>';
+    pontosPorCor[Math.floor(rnd() * cores.length)] += 'M' + f1(x) + ',' + f1(y) + 'h0';
   }
+  s += '<g class="torcida" fill="none" stroke-width="4.8" stroke-linecap="round">';
+  cores.forEach((cor, k) => { if (pontosPorCor[k]) s += '<path d="' + pontosPorCor[k] + '" stroke="' + cor + '"/>'; });
   s += '</g>';
 
   /* --- 9.7 Telões: placar (esq.) e anúncio fictício (dir.) --- */
@@ -464,7 +474,10 @@ function curvaSuave(pontos) {
   return d;
 }
 /* Filtro de deslocamento: traço irregular (estático, nunca anima) */
-const FILTRO_PINCEL = '<filter id="pincel" x="-5%" y="-20%" width="110%" height="140%"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7"/><feDisplacementMap in="SourceGraphic" scale="5"/></filter>';
+/* No celular o filtro é omitido (traço liso): ver APARELHO_LEVE no topo deste arquivo. */
+const FILTRO_PINCEL = APARELHO_LEVE ? '' : '<filter id="pincel" x="-5%" y="-20%" width="110%" height="140%"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7"/><feDisplacementMap in="SourceGraphic" scale="5"/></filter>';
+/* Atributo para aplicar o filtro a um grupo (vazio no celular). */
+const usarPincel = (id) => APARELHO_LEVE ? '' : ' filter="url(#' + (id || 'pincel') + ')"';
 function setaEm(ponta, anterior) {
   const ang = Math.atan2(ponta[1] - anterior[1], ponta[0] - anterior[0]);
   const a = (dx, dy) => [ponta[0] + dx * Math.cos(ang) - dy * Math.sin(ang), ponta[1] + dx * Math.sin(ang) + dy * Math.cos(ang)];
@@ -522,7 +535,7 @@ function montarLinhaDeclinio(caixa) {
     svg.setAttribute('viewBox', '0 0 ' + vb[0] + ' ' + vb[1]);
     svg.setAttribute('preserveAspectRatio', 'none');
     svg.innerHTML = '<defs>' + FILTRO_PINCEL + '</defs>' +
-      '<g filter="url(#pincel)">' +
+      '<g' + usarPincel('pincel') + '>' +
         '<path d="' + caminho + '" fill="none" stroke="var(--color-alerta)" stroke-width="3" stroke-linecap="round" opacity=".35" transform="translate(2.5 2)"/>' +
         '<path class="traco-principal" d="' + caminho + '" fill="none" stroke="var(--color-alerta)" stroke-width="7" stroke-linecap="round"/>' +
         '<polygon class="ponta" points="' + setaEm(fim, antes) + '" fill="var(--color-alerta)"/>' +
@@ -588,7 +601,7 @@ function prepararMorfose(svg, opcoes) {
   const DY = opcoes.dy == null ? 110 : opcoes.dy;      /* chão da trajetória em y = 462 no estádio */
   const ns = 'http://www.w3.org/2000/svg';
   const g = document.createElementNS(ns, 'g'); g.setAttribute('class', 'morfose');
-  g.innerHTML = '<defs>' + FILTRO_PINCEL.replace('id="pincel"', 'id="pincel-m"') + '</defs><g filter="url(#pincel-m)">' +
+  g.innerHTML = '<defs>' + FILTRO_PINCEL.replace('id="pincel"', 'id="pincel-m"') + '</defs><g' + usarPincel('pincel-m') + '>' +
     '<path class="m-traco" fill="none" stroke="var(--color-alerta)" stroke-width="7" stroke-linecap="round"/>' +
     '<polygon class="m-ponta" fill="var(--color-alerta)"/></g>';
   svg.insertBefore(g, svg.querySelector('.hs'));
@@ -628,7 +641,14 @@ function prepararMorfose(svg, opcoes) {
 function animar(dur, cadaQuadro, fim) {
   if (movimentoReduzido()) { cadaQuadro(1); if (fim) fim(); return; }
   const t0 = performance.now(), ease = x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
-  (function q(agora) { const t = Math.min(1, (agora - t0) / dur); cadaQuadro(ease(t)); if (t < 1) requestAnimationFrame(q); else if (fim) fim(); })(t0);
+  /* Proteção para aparelhos lentos: se 3 quadros seguidos demoram mais de 80 ms (menos de ~12 quadros
+     por segundo), a animação pula direto para o estado final em vez de arrastar a tela. */
+  let ultimo = t0, lentos = 0;
+  (function q(agora) {
+    lentos = (agora - ultimo > 80) ? lentos + 1 : 0; ultimo = agora;
+    const t = lentos >= 3 ? 1 : Math.min(1, (agora - t0) / dur);
+    cadaQuadro(ease(t)); if (t < 1) requestAnimationFrame(q); else if (fim) fim();
+  })(t0);
 }
 
 /* Rolagem suave da entrada até um alvo (1200ms; 0ms com movimento reduzido) */

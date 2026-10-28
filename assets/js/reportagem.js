@@ -8,7 +8,8 @@
 /* ---------- Dados: lê /data/arquivo.csv ---------- */
 async function carregarCSV(nome) {
   try {
-    const r = await fetch(RAIZ + 'data/' + nome, { cache: 'no-store' });
+    /* cache padrão do navegador: no 4G, baixar o CSV de novo a cada visita atrasa o gráfico à toa */
+    const r = await fetch(RAIZ + 'data/' + nome);
     if (r.ok) return lerCSV(await r.text());
   } catch (e) { /* cai na mensagem de erro abaixo */ }
   return null;
@@ -47,10 +48,17 @@ async function graficoDeCSV(nome, elGrafico, desenhar, tabela, colunas) {
 const Scrolly = {
   iniciar(caixa, aoMudar) {
     const passos = $$('.passo-rep', caixa);
-    let atual = null, quadro = 0;
+    let atual = null, quadro = 0, linha = 0, largura = 0;
+    /* A linha de leitura só é recalculada quando a LARGURA muda. No celular, a barra de endereço
+       que some e volta ao rolar altera innerHeight o tempo todo e fazia o passo ativo piscar. */
+    function calcularLinha() {
+      largura = innerWidth;
+      linha = innerHeight * (matchMedia('(min-width: 1024px)').matches ? 0.55 : 0.65);
+    }
+    calcularLinha();
+    addEventListener('resize', () => { if (innerWidth !== largura) { calcularLinha(); if (!quadro) quadro = requestAnimationFrame(medir); } });
     function medir() {
       quadro = 0;
-      const linha = innerHeight * (matchMedia('(min-width: 1024px)').matches ? 0.55 : 0.65);
       let n = +passos[0].dataset.passo;
       passos.forEach(p => { if (p.getBoundingClientRect().top < linha) n = +p.dataset.passo; });
       if (n !== atual) {
@@ -110,21 +118,32 @@ function iniciarReportagem() {
 
   /* 3. indicador de posição: o estádio esvazia e vira a trajetória da bola */
   const svgPos = $('#svg-posicao');
-  ativarEstadio(svgPos, null);
-  $('#' + R.hotspot_estadio, svgPos).classList.add('atual');
-  const morf = prepararMorfose(svgPos);
-  centralizarRolagem(svgPos.parentElement);
   const legPos = $('#legenda-pos');
   legPos.textContent = 'O estádio do dossiê. Role até aqui para ver o caminho das seis reportagens.';
+  /* Este estádio fica no fim da página: só é desenhado quando o leitor está a ~1 tela de distância.
+     (O <svg> já tem viewBox no HTML, então a altura da página não muda quando ele é montado.) */
+  let morf = null;
+  const montarPosicao = () => {
+    if (morf) return morf;
+    ativarEstadio(svgPos, null);
+    $('#' + R.hotspot_estadio, svgPos).classList.add('atual');
+    morf = prepararMorfose(svgPos);
+    centralizarRolagem(svgPos.parentElement);
+    atualizarVisitados();
+    return morf;
+  };
   let feito = false;
   const transformar = () => {
     if (feito) return; feito = true;
-    animar(1400, k => morf.aplicar(k), () => {
+    const m = montarPosicao();
+    animar(1400, k => m.aplicar(k), () => {
       legPos.textContent = 'Você está no quique ' + R.numero + ' de ' + ORDEM.length + ': ' + R.titulo_provisorio + '. Os números abrem as outras reportagens.';
     });
   };
   if (movimentoReduzido() || !('IntersectionObserver' in window)) transformar();
   else {
+    const pre = new IntersectionObserver(e => { if (e[0].isIntersecting) { pre.disconnect(); montarPosicao(); } }, { rootMargin: '100% 0px' });
+    pre.observe(svgPos.parentElement);
     const io = new IntersectionObserver(e => { if (e[0].isIntersecting) { io.disconnect(); transformar(); } }, { threshold: 0.4 });
     io.observe(svgPos.parentElement);   /* observa a moldura: no celular o SVG é mais largo que a tela */
   }

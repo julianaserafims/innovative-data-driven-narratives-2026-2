@@ -730,3 +730,28 @@ a.logos { min-height: 44px; }
 /* esquema da r1: o passo atual ganha marca-texto; nada fica invisível */
 .esq .grupo.atual .marca-texto { opacity: 1; }
 .esq .marca-texto { opacity: 0; transition: opacity var(--motion-duration-duracao_media) var(--motion-easing-easing_padrao); }
+
+/* =====================================================================
+   CELULAR: desempenho e conforto de leitura
+   ===================================================================== */
+/* Impede o iOS de aumentar o texto sozinho ao girar a tela. */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+/* Toque sem atraso nem zoom por toque duplo em botões e links; realce de toque discreto. */
+a, button, summary, .c-ponto, .hs { touch-action: manipulation; -webkit-tap-highlight-color: rgba(43, 75, 160, .15); }
+
+/* Áreas com rolagem lateral (estádio, gráficos, tabelas): o gesto de arrastar não "vaza"
+   para a página nem dispara o voltar do navegador. */
+.estadio-rolagem, .c-rolagem, .graf-rolagem, .tab-rolagem, .tl-rolagem, .moldura-pos { overscroll-behavior-x: contain; }
+
+/* "vh" no celular muda quando a barra do navegador some e aparece, e o texto pulava.
+   "svh" (altura mínima da tela) é estável; quem não suporta continua com "vh". */
+@supports (height: 1svh) {
+  .esquema-moldura svg { max-height: calc(55svh - 44px); }
+  .passos-rep { gap: 55svh; padding-block: 8svh 25svh; }
+}
+@media (min-width: 1024px) {
+  @supports (height: 1svh) {
+    .passos-rep { gap: 60svh; padding-block: 20svh 40svh; }
+  }
+}

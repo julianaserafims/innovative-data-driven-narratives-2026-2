@@ -20,7 +20,7 @@ svgT.innerHTML = '<defs>' + FILTRO_PINCEL +
   listras + '<rect x="0" y="' + CHAO + '" width="960" height="28" fill="url(#ret-verde-c)"/>' +
   '<line x1="0" y1="' + CHAO + '" x2="960" y2="' + CHAO + '" stroke="#fff" stroke-width="3"/>' +
   '<line x1="0" y1="' + (CHAO + 28) + '" x2="960" y2="' + (CHAO + 28) + '" stroke="var(--color-texto)" stroke-width="2"/>' +
-  '<g filter="url(#pincel)">' +
+  '<g' + usarPincel('pincel') + '>' +
     '<path d="' + CAMINHO + '" fill="none" stroke="var(--color-alerta)" stroke-width="7" stroke-linecap="round" opacity=".28"/>' +
     '<path id="rastro" d="' + CAMINHO + '" fill="none" stroke="var(--color-alerta)" stroke-width="7" stroke-linecap="round"/>' +
     '<polygon points="' + setaEm([FIM_X + 30, CHAO], [FIM_X, CHAO]) + '" fill="var(--color-alerta)"/>' +
@@ -131,8 +131,17 @@ $('#figura').addEventListener('keydown', (e) => {
 colocarEm(0);
 
 /* ---------- 4. Estádio e lista com achados ---------- */
-ativarEstadio($('#svg-estadio'), $('#painel'));
-centralizarRolagem($('#rolagem'));
+/* O estádio fica abaixo da bola: só é desenhado quando falta ~1 tela para chegar nele.
+   (O <svg> tem viewBox no HTML, então a altura da página não muda quando ele é montado.) */
+function montarEstadioDaHome() {
+  ativarEstadio($('#svg-estadio'), $('#painel'));
+  centralizarRolagem($('#rolagem'));
+  atualizarVisitados();
+}
+if ('IntersectionObserver' in window) {
+  const ioEstadio = new IntersectionObserver((e) => { if (e[0].isIntersecting) { ioEstadio.disconnect(); montarEstadioDaHome(); } }, { rootMargin: '100% 0px' });
+  ioEstadio.observe($('#rolagem'));
+} else montarEstadioDaHome();
 montarLista($('#lista'), true);
 atualizarVisitados();
 ligarEntrada($('#trajetoria'));
