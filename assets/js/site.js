@@ -121,6 +121,7 @@ document.addEventListener('click', (ev) => {
   }
   const a = ev.target.closest('a[data-abre]');
   if (!a) return;
+  if (ev.defaultPrevented) return;   /* 1º toque num setor do estádio: só lê a chamada, não abriu a reportagem */
   const id = a.dataset.abre;
   Visitados.marcar(id);
   if (MODO_PROTOTIPO && !LINKS_PROTOTIPO[id]) {
@@ -175,6 +176,7 @@ const Som = {
     this.ligado = ligar;
     $$('.btn-som').forEach(b => {
       b.setAttribute('aria-pressed', String(ligar));
+      b.setAttribute('aria-label', 'Som: ' + (ligar ? 'ligado' : 'desligado'));   /* no celular o botão mostra só o ícone */
       b.innerHTML = icone(ligar ? 'volume-2' : 'volume-x') +
         '<span class="rotulo-longo">Som: ' + (ligar ? 'ligado' : 'desligado') + '</span><span class="rotulo-curto">' + (ligar ? 'Ligado' : 'Mudo') + '</span>';
     });
@@ -433,24 +435,74 @@ function desenharEstadio(opcoes) {
   return s;
 }
 
-/* Liga o estádio ao painel de leitura (aria-live) */
-function ativarEstadio(svg, painel) {
+/* Celular: sem mouse não existe "passar o mouse". Nessas telas o setor é lido com um toque
+   e a reportagem abre com um segundo toque (ou pelo botão do painel). */
+const semMouse = () => window.matchMedia('(hover: none)').matches;
+
+/* Os marcadores numerados do estádio têm 20 unidades de raio num desenho de 960. Com o estádio
+   encolhido para a largura do celular isso vira um ponto de 7 px; aqui eles crescem (até 2,2×)
+   para ficar com tamanho de dedo. Em telas largas a escala é 1 e nada muda. */
+function escalaMarcador(svg) {
+  const w = svg.getBoundingClientRect().width || 960;
+  return Math.max(1, Math.min(2.2, 0.8 * 960 / w));
+}
+function ajustarMarcadores(svg) {
+  const s = escalaMarcador(svg);
+  $$('.mk', svg).forEach(m => {
+    if (!m.dataset.x0) { m.dataset.x0 = m.dataset.x; m.dataset.y0 = m.dataset.y; }
+    /* mantém o marcador inteiro dentro do desenho (o do gramado ficava cortado embaixo) */
+    const x = Math.max(24 * s, Math.min(960 - 24 * s, +m.dataset.x0));
+    const y = Math.max(24 * s, Math.min(540 - 24 * s, +m.dataset.y0));
+    m.dataset.x = x; m.dataset.y = y;
+    m.setAttribute('transform', 'translate(' + f1(x) + ' ' + f1(y) + ') scale(' + s.toFixed(2) + ')');
+  });
+}
+
+/* Liga o estádio ao painel de leitura (aria-live).
+   opcoes.ajustar === false: não mexe nos marcadores (a câmera da abertura cuida deles);
+   opcoes.resize === false: não reajusta ao girar a tela (o indicador de posição vira trajetória). */
+function ativarEstadio(svg, painel, opcoes) {
+  opcoes = opcoes || {};
   svg.innerHTML = '<title id="' + svg.id + '-t">Estádio do dossiê, visto da beira do campo</title>' +
     '<desc id="' + svg.id + '-d">Ilustração da metade de lá de um estádio, com seis setores numerados. 1, placas de publicidade; 2, túnel do vestiário; 3, cabine de imprensa; 4, gramado e faixa do campeonato; 5, cabine do VAR; 6, arquibancada. Cada número abre uma reportagem. A mesma lista está logo abaixo da ilustração.</desc>' +
     desenharEstadio();
   svg.setAttribute('aria-labelledby', svg.id + '-t ' + svg.id + '-d');
+  if (opcoes.ajustar !== false) {
+    ajustarMarcadores(svg);
+    if (opcoes.resize !== false) {
+      let larg = svg.getBoundingClientRect().width, t;
+      window.addEventListener('resize', () => {
+        clearTimeout(t);
+        t = setTimeout(() => { const n = svg.getBoundingClientRect().width; if (Math.abs(n - larg) > 1) { larg = n; ajustarMarcadores(svg); } }, 150);
+      });
+    }
+  }
+  if (painel && semMouse()) {
+    const dica = painel.querySelector('.pl-txt');
+    if (dica) dica.textContent = 'Toque num número para ler a chamada do setor. Toque de novo para abrir a reportagem.';
+  }
   const padrao = painel ? painel.innerHTML : '';
+  let atual = null;
   function mostrar(r) {
     if (!painel) return;
     const s = setorDe(r);
     painel.innerHTML = '<span class="pl-cab" style="color:' + corCat(r) + '">' + r.numero + ' · ' + esc(s.area) + '</span>' +
-      '<span class="pl-txt">' + esc(s.microcopy) + '</span>';
+      '<span class="pl-txt">' + esc(s.microcopy) + '</span>' +
+      (semMouse() ? '<a class="btn btn-primario pl-abrir" data-abre="' + r.id + '" href="' + urlReportagem(r) + '">Ler reportagem ' + r.numero + ' ' + icone('arrow-right') + '</a>' : '');
+  }
+  function selecionar(a, r) {
+    $$('.hs.ativo', svg).forEach(x => x.classList.remove('ativo'));
+    a.classList.add('ativo'); atual = a; mostrar(r);
   }
   $$('.hs', svg).forEach(a => {
     const r = MAPA.reportagens.find(x => x.id === a.dataset.rep);
     a.addEventListener('mouseenter', () => mostrar(r));
     a.addEventListener('focus', () => mostrar(r));
     a.addEventListener('keydown', (e) => { if (e.key === ' ') { e.preventDefault(); a.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true })); } });
+    a.addEventListener('click', (e) => {
+      if (!painel || !semMouse()) return;                    /* com mouse, o clique abre direto, como sempre */
+      if (atual !== a) { e.preventDefault(); selecionar(a, r); }   /* 1º toque: lê a chamada; 2º toque: abre */
+    });
   });
   return { mostrar, padrao };
 }
@@ -571,27 +623,48 @@ function montarLinhaDeclinio(caixa) {
    11. TRAJETÓRIA DA BOLA (metáfora da home C e do indicador das reportagens)
    Cada quique sobe ~28% menos que o anterior. Coordenadas no viewBox 960 × 420.
    ===================================================================== */
-const TRAJ = {
+/* Geometria em telas largas (computador): desenho de 960 × 420. */
+const TRAJ_LARGO = {
+  L: 960, A: 420,
   CHAO: 352, RAIO: 12,
-  INICIO: [36, 64],                          /* de onde a bola cai */
+  INICIO: [36, 64], QUEDA: 42,               /* de onde a bola cai e quanto a queda "puxa" para o lado */
   POUSOS: [120, 262, 392, 505, 602, 686],    /* onde a bola toca o chão: r1 … r6 */
   ALTURAS: [230, 166, 120, 87, 63],          /* altura de cada quique entre pousos */
   QUIQUINHOS: [[728, 30], [760, 13]],        /* depois do 6º pouso: [x, altura] */
   FIM_X: 880                                 /* onde a bola para */
 };
+/* Celular: desenho de 480 × 330 que cabe na tela sem rolar de lado. Pousos a 62 unidades
+   (≈ 46 px, o que cabe um dedo) e quiques mais baixos, mantendo a regra de perder 28% a cada um. */
+const TRAJ_ESTREITO = {
+  L: 480, A: 330,
+  CHAO: 262, RAIO: 12,
+  INICIO: [14, 80], QUEDA: 16,
+  POUSOS: [52, 114, 176, 238, 300, 362],
+  ALTURAS: [146, 105, 76, 55, 40],
+  QUIQUINHOS: [[394, 16], [420, 7]],
+  FIM_X: 446
+};
+/* Metamorfose do estádio em trajetória (desenho do estádio, 960 × 540) no celular:
+   os mesmos quiques, mas com os pousos espaçados por igual para os seis números não se encostarem. */
+const TRAJ_MORFOSE_ESTREITO = Object.assign({}, TRAJ_LARGO, {
+  POUSOS: [110, 230, 350, 470, 590, 710], QUIQUINHOS: [[752, 30], [784, 13]]
+});
+const telaEstreita = () => window.matchMedia('(max-width: 759px)').matches;
+let TRAJ = TRAJ_LARGO;                       /* geometria em uso; trocada por escolherTrajetoria() */
+function escolherTrajetoria() { TRAJ = telaEstreita() ? TRAJ_ESTREITO : TRAJ_LARGO; return TRAJ; }
 function _q(x0, y0, x1, y1, h) { return 'Q' + f1((x0 + x1) / 2) + ',' + f1(Math.min(y0, y1) - 2 * h) + ' ' + f1(x1) + ',' + f1(y1); }
 /* Segmentos: [0] queda; [1..5] quiques; [6] quiquinhos e rolagem. dy desloca tudo na vertical. */
-function segmentosTrajetoria(dy) {
-  dy = dy || 0;
-  const C = TRAJ.CHAO + dy, P = TRAJ.POUSOS, s = [];
-  s.push('M' + TRAJ.INICIO[0] + ',' + (TRAJ.INICIO[1] + dy) + ' Q' + (TRAJ.INICIO[0] + 42) + ',' + (TRAJ.INICIO[1] + dy) + ' ' + P[0] + ',' + C);
-  for (let i = 0; i < 5; i++) s.push('M' + P[i] + ',' + C + ' ' + _q(P[i], C, P[i + 1], C, TRAJ.ALTURAS[i]));
+function segmentosTrajetoria(dy, G) {
+  dy = dy || 0; G = G || TRAJ;
+  const C = G.CHAO + dy, P = G.POUSOS, s = [];
+  s.push('M' + G.INICIO[0] + ',' + (G.INICIO[1] + dy) + ' Q' + (G.INICIO[0] + G.QUEDA) + ',' + (G.INICIO[1] + dy) + ' ' + P[0] + ',' + C);
+  for (let i = 0; i < 5; i++) s.push('M' + P[i] + ',' + C + ' ' + _q(P[i], C, P[i + 1], C, G.ALTURAS[i]));
   let d = 'M' + P[5] + ',' + C, x = P[5];
-  TRAJ.QUIQUINHOS.forEach(([x1, h]) => { d += ' ' + _q(x, C, x1, C, h); x = x1; });
-  s.push(d + ' L' + TRAJ.FIM_X + ',' + C);
+  G.QUIQUINHOS.forEach(([x1, h]) => { d += ' ' + _q(x, C, x1, C, h); x = x1; });
+  s.push(d + ' L' + G.FIM_X + ',' + C);
   return s;
 }
-function caminhoTrajetoria(dy) { const s = segmentosTrajetoria(dy); return s[0] + ' ' + s.slice(1).map(t => t.replace(/^M[\d.]+,[\d.]+ /, '')).join(' '); }
+function caminhoTrajetoria(dy, G) { const s = segmentosTrajetoria(dy, G); return s[0] + ' ' + s.slice(1).map(t => t.replace(/^M[\d.]+,[\d.]+ /, '')).join(' '); }
 
 /* Metamorfose do estádio na trajetória (herdada da Opção B).
    Os seis marcadores saem do estádio e pousam na trajetória; o cenário apaga.
@@ -599,6 +672,9 @@ function caminhoTrajetoria(dy) { const s = segmentosTrajetoria(dy); return s[0] 
 function prepararMorfose(svg, opcoes) {
   opcoes = opcoes || {};
   const DY = opcoes.dy == null ? 110 : opcoes.dy;      /* chão da trajetória em y = 462 no estádio */
+  /* aqui a trajetória vive no desenho do estádio (960 × 540), então não usa a geometria da home */
+  const T = opcoes.geo || (telaEstreita() ? TRAJ_MORFOSE_ESTREITO : TRAJ_LARGO);
+  const escalaPadrao = escalaMarcador(svg);   /* mesmo tamanho de dedo do estádio parado */
   const ns = 'http://www.w3.org/2000/svg';
   const g = document.createElementNS(ns, 'g'); g.setAttribute('class', 'morfose');
   g.innerHTML = '<defs>' + FILTRO_PINCEL.replace('id="pincel"', 'id="pincel-m"') + '</defs><g' + usarPincel('pincel-m') + '>' +
@@ -609,11 +685,11 @@ function prepararMorfose(svg, opcoes) {
   const reps = reportagensEmOrdem();
   const mks = reps.map(r => svg.querySelector('#' + r.hotspot_estadio + ' .mk'));
   const de = mks.map(m => [+m.dataset.x, +m.dataset.y]);
-  const C = TRAJ.CHAO + DY;
-  const para = TRAJ.POUSOS.map(x => [x, C]);
+  const C = T.CHAO + DY;
+  const para = T.POUSOS.map(x => [x, C]);
   const cenario = svg.querySelector('.cenario');
   function aplicar(k, escala) {
-    escala = escala || 1;
+    escala = escala || escalaPadrao;
     const pts = mks.map((m, i) => {
       const x = de[i][0] + (para[i][0] - de[i][0]) * k, y = de[i][1] + (para[i][1] - de[i][1]) * k;
       m.setAttribute('transform', 'translate(' + f1(x) + ' ' + f1(y) + ') scale(' + escala.toFixed(3) + ')');
@@ -621,12 +697,12 @@ function prepararMorfose(svg, opcoes) {
     });
     cenario.style.opacity = String(1 - 0.92 * k);
     if (k <= 0.001) { traco.style.opacity = 0; ponta.style.opacity = 0; return; }
-    const ini = [pts[0][0] + (TRAJ.INICIO[0] - pts[0][0]) * k, pts[0][1] + (TRAJ.INICIO[1] + DY - pts[0][1]) * k];
-    let d = 'M' + f1(ini[0]) + ',' + f1(ini[1]) + ' Q' + f1(ini[0] + 42 * k) + ',' + f1(ini[1]) + ' ' + f1(pts[0][0]) + ',' + f1(pts[0][1]);
-    for (let i = 0; i < 5; i++) d += ' ' + _q(pts[i][0], pts[i][1], pts[i + 1][0], pts[i + 1][1], TRAJ.ALTURAS[i] * k);
+    const ini = [pts[0][0] + (T.INICIO[0] - pts[0][0]) * k, pts[0][1] + (T.INICIO[1] + DY - pts[0][1]) * k];
+    let d = 'M' + f1(ini[0]) + ',' + f1(ini[1]) + ' Q' + f1(ini[0] + T.QUEDA * k) + ',' + f1(ini[1]) + ' ' + f1(pts[0][0]) + ',' + f1(pts[0][1]);
+    for (let i = 0; i < 5; i++) d += ' ' + _q(pts[i][0], pts[i][1], pts[i + 1][0], pts[i + 1][1], T.ALTURAS[i] * k);
     let x = pts[5][0], y = pts[5][1];
-    TRAJ.QUIQUINHOS.forEach(([x1, h]) => { const xx = x + (x1 - x) * k; d += ' ' + _q(x, y, xx, C, h * k); x = xx; y = C; });
-    const fimX = pts[5][0] + (TRAJ.FIM_X - pts[5][0]) * k;
+    T.QUIQUINHOS.forEach(([x1, h]) => { const xx = x + (x1 - x) * k; d += ' ' + _q(x, y, xx, C, h * k); x = xx; y = C; });
+    const fimX = pts[5][0] + (T.FIM_X - pts[5][0]) * k;
     d += ' L' + f1(fimX) + ',' + f1(C);
     traco.setAttribute('d', d);
     const L = traco.getTotalLength();
@@ -709,12 +785,15 @@ function montarCasca() {
 <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 <header class="cabecalho">
   <div class="conteiner">
-    <a class="logos" href="${RAIZ}index.html" aria-label="Da Sorte ao Declínio: página inicial">
-      <!-- Trocar pelos logos oficiais: <img src="${RAIZ}assets/img/ufpe.svg" alt="UFPE" height="32"> -->
-      <span class="logo-ph" aria-hidden="true">UFPE</span>
-      <span class="logo-ph" aria-hidden="true">CAC</span>
-      <span class="logo-ph" aria-hidden="true">CIn</span>
-    </a>
+    <div class="topo-esq">
+      <a class="marca-topo" href="${RAIZ}index.html" aria-label="Da Sorte ao Declínio: página inicial">
+        <svg class="bola-topo" viewBox="-15 -15 30 30" aria-hidden="true" focusable="false"><circle r="13" fill="#fff" stroke="#15171C" stroke-width="2.5"/><polygon points="0,-5 4.8,-1.5 3,4 -3,4 -4.8,-1.5" fill="#15171C"/><path d="M0,-5 L0,-12 M4.8,-1.5 L11,-4 M3,4 L7,10 M-3,4 L-7,10 M-4.8,-1.5 L-11,-4" stroke="#15171C" stroke-width="1.5" fill="none"/></svg>
+        <span class="marca-nome">Da Sorte ao Declínio</span>
+      </a>
+      <nav class="inst" aria-label="Instituições">
+        ${PROJETO.links.map(l => '<a class="inst-link" href="' + esc(l.url) + '" target="_blank" rel="noopener" title="' + esc(l.nome) + '" aria-label="' + esc(l.nome) + ' (abre em nova aba)"><span class="sigla">' + esc(l.sigla) + '</span><span class="nome-longo"> · ' + esc(l.nome) + '</span></a>').join('')}
+      </nav>
+    </div>
     <div class="acoes-cabecalho">
       <button class="btn-icone btn-som" type="button" aria-pressed="false">Som: desligado</button>
       <button class="btn-icone" id="btn-menu" type="button" aria-expanded="false" aria-controls="menu-lateral">${icone('menu')}<span class="sr">Abrir menu</span></button>
@@ -734,6 +813,10 @@ function montarCasca() {
     <ul>
       <li><a class="menu-item" href="${RAIZ}metodologia.html"><span class="cat" aria-hidden="true"></span><span class="tit">Metodologia e dados</span><span></span></a></li>
       <li><a class="menu-item" href="${RAIZ}quem-somos.html"><span class="cat" aria-hidden="true"></span><span class="tit">Quem somos</span><span></span></a></li>
+    </ul>
+    <h2>Instituições</h2>
+    <ul>
+      ${PROJETO.links.map(l => '<li><a class="menu-item" href="' + esc(l.url) + '" target="_blank" rel="noopener"><span class="cat" aria-hidden="true"></span><span class="tit">' + esc(l.nome) + ' <span aria-hidden="true">↗</span><span class="sr"> (abre em nova aba)</span></span><span></span></a></li>').join('')}
     </ul>
   </nav>
 </aside>
@@ -768,6 +851,7 @@ function montarCasca() {
           <li><a href="${RAIZ}metodologia.html">Metodologia e dados</a></li>
           <li><a href="${RAIZ}quem-somos.html">Quem somos</a></li>
           <li><a href="${RAIZ}index.html">Página inicial</a></li>
+          ${PROJETO.links.map(l => '<li><a href="' + esc(l.url) + '" target="_blank" rel="noopener">' + esc(l.nome) + ' (' + esc(l.sigla) + ') ↗<span class="sr"> (abre em nova aba)</span></a></li>').join('')}
         </ul>
       </section>
     </div>

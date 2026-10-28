@@ -2,55 +2,67 @@
 
 iniciarComum();
 
-/* ---------- 1. Geometria da trajetória (metáfora; sem escala) ----------
-   Chão em y = 352. Cada quique sobe menos que o anterior (perde 28%). */
-const { CHAO, RAIO, POUSOS, FIM_X } = TRAJ;      /* geometria comum (comum.js, seção 11) */
+/* ---------- 1. Geometria e desenho da trajetória (metáfora; sem escala) ----------
+   Em telas largas o desenho é de 960 × 420. No celular é de 480 × 330: cabe na tela, sem rolar de lado,
+   com os seis pousos a ≈ 46 px um do outro (o que cabe um dedo). A geometria vem de site.js
+   (TRAJ_LARGO / TRAJ_ESTREITO). Cada quique sobe menos que o anterior (perde 28%). */
 const reps = reportagensEmOrdem();
-const SEG = segmentosTrajetoria(0);
-const CAMINHO = caminhoTrajetoria(0);
-
-/* ---------- 2. Desenho do SVG ---------- */
 const svgT = $('#svg-traj');
-let listras = '';
-for (let x = 0; x < 960; x += 60) listras += '<rect x="' + x + '" y="' + CHAO + '" width="60" height="28" fill="var(--color-' + ((x / 60) % 2 ? 'gramado_escuro' : 'gramado_claro') + ')"/>';
-svgT.innerHTML = '<defs>' + FILTRO_PINCEL +
-  '<pattern id="ret-verde-c" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.25" fill="var(--color-tinta_verde)" opacity=".55"/></pattern>' +
-  '<clipPath id="clip-bola"><circle r="' + RAIO + '"/></clipPath></defs>' +
-  '<rect width="960" height="420" fill="var(--color-superficie)"/>' +
-  listras + '<rect x="0" y="' + CHAO + '" width="960" height="28" fill="url(#ret-verde-c)"/>' +
-  '<line x1="0" y1="' + CHAO + '" x2="960" y2="' + CHAO + '" stroke="#fff" stroke-width="3"/>' +
-  '<line x1="0" y1="' + (CHAO + 28) + '" x2="960" y2="' + (CHAO + 28) + '" stroke="var(--color-texto)" stroke-width="2"/>' +
-  '<g' + usarPincel('pincel') + '>' +
-    '<path d="' + CAMINHO + '" fill="none" stroke="var(--color-alerta)" stroke-width="7" stroke-linecap="round" opacity=".28"/>' +
-    '<path id="rastro" d="' + CAMINHO + '" fill="none" stroke="var(--color-alerta)" stroke-width="7" stroke-linecap="round"/>' +
-    '<polygon points="' + setaEm([FIM_X + 30, CHAO], [FIM_X, CHAO]) + '" fill="var(--color-alerta)"/>' +
-  '</g>' +
-  '<line x1="' + FIM_X + '" y1="' + CHAO + '" x2="' + (FIM_X + 26) + '" y2="' + CHAO + '" stroke="var(--color-alerta)" stroke-width="7"/>' +
-  SEG.map((d, i) => '<path class="seg" data-i="' + i + '" d="' + d + '" fill="none" stroke="none"/>').join('') +
-  '<g id="bola"><g id="bola-gira">' +
-    '<circle r="' + RAIO + '" fill="var(--color-superficie)" stroke="var(--color-texto)" stroke-width="2.5"/>' +
-    '<g clip-path="url(#clip-bola)"><polygon points="0,-5 4.8,-1.5 3,4 -3,4 -4.8,-1.5" fill="var(--color-texto)"/>' +
-    '<path d="M0,-5 L0,-12 M4.8,-1.5 L11,-4 M3,4 L7,10 M-3,4 L-7,10 M-4.8,-1.5 L-11,-4" stroke="var(--color-texto)" stroke-width="1.5"/></g>' +
-  '</g></g>';
-
-/* Pontos clicáveis (HTML, para foco e alvo de toque de 44px) */
-$('#c-pontos').innerHTML = reps.map((r, i) =>
-  '<li data-rep="' + r.id + '" style="--x:' + (POUSOS[i] / 960 * 100) + '%;--y:' + ((CHAO + 14) / 420 * 100) + '%;--cat:' + corCat(r) + '">' +
-    '<button class="c-ponto" type="button" data-i="' + i + '" aria-label="Quique ' + r.numero + ': ' + esc(setorDe(r).area) + ', ' + esc(r.titulo_provisorio) + '">' +
-      '<span class="bola-n" aria-hidden="true">' + r.numero + '</span><span class="chk" aria-hidden="true">' + icone('check') + '</span></button>' +
-    '<span class="c-nome" aria-hidden="true">' + esc(setorDe(r).curto) + '</span>' +
-  '</li>').join('');
-$('#c-fim').innerHTML = esc(FIM_DA_LINHA.rotulo) + '*<span>' + esc(FIM_DA_LINHA.nota) + '</span>';
-
-/* ---------- 3. Estado: 0 a 5 = reportagens; 6 = a bola parou ---------- */
-const segs = $$('.seg', svgT);
-const rastro = $('#rastro'), bola = $('#bola'), gira = $('#bola-gira');
-const compTotal = rastro.getTotalLength();
-const compAte = [];                  /* comprimento do rastro até cada estado */
-let acc = 0; segs.forEach((s, i) => { acc += s.getTotalLength(); compAte[i] = acc; });
+const figura = $('#figura');
+let G, segs, rastro, bola, gira, compTotal, compAte;
 let estado = 0, animando = null, rotacao = 0;
 
-function posicionarBola(x, y) { bola.setAttribute('transform', 'translate(' + x.toFixed(1) + ' ' + (y - RAIO).toFixed(1) + ')'); gira.setAttribute('transform', 'rotate(' + rotacao.toFixed(0) + ')'); }
+function montarTrajetoria() {
+  G = escolherTrajetoria();
+  const { L, A, CHAO, RAIO, POUSOS, FIM_X } = G;
+  const SEG = segmentosTrajetoria(0);
+  const CAMINHO = caminhoTrajetoria(0);
+  figura.dataset.modo = G === TRAJ_ESTREITO ? 'estreito' : 'largo';
+  figura.style.aspectRatio = L + ' / ' + A;
+  svgT.setAttribute('viewBox', '0 0 ' + L + ' ' + A);
+
+  /* ---------- 2. Desenho do SVG ---------- */
+  let listras = '';
+  for (let x = 0; x < L; x += 60) listras += '<rect x="' + x + '" y="' + CHAO + '" width="60" height="28" fill="var(--color-' + ((x / 60) % 2 ? 'gramado_escuro' : 'gramado_claro') + ')"/>';
+  svgT.innerHTML = '<defs>' + FILTRO_PINCEL +
+    '<pattern id="ret-verde-c" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.25" fill="var(--color-tinta_verde)" opacity=".55"/></pattern>' +
+    '<clipPath id="clip-bola"><circle r="' + RAIO + '"/></clipPath></defs>' +
+    '<rect width="' + L + '" height="' + A + '" fill="var(--color-superficie)"/>' +
+    listras + '<rect x="0" y="' + CHAO + '" width="' + L + '" height="28" fill="url(#ret-verde-c)"/>' +
+    '<line x1="0" y1="' + CHAO + '" x2="' + L + '" y2="' + CHAO + '" stroke="#fff" stroke-width="3"/>' +
+    '<line x1="0" y1="' + (CHAO + 28) + '" x2="' + L + '" y2="' + (CHAO + 28) + '" stroke="var(--color-texto)" stroke-width="2"/>' +
+    '<g' + usarPincel('pincel') + '>' +
+      '<path d="' + CAMINHO + '" fill="none" stroke="var(--color-alerta)" stroke-width="7" stroke-linecap="round" opacity=".28"/>' +
+      '<path id="rastro" d="' + CAMINHO + '" fill="none" stroke="var(--color-alerta)" stroke-width="7" stroke-linecap="round"/>' +
+      '<polygon points="' + setaEm([FIM_X + 30, CHAO], [FIM_X, CHAO]) + '" fill="var(--color-alerta)"/>' +
+    '</g>' +
+    '<line x1="' + FIM_X + '" y1="' + CHAO + '" x2="' + (FIM_X + 26) + '" y2="' + CHAO + '" stroke="var(--color-alerta)" stroke-width="7"/>' +
+    SEG.map((d, i) => '<path class="seg" data-i="' + i + '" d="' + d + '" fill="none" stroke="none"/>').join('') +
+    '<g id="bola"><g id="bola-gira">' +
+      '<circle r="' + RAIO + '" fill="var(--color-superficie)" stroke="var(--color-texto)" stroke-width="2.5"/>' +
+      '<g clip-path="url(#clip-bola)"><polygon points="0,-5 4.8,-1.5 3,4 -3,4 -4.8,-1.5" fill="var(--color-texto)"/>' +
+      '<path d="M0,-5 L0,-12 M4.8,-1.5 L11,-4 M3,4 L7,10 M-3,4 L-7,10 M-4.8,-1.5 L-11,-4" stroke="var(--color-texto)" stroke-width="1.5"/></g>' +
+    '</g></g>';
+
+  /* Pontos clicáveis (HTML, para foco e alvo de toque de 44px) */
+  $('#c-pontos').innerHTML = reps.map((r, i) =>
+    '<li data-rep="' + r.id + '" style="--x:' + (POUSOS[i] / L * 100) + '%;--y:' + ((CHAO + 14) / A * 100) + '%;--cat:' + corCat(r) + '">' +
+      '<button class="c-ponto" type="button" data-i="' + i + '" aria-label="Quique ' + r.numero + ': ' + esc(setorDe(r).area) + ', ' + esc(r.titulo_provisorio) + '">' +
+        '<span class="bola-n" aria-hidden="true">' + r.numero + '</span><span class="chk" aria-hidden="true">' + icone('check') + '</span></button>' +
+      '<span class="c-nome" aria-hidden="true">' + esc(setorDe(r).curto) + '</span>' +
+    '</li>').join('');
+  $('#c-fim').innerHTML = esc(FIM_DA_LINHA.rotulo) + '*<span>' + esc(FIM_DA_LINHA.nota) + '</span>';
+
+  /* ---------- 3. Medidas do rastro ---------- */
+  segs = $$('.seg', svgT);
+  rastro = $('#rastro'); bola = $('#bola'); gira = $('#bola-gira');
+  compTotal = rastro.getTotalLength();
+  compAte = [];                      /* comprimento do rastro até cada estado */
+  let acc = 0; segs.forEach((s, i) => { acc += s.getTotalLength(); compAte[i] = acc; });
+}
+montarTrajetoria();
+
+function posicionarBola(x, y) { bola.setAttribute('transform', 'translate(' + x.toFixed(1) + ' ' + (y - G.RAIO).toFixed(1) + ')'); gira.setAttribute('transform', 'rotate(' + rotacao.toFixed(0) + ')'); }
 function pontoNoSeg(i, frac) { const s = segs[i]; const pnt = s.getPointAtLength(s.getTotalLength() * frac); return [pnt.x, pnt.y]; }
 function rastroAte(comp) { rastro.style.strokeDasharray = compTotal; rastro.style.strokeDashoffset = compTotal - comp; }
 
@@ -81,7 +93,7 @@ function mostrarCartao() {
   /* No celular a figura rola de lado: acompanha a bola */
   const rol = $('#c-rolagem');
   if (rol.scrollWidth > rol.clientWidth) {
-    const x = (estado === 6 ? FIM_X : POUSOS[estado]) / 960 * rol.scrollWidth - rol.clientWidth / 2;
+    const x = (estado === 6 ? G.FIM_X : G.POUSOS[estado]) / G.L * rol.scrollWidth - rol.clientWidth / 2;
     rol.scrollTo({ left: Math.max(0, x), behavior: movimentoReduzido() ? 'auto' : 'smooth' });
   }
 }
@@ -123,12 +135,19 @@ function irPara(alvo) {
 
 $('#btn-prox').addEventListener('click', () => { if (estado < 6) irPara(estado + 1); });
 $('#btn-ant').addEventListener('click', () => { if (estado > 0) irPara(estado - 1); });
-$$('.c-ponto').forEach(b => b.addEventListener('click', () => irPara(+b.dataset.i)));
+/* delegação: os botões são recriados quando a tela muda de tamanho (celular ↔ computador) */
+$('#c-pontos').addEventListener('click', (e) => { const b = e.target.closest('.c-ponto'); if (b) irPara(+b.dataset.i); });
 $('#figura').addEventListener('keydown', (e) => {
   if (e.key === 'ArrowRight') { e.preventDefault(); irPara(estado + 1); }
   if (e.key === 'ArrowLeft') { e.preventDefault(); irPara(estado - 1); }
 });
 colocarEm(0);
+/* Ao girar o celular ou redimensionar a janela, troca entre o desenho estreito e o largo */
+{
+  const mq = window.matchMedia('(max-width: 759px)');
+  const trocou = () => { montarTrajetoria(); colocarEm(estado); atualizarVisitados(); };
+  if (mq.addEventListener) mq.addEventListener('change', trocou); else if (mq.addListener) mq.addListener(trocou);
+}
 
 /* ---------- 4. Estádio e lista com achados ---------- */
 /* O estádio fica abaixo da bola: só é desenhado quando falta ~1 tela para chegar nele.

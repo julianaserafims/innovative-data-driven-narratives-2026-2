@@ -99,7 +99,7 @@ function iniciarReportagem() {
 
   /* 1. câmera da abertura: estádio inteiro → setor desta reportagem */
   const svgCam = $('#svg-camera');
-  ativarEstadio(svgCam, null);
+  ativarEstadio(svgCam, null, { ajustar: false });   /* a câmera da abertura controla o tamanho dos marcadores */
   $('#' + R.hotspot_estadio, svgCam).classList.add('atual');
   svgCam.setAttribute('inert', '');   /* ilustração: os números desta figura não são clicáveis */
   const vbFim = VISTAS_CAMERA[R.hotspot_estadio], vbIni = [0, 0, 960, 540];
@@ -125,7 +125,7 @@ function iniciarReportagem() {
   let morf = null;
   const montarPosicao = () => {
     if (morf) return morf;
-    ativarEstadio(svgPos, null);
+    ativarEstadio(svgPos, null, { resize: false });
     $('#' + R.hotspot_estadio, svgPos).classList.add('atual');
     morf = prepararMorfose(svgPos);
     centralizarRolagem(svgPos.parentElement);
