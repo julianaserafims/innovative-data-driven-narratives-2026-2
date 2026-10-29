@@ -13,28 +13,60 @@
       como pendência até ser substituído.
    --------------------------------------------------------------------- */
 const PROJETO = {
+  /* Equipe: fonte única dos nomes. "rep" liga quem escreveu à reportagem: daí saem o crédito
+     na abertura de cada reportagem e a linha "Reportagem e texto" do rodapé. "curto" é o nome
+     que a própria pessoa usou na pasta de apuração; "nome" e "curso" vêm da lista da turma. */
+  equipe: [
+    { nome: 'Anna Beatriz Monteiro Ferraz', curto: 'Anna Beatriz', curso: 'Jornalismo', rep: 'r1' },
+    { nome: 'Sabrina Rodrigues Rangel de Souza', curto: 'Sabrina Rangel', curso: 'Jornalismo', rep: 'r2' },
+    { nome: 'Laura Heloisa Limoeiro dos Santos', curto: 'Laura Heloisa', curso: 'Jornalismo', rep: 'r2' },
+    { nome: 'Arthur Wesley Andrade da Silva', curto: 'Arthur Andrade', curso: 'Jornalismo', rep: 'r3' },
+    { nome: 'Larissa Labelle da Silva Gouveia Batista', curto: 'Larissa Labelle', curso: 'Jornalismo', rep: 'r3' },
+    { nome: 'Manuela Vasconcelos Serpa Lopes de Souza', curto: 'Manuela Serpa', curso: 'Jornalismo', rep: 'r4' },
+    { nome: 'Ellywelton da Silva Alves', curto: 'Ellywelton Alves', curso: 'Jornalismo', rep: 'r4' },
+    { nome: 'Maria Candida Serpa Uchoa', curto: 'Maria Cândida', curso: 'Jornalismo', rep: 'r5' },
+    { nome: 'Lays Karolline da Silva Soares', curto: 'Lays Soares', curso: 'Jornalismo', rep: 'r5' },
+    { nome: 'Isaura Maria Santos Barbosa de Brito', curto: 'Isaura Maria', curso: 'Jornalismo', rep: 'r6' },
+    { nome: 'Luana Vitória Santos de Araújo', curto: 'Luana Araújo', curso: 'Jornalismo', rep: 'r6' },
+    { nome: 'Maria Rita Cavalcante de Oliveira Trajano', curso: 'Jornalismo', funcao: '[A CONFIRMAR: função]' },
+    { nome: 'Alexandre Candido Souza', curso: 'Computação', funcao: '[A PREENCHER: função]' },
+    { nome: 'Cleber Victor da Silva Júnior', curso: 'Computação', funcao: '[A PREENCHER: função]' },
+    { nome: 'Gabriel Vinicius Ayres Barbosa', curso: 'Computação', funcao: 'Desenvolvimento' },
+    { nome: 'Guilherme Montenegro de Albuquerque', curso: 'Computação', funcao: '[A PREENCHER: função]' },
+    { nome: 'Juliana Serafim da Silva', curso: 'Computação', funcao: 'Desenvolvimento' },
+    { nome: 'Luan de Oliveira Romancini Leite', curso: 'Computação', funcao: '[A PREENCHER: função]' },
+    { nome: 'Marcos Christopher de Sousa Martins', curso: 'Computação', funcao: 'Desenvolvimento' },
+    { nome: 'Maria Clara Gomes Alves', curso: 'Computação', funcao: '[A PREENCHER: função]' },
+    { nome: 'Mariana Beatriz Campêlo Ferreira', curso: 'Computação', funcao: '[A PREENCHER: função]' },
+    { nome: 'Mariana Melo dos Santos', curso: 'Computação', funcao: '[A PREENCHER: função]' },
+    { nome: 'Pericles Ferreira Sardinha', curso: 'Computação', funcao: '[A PREENCHER: função]' },
+    { nome: 'Vinicius Alves Fialho', curso: 'Computação', funcao: '[A PREENCHER: função]' }
+  ],
+  /* Demais créditos do rodapé e da abertura das reportagens ("Reportagem e texto" vem da equipe). */
   creditos: [
-    ['Reportagem e texto', '[A PREENCHER: nomes]'],
     ['Dados', '[A PREENCHER: nomes]'],
     ['Design e desenvolvimento', '[A PREENCHER: nomes]'],
     ['Orientação', '[A PREENCHER: professor(a)]']
   ],
   disciplina: 'Narrativas Inovadoras com Dados na Comunicação Digital',
   instituicao: 'UFPE · Centro de Artes e Comunicação (CAC)',
-  /* Links das instituições (barra do topo, menu e rodapé). Confira os endereços antes de publicar. */
+  /* Links das instituições (barra do topo, menu e rodapé). Endereços conferidos em 28/10/2026
+     (www.cin.ufpe.br redireciona para portal.cin.ufpe.br). */
   links: [
     { sigla: 'UFPE', nome: 'Universidade Federal de Pernambuco', url: 'https://www.ufpe.br' },
     { sigla: 'CAC', nome: 'Centro de Artes e Comunicação', url: 'https://www.ufpe.br/cac' },
-    { sigla: 'CIn', nome: 'Centro de Informática', url: 'https://www.cin.ufpe.br' }
+    { sigla: 'CIn', nome: 'Centro de Informática', url: 'https://portal.cin.ufpe.br' }
   ],
-  semestre: '[A PREENCHER]',
+  semestre: '2026.2',
   publicado_em: '[A PREENCHER]',
-  atualizado_em: '14/10/2026',
-  repositorio: '[A PREENCHER: endereço do repositório no GitHub]',
+  atualizado_em: '29/10/2026',
+  site: 'https://julianaserafims.github.io/innovative-data-driven-narratives-2026-2/',
+  repositorio: 'https://github.com/julianaserafims/innovative-data-driven-narratives-2026-2',
   licenca_conteudo: 'Textos e dados: CC BY 4.0. Os relatos do Guia do Ministério da Saúde seguem CC BY-NC-SA 4.0.',
   licenca_codigo: 'Código: MIT. Ícones: Lucide (ISC).',
-  /* Aviso de jogo responsável (seção B, ajustado à MP 1.394/2026). Os canais devem ser conferidos antes da publicação. */
-  aviso_jogo_responsavel: '<strong>Apostar pode causar dependência.</strong> Uma medida provisória de setembro de 2026 proíbe as apostas de quota fixa no Brasil; a medida ainda está em análise no Congresso. Se está difícil parar, procure o CAPS ou a UBS da sua cidade, ou os Jogadores Anônimos. Em sofrimento emocional, ligue <strong>188</strong> (CVV). Teleatendimento do Ministério da Saúde: <span class="pendente">[A CONFIRMAR]</span>'
+  /* Aviso de jogo responsável (seção B, ajustado à MP 1.394/2026). Canais conferidos em gov.br em 29/10/2026;
+     a autoexclusão nacional está fora do ar desde a MP e por isso não aparece aqui. */
+  aviso_jogo_responsavel: '<strong>Apostar pode causar dependência.</strong> Uma medida provisória de setembro de 2026 proíbe as apostas de quota fixa no Brasil; a medida ainda está em análise no Congresso. Se está difícil parar, procure o CAPS ou a UBS da sua cidade, ou os Jogadores Anônimos. Em sofrimento emocional, ligue <strong>188</strong> (CVV). Teleatendimento gratuito do SUS: aplicativo <strong>Meu SUS Digital</strong>, autoteste “Problemas com jogos de apostas?”.'
 };
 
 /* ---------------------------------------------------------------------

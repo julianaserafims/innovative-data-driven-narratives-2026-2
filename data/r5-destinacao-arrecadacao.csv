@@ -1,7 +1,10 @@
 destino,percentual,fonte,status
-Esporte,36,"Lei 13.756/2018, art. 30, conforme o Dossiê IEPS",CONFERIR
-Turismo,28,"Lei 13.756/2018, art. 30, conforme o Dossiê IEPS",CONFERIR
-Educação (MEC),10,"Lei 13.756/2018, art. 30, conforme o Dossiê IEPS",CONFERIR
-Seguridade social,10,"Lei 13.756/2018, art. 30, conforme o Dossiê IEPS",CONFERIR
-Saúde (prevenção e redução de danos do jogo),1,"Lei 13.756/2018, art. 30, conforme o Dossiê IEPS",CONFERIR
-Outros destinos não listados no material,15,Diferença até 100%; completar com o texto vigente da lei,CONFERIR
+Esporte,36,"Lei 13.756/2018, art. 30, § 1º-A (redação da Lei 14.790/2023), inciso III",OK
+Turismo,28,"Lei 13.756/2018, art. 30, § 1º-A (redação da Lei 14.790/2023), inciso V",OK
+Segurança pública,13.6,"Lei 13.756/2018, art. 30, § 1º-A (redação da Lei 14.790/2023), inciso II",OK
+Educação (MEC),10,"Lei 13.756/2018, art. 30, § 1º-A (redação da Lei 14.790/2023), inciso I",OK
+Seguridade social,10,"Lei 13.756/2018, art. 30, § 1º-A (redação da Lei 14.790/2023), inciso IV-A",OK
+Saúde (prevenção e redução de danos do jogo),1,"Lei 13.756/2018, art. 30, § 1º-A (redação da Lei 14.790/2023), inciso VI",OK
+"Entidades da sociedade civil (Fenapaes, Fenapestalozzi, Cruz Vermelha)",0.5,"Lei 13.756/2018, art. 30, § 1º-A (redação da Lei 14.790/2023), inciso VII",OK
+Funapol (Polícia Federal),0.5,"Lei 13.756/2018, art. 30, § 1º-A (redação da Lei 14.790/2023), inciso VIII",OK
+ABDI,0.4,"Lei 13.756/2018, art. 30, § 1º-A (redação da Lei 14.790/2023), inciso IX",OK

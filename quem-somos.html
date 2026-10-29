@@ -21,17 +21,14 @@
     <p class="linha-fina">Um dossiê de jornalismo de dados feito por estudantes da UFPE sobre o dinheiro das casas de apostas no futebol brasileiro.</p>
 
     <h2>A equipe</h2>
-    <p class="legenda">Duplique um cartão para cada integrante.</p>
-    <ul class="equipe"><li><span class="nome"><span class="pendente">[NOME]</span></span><span class="legenda"><span class="pendente">[CURSO]</span></span><span>Reportagem e texto</span></li>
-<li><span class="nome"><span class="pendente">[NOME]</span></span><span class="legenda"><span class="pendente">[CURSO]</span></span><span>Dados</span></li>
-<li><span class="nome"><span class="pendente">[NOME]</span></span><span class="legenda"><span class="pendente">[CURSO]</span></span><span>Design</span></li>
-<li><span class="nome"><span class="pendente">[NOME]</span></span><span class="legenda"><span class="pendente">[CURSO]</span></span><span>Desenvolvimento</span></li></ul>
+    <!-- Os cartões saem de assets/js/mapa-narrativo.js (PROJETO.equipe): edite os nomes e funções lá. -->
+    <ul class="equipe" id="equipe"></ul>
 
     <h2>Orientação</h2>
-    <p><span class="pendente">[A PREENCHER: nome do(a) professor(a) orientador(a)]</span></p>
+    <p id="orientacao"></p>
 
     <h2>A disciplina</h2>
-    <p>Este trabalho foi produzido na disciplina Narrativas Inovadoras com Dados na Comunicação Digital, do Centro de Artes e Comunicação (CAC) da Universidade Federal de Pernambuco, no semestre <span class="pendente">[A PREENCHER]</span>.</p>
+    <p>Este trabalho foi produzido na disciplina Narrativas Inovadoras com Dados na Comunicação Digital, do Centro de Artes e Comunicação (CAC) da Universidade Federal de Pernambuco, no semestre <span id="semestre"></span>.</p>
     <!-- Os endereços ficam em assets/js/mapa-narrativo.js (PROJETO.links); aqui só a lista visível. -->
     <ul class="links-inst" id="links-inst" aria-label="Instituições"></ul>
 
@@ -40,13 +37,22 @@
     <p>Usamos ironia só contra o sistema das bets, nunca contra quem aposta. Tratamos a dependência como questão de saúde pública. As marcas BET X, BET Y e BET Z das ilustrações são fictícias.</p>
 
     <h2>Como citar</h2>
-    <p><span class="pendente">[NOMES DA EQUIPE]</span>. <i>Da Sorte ao Declínio: dossiê das bets no futebol</i>. Recife: UFPE/CAC, 2026. Disponível em: <span class="pendente">[URL]</span>.</p>
+    <p><span class="pendente">[NOMES DA EQUIPE]</span>. <i>Da Sorte ao Declínio: dossiê das bets no futebol</i>. Recife: UFPE/CAC, 2026. Disponível em: <span id="url-site"></span>.</p>
   </div>
 </main>
 <script src="assets/js/mapa-narrativo.js"></script>
 <script src="assets/js/site.js"></script>
 <script>
 iniciarComum();
+/* Equipe, orientação, semestre e endereço: tudo vem de PROJETO (mapa-narrativo.js) */
+document.getElementById('equipe').innerHTML = PROJETO.equipe.map(p => {
+  const r = p.rep && MAPA.reportagens.find(x => x.id === p.rep);
+  const funcao = r ? 'Texto e reportagem · Reportagem ' + r.numero : p.funcao;
+  return '<li><span class="nome">' + esc(p.nome) + '</span><span class="legenda">' + esc(p.curso) + '</span><span>' + pend(funcao) + '</span></li>';
+}).join('');
+document.getElementById('orientacao').innerHTML = pend(PROJETO.creditos.find(([f]) => f === 'Orientação')[1]);
+document.getElementById('semestre').innerHTML = pend(PROJETO.semestre);
+document.getElementById('url-site').innerHTML = '<a href="' + esc(PROJETO.site) + '">' + esc(PROJETO.site) + '</a>';
 /* Links das instituições: os endereços ficam em assets/js/mapa-narrativo.js (PROJETO.links) */
 document.getElementById('links-inst').innerHTML = PROJETO.links.map(l =>
   '<li><a class="btn btn-secundario" href="' + esc(l.url) + '" target="_blank" rel="noopener">' + esc(l.sigla) + ' · ' + esc(l.nome) + ' ↗<span class="sr"> (abre em nova aba)</span></a></li>').join('');

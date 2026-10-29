@@ -796,6 +796,11 @@ function iniciarComum() {
    montados aqui para que créditos e menu sejam editados num lugar só.
    ===================================================================== */
 function pend(v) { return /^\[/.test(v) ? '<span class="pendente">' + esc(v) + '</span>' : esc(v); }
+/* "A, B e C": quem escreveu a reportagem repId (ou todas, sem repId), na ordem de PROJETO.equipe */
+function autores(repId) {
+  const n = PROJETO.equipe.filter(p => p.rep && (!repId || p.rep === repId)).map(p => p.curto);
+  return n.length ? (n.length > 1 ? n.slice(0, -1).join(', ') + ' e ' + n[n.length - 1] : n[0]) : '[A PREENCHER: nomes]';
+}
 function montarCasca() {
   const main = document.querySelector('main');
   const cab = `
@@ -852,7 +857,7 @@ function montarCasca() {
     <div class="rodape-grade">
       <section aria-labelledby="rod-cred">
         <h2 id="rod-cred">Créditos</h2>
-        <dl>${PROJETO.creditos.map(([f, n]) => '<dt>' + esc(f) + '</dt><dd>' + pend(n) + '</dd>').join('')}</dl>
+        <dl>${[['Reportagem e texto', autores()]].concat(PROJETO.creditos).map(([f, n]) => '<dt>' + esc(f) + '</dt><dd>' + pend(n) + '</dd>').join('')}</dl>
       </section>
       <section aria-labelledby="rod-disc">
         <h2 id="rod-disc">Disciplina</h2>
@@ -872,7 +877,7 @@ function montarCasca() {
         </ul>
       </section>
     </div>
-    <p class="fino">Publicado em ${pend(PROJETO.publicado_em)} · Atualizado em ${esc(PROJETO.atualizado_em)} · ${esc(PROJETO.licenca_conteudo)} ${esc(PROJETO.licenca_codigo)} · Código aberto: ${pend(PROJETO.repositorio)} · As marcas BET X, BET Y e BET Z das ilustrações são fictícias.</p>
+    <p class="fino">Publicado em ${pend(PROJETO.publicado_em)} · Atualizado em ${esc(PROJETO.atualizado_em)} · ${esc(PROJETO.licenca_conteudo)} ${esc(PROJETO.licenca_codigo)} · Código aberto: ${/^\[/.test(PROJETO.repositorio) ? pend(PROJETO.repositorio) : '<a href="' + esc(PROJETO.repositorio) + '">' + esc(PROJETO.repositorio.replace(/^https:\/\//, '')) + '</a>'} · As marcas BET X, BET Y e BET Z das ilustrações são fictícias.</p>
   </div>
 </footer>`;
   main.insertAdjacentHTML('beforebegin', cab);

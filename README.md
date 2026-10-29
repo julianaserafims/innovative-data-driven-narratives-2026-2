@@ -4,7 +4,7 @@ Dossiê de jornalismo de dados em seis reportagens sobre o dinheiro das casas de
 
 Trabalho da disciplina **Narrativas Inovadoras com Dados na Comunicação Digital** · UFPE / Centro de Artes e Comunicação (CAC).
 
-- Site publicado: **[A PREENCHER]**
+- Site publicado: **https://julianaserafims.github.io/innovative-data-driven-narratives-2026-2/**
 - Equipe e créditos: veja `quem-somos.html` (e preencha em `assets/js/mapa-narrativo.js`)
 
 ---

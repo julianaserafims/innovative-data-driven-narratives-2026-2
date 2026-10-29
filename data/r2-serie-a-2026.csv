@@ -1,21 +1,21 @@
 clube,patrocinador_master,e_bet,situacao,valor_fixo_anual_mi,valor_max_anual_mi,vigencia,observacao,fonte,status
-Flamengo,Betano,sim,bet,268.5,,2025-2028,maior contrato máster do futebol brasileiro,Levantamento de patrocínios 2026 (link encurtado share.google/7Suvy1jeK7e1y0gFl),CONFERIR
-Corinthians,Esportes da Sorte,sim,bet,150,200,até 2029,renovado em fev/2026,Levantamento de patrocínios 2026,CONFERIR
-Palmeiras,Sportingbet,sim,bet,100,170,até 2027,,Levantamento de patrocínios 2026,CONFERIR
-São Paulo,Superbet,sim,bet,,113,até 2030,valor máximo inclui bônus,Levantamento de patrocínios 2026,CONFERIR
-Fluminense,Superbet,sim,bet,53,86,até 2029,até R$ 33 mi em bônus,Levantamento de patrocínios 2026,CONFERIR
-Santos,Novibet,sim,bet,35,85,3 temporadas desde fev/2026,,Levantamento de patrocínios 2026,CONFERIR
-Botafogo,VBet,sim,bet,55,70,até fim de 2027,,Levantamento de patrocínios 2026,CONFERIR
-Atlético-MG,H2Bet,sim,bet,60,,3 anos,,Levantamento de patrocínios 2026,CONFERIR
-Cruzeiro,Betnacional,sim,bet,43,,até dez/2026,substituiu Betfair na camisa em dez/2025 (mesmo contrato),Levantamento de patrocínios 2026,CONFERIR
-Vitória,Bet7k,sim,bet,16,20,,,Levantamento de patrocínios 2026,CONFERIR
-Remo,VaideBet,sim,bet,12,,1 ano,bônus por desempenho,Levantamento de patrocínios 2026,CONFERIR
-Vasco,Sportingbet,sim,bet,,,até fim de 2027 (+1 opcional),anunciado em jul/2026; valores não divulgados,Levantamento de patrocínios 2026,CONFERIR
-Chapecoense,ZeroUm,sim,bet,,,desde 2025,,Levantamento de patrocínios 2026,CONFERIR
-Athletico-PR,sem patrocínio,nao,encerrou_bet,,,,encerrou com Viva Sorte Bet em fev/2026,Levantamento de patrocínios 2026,CONFERIR
-Bahia,sem patrocínio,nao,encerrou_bet,,,,rescindiu com Viva Sorte Bet em jan/2026; acordo temporário de 3 meses com Esportiva Bet em abr/2026,Levantamento de patrocínios 2026,CONFERIR
-Coritiba,FoxLux,nao,encerrou_bet,,,,encerrou com Reals Bet; FoxLux anunciada em set/2026,Levantamento de patrocínios 2026,CONFERIR
-Grêmio,sem patrocínio,nao,encerrou_bet,,,,encerrou com Alfa Bet em dez/2025 (outro levantamento da equipe aponta Pitaco como máster),Levantamento de patrocínios 2026,CONFERIR
-Internacional,sem patrocínio,nao,encerrou_bet,,,,rescindiu em jan/2026,Levantamento de patrocínios 2026,CONFERIR
-Bragantino,Red Bull,nao,outro_setor,,,,,Levantamento de patrocínios 2026,CONFERIR
-Mirassol,Bebidas Poty,nao,nunca,,,,nunca teve bet como máster,Levantamento de patrocínios 2026; ge (sem link),CONFERIR
+Flamengo,Betano,sim,bet,268.5,,ago/2025 a dez/2028,maior contrato máster do futebol brasileiro; valor por temporada segundo o ge,"ge, via Propmark (18/08/2025): https://propmark.com.br/anunciantes/betano-e-escolhida-como-patrocinadora-master-do-flamengo/",OK
+Corinthians,Esportes da Sorte,sim,bet,150,200,até dez/2029,renovado em fev/2026,Meio & Mensagem (24/02/2026): https://www.meioemensagem.com.br/marketing/corinthians-e-esportes-da-sorte-renovam-ate-2029,OK
+Palmeiras,Sportingbet,sim,bet,100,170,até dez/2027,,Meio & Mensagem (13/01/2025): https://www.meioemensagem.com.br/marketing/palmeiras-anuncia-sportingbet-como-patrocinadora,OK
+São Paulo,Superbet,sim,bet,,,até 2030,sem valor anual divulgado: R$ 600 mi pela exposição mais até R$ 400 mi por desempenho no contrato inteiro,Meio & Mensagem: https://www.meioemensagem.com.br/marketing/superbet-e-sao-paulo-detalhes-da-parceria-que-pode-ultrapassar-r-1-bilhao,OK
+Fluminense,Superbet,sim,bet,53,86,até fim de 2029,até R$ 33 mi em bônus e metas,Poder360 (08/03/2026): https://www.poder360.com.br/poder-sportsmkt/fluminense-renova-com-a-superbet-ate-2029/,OK
+Santos,Novibet,sim,bet,35,85,fev/2026 a fev/2029,até R$ 50 mi variáveis por temporada,Máquina do Esporte (25/02/2026): https://maquinadoesporte.com.br/futebol/santos-fecha-patrocinio-master-com-novibet-ate-2029/,OK
+Botafogo,VBet,sim,bet,55,70,3 temporadas desde 2025,,Trivela (06/01/2025): https://trivela.com.br/brasil/botafogo-vbet-ranking-patrocinio-master-brasil/,OK
+Atlético-MG,H2Bet,sim,bet,60,,até dez/2027,,Máquina do Esporte (20/12/2024): https://maquinadoesporte.com.br/futebol/atletico-mg-e-h2bet-fecham-maior-patrocinio-master-da-historia-do-clube-ate-2027/,OK
+Cruzeiro,Betnacional,sim,bet,,,temporada 2026,"Betnacional na camisa desde jan/2026; valores não divulgados (os R$ 43 mi eram do contrato anterior, com a Betfair)",Meio & Mensagem (05/12/2025): https://www.meioemensagem.com.br/marketing/betnacional-e-a-nova-patrocinadora-master-do-cruzeiro,OK
+Vitória,Bet7k,sim,bet,16,20,até fim de 2027,,Focus GN (13/01/2025): https://focusgn.com/brasil/saiba-quais-sao-os-valores-do-contrato-de-patrocinio-master-do-vitoria-com-a-bet7k,OK
+Remo,VaideBet,sim,bet,,12,temporada 2026,"""alcança R$ 12 milhões anuais""; o clube não divulgou a divisão entre fixo e bônus",Diário do Pará (26/09/2026): https://diariodopara.com.br/bola/remo-pode-perder-r-12-milhoes-por-ano-com-proibicao-das-bets-no-brasil/,OK
+Vasco,Sportingbet,sim,bet,,,jul/2026 a fim de 2027,estreou na camisa em 25/07/2026; valores não divulgados,Poder360: https://www.poder360.com.br/poder-sportsmkt/vasco-fecha-com-a-sportingbet-como-nova-patrocinadora-master/; Meio & Mensagem (27/07/2026),OK
+Chapecoense,ZeroUm,sim,bet,,,desde 2025,,Levantamento de patrocínios da equipe (Meio & Mensagem e outros; sem link por clube),CONFERIR
+Athletico-PR,sem patrocínio,nao,encerrou_bet,,,,encerrou com Viva Sorte Bet em fev/2026,Levantamento de patrocínios da equipe (Meio & Mensagem e outros; sem link por clube),CONFERIR
+Bahia,sem patrocínio,nao,encerrou_bet,,,,rescindiu com Viva Sorte Bet em jan/2026; acordo temporário de 3 meses com Esportiva Bet em abr/2026,Levantamento de patrocínios da equipe (Meio & Mensagem e outros; sem link por clube),CONFERIR
+Coritiba,FoxLux,nao,encerrou_bet,,,,encerrou com Reals Bet; FoxLux anunciada em set/2026,Levantamento de patrocínios da equipe (Meio & Mensagem e outros; sem link por clube),CONFERIR
+Grêmio,Pitaco,sim,bet,,,3 anos desde set/2026,"acordo oficializado em 23/09/2026, dois dias antes da MP; o clube estava sem máster desde dez/2025, quando rompeu com a Alfa",Máquina do Esporte (23/09/2026): https://maquinadoesporte.com.br/futebol/gremio-tera-pitaco-como-patrocinadora-master-por-tres-anos/,OK
+Internacional,sem patrocínio,nao,encerrou_bet,,,,rescindiu em jan/2026,Levantamento de patrocínios da equipe (Meio & Mensagem e outros; sem link por clube),CONFERIR
+Bragantino,Red Bull,nao,outro_setor,,,,,Levantamento de patrocínios da equipe (Meio & Mensagem e outros; sem link por clube),CONFERIR
+Mirassol,Bebidas Poty,nao,nunca,,,,nunca teve bet como máster,ge (26/09/2026): https://ge.globo.com/sp/tem-esporte/futebol/times/mirassol/noticia/2026/09/26/sem-bet-e-sem-divida-mirassol-nunca-teve-casa-de-aposta-como-patrocinador-master.ghtml,OK

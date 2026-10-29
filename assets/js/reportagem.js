@@ -91,6 +91,14 @@ function iniciarReportagem() {
   document.documentElement.style.setProperty('--cat', corCat(R));
   $('#eyebrow-rep').innerHTML = '<span class="quad-cat" style="background:' + corCat(R) + '"></span>Reportagem ' + R.numero + ' de ' + ORDEM.length + ' · ' + esc(SETOR.area);
   $$('.menu-item[data-abre="' + R.id + '"]').forEach(a => a.setAttribute('aria-current', 'page'));
+
+  /* créditos e datas da abertura: vêm de PROJETO (mapa-narrativo.js), como o rodapé */
+  $('#creditos-rep').innerHTML = [['Texto e reportagem', autores(R.id)]].concat(PROJETO.creditos.filter(([f]) => f !== 'Orientação'))
+    .map(([f, n]) => esc(f) + ': ' + pend(n)).join(' · ');
+  $('#publicado-rep').innerHTML = pend(PROJETO.publicado_em);
+  const atualizado = $('#atualizado-rep');
+  atualizado.textContent = PROJETO.atualizado_em;
+  atualizado.dateTime = PROJETO.atualizado_em.split('/').reverse().join('-');
   Visitados.marcar(R.id);
 
   /* tempo de leitura (200 palavras por minuto) */
