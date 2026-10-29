@@ -21,6 +21,12 @@ const PROJETO = {
   ],
   disciplina: 'Narrativas Inovadoras com Dados na Comunicação Digital',
   instituicao: 'UFPE · Centro de Artes e Comunicação (CAC)',
+  /* Links das instituições (barra do topo, menu e rodapé). Confira os endereços antes de publicar. */
+  links: [
+    { sigla: 'UFPE', nome: 'Universidade Federal de Pernambuco', url: 'https://www.ufpe.br' },
+    { sigla: 'CAC', nome: 'Centro de Artes e Comunicação', url: 'https://www.ufpe.br/cac' },
+    { sigla: 'CIn', nome: 'Centro de Informática', url: 'https://www.cin.ufpe.br' }
+  ],
   semestre: '[A PREENCHER]',
   publicado_em: '[A PREENCHER]',
   atualizado_em: '14/10/2026',

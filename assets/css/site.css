@@ -280,7 +280,7 @@ a:hover { color: var(--color-destaque_interativo_hover); }
 .hs .mk-check { display: none; }
 .hs.visitado .mk-base { fill: var(--color-texto); }
 .hs.visitado .mk-check { display: inline; }
-.hs:active .mk { transform: translateY(1px); }
+/* (removido: um transform em CSS sobrescreve o transform do SVG e o marcador pulava para o canto ao ser tocado) */
 
 /* Lista equivalente ao estádio — sempre visível (seção F) */
 .lista-reportagens { list-style: none; margin: var(--space-space_5) 0 0; padding: 0; display: grid; gap: var(--space-space_3); grid-template-columns: 1fr; }
@@ -730,3 +730,88 @@ a.logos { min-height: 44px; }
 /* esquema da r1: o passo atual ganha marca-texto; nada fica invisível */
 .esq .grupo.atual .marca-texto { opacity: 1; }
 .esq .marca-texto { opacity: 0; transition: opacity var(--motion-duration-duracao_media) var(--motion-easing-easing_padrao); }
+
+/* =====================================================================
+   CELULAR: desempenho e conforto de leitura
+   ===================================================================== */
+/* Impede o iOS de aumentar o texto sozinho ao girar a tela. */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+/* Toque sem atraso nem zoom por toque duplo em botões e links; realce de toque discreto. */
+a, button, summary, .c-ponto, .hs { touch-action: manipulation; -webkit-tap-highlight-color: rgba(43, 75, 160, .15); }
+
+/* Áreas com rolagem lateral (estádio, gráficos, tabelas): o gesto de arrastar não "vaza"
+   para a página nem dispara o voltar do navegador. */
+.estadio-rolagem, .c-rolagem, .graf-rolagem, .tab-rolagem, .tl-rolagem, .moldura-pos { overscroll-behavior-x: contain; }
+
+/* "vh" no celular muda quando a barra do navegador some e aparece, e o texto pulava.
+   "svh" (altura mínima da tela) é estável; quem não suporta continua com "vh". */
+@supports (height: 1svh) {
+  .esquema-moldura svg { max-height: calc(55svh - 44px); }
+  .passos-rep { gap: 55svh; padding-block: 8svh 25svh; }
+}
+@media (min-width: 1024px) {
+  @supports (height: 1svh) {
+    .passos-rep { gap: 60svh; padding-block: 20svh 40svh; }
+  }
+}
+
+/* =====================================================================
+   CELULAR 2: barra do topo colorida, estádio e bola que cabem na tela, toque no lugar do mouse
+   ===================================================================== */
+
+/* ---- Barra do topo: azul, com friso amarelo e verde, e links da UFPE e dos centros ---- */
+.cabecalho {
+  background: var(--color-tinta_azul); color: #fff;
+  border-bottom: 3px solid var(--color-faixa_amarela);
+  box-shadow: 0 3px 0 var(--color-tinta_verde);
+}
+.topo-esq { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.marca-topo { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; min-width: 44px; flex: none; color: #fff; text-decoration: none; }
+.marca-topo:hover { color: #fff; }
+.bola-topo { width: 36px; height: 36px; flex: none; }
+.marca-nome {
+  display: none; white-space: nowrap;
+  font-family: var(--font-family-display); font-weight: 900; text-transform: uppercase;
+  font-size: 1.35rem; line-height: 1; letter-spacing: 0.02em;
+}
+@media (min-width: 640px) { .marca-nome { display: inline; } }
+.inst { display: flex; align-items: center; gap: 6px; min-width: 0; }
+.inst-link {
+  position: relative; display: inline-flex; align-items: center; min-height: 34px; padding: 0 10px;
+  color: #fff; text-decoration: none; white-space: nowrap;
+  font-family: var(--font-family-mono); font-size: 12px; font-weight: 600; letter-spacing: 0.04em;
+  border: 1.5px solid rgba(255, 255, 255, .75); background: rgba(255, 255, 255, .1);
+}
+.inst-link::after { content: ''; position: absolute; inset: -5px 0; }      /* alvo de toque de 44 px de altura */
+.inst-link:hover { background: var(--color-faixa_amarela); border-color: var(--color-faixa_amarela); color: var(--color-texto); }
+.inst-link .nome-longo { display: none; font-weight: 400; }
+@media (min-width: 1500px) { .inst-link .nome-longo { display: inline; } }   /* só cabe em telas bem largas; nas outras o nome completo está no título do link, no menu e no rodapé */
+.inst { overflow: hidden; }
+.cabecalho :focus-visible { box-shadow: 0 0 0 3px var(--color-faixa_amarela); outline-offset: 2px; }
+.cabecalho .btn-icone { border-color: #fff; color: #fff; background: transparent; }
+.cabecalho .btn-icone:hover { background: rgba(255, 255, 255, .18); }
+.cabecalho .btn-som[aria-pressed="true"] { background: var(--color-faixa_amarela); border-color: var(--color-faixa_amarela); color: var(--color-texto); }
+@media (max-width: 520px) {                         /* celular: o botão de som mostra só o ícone */
+  .btn-som .rotulo-longo, .btn-som .rotulo-curto { display: none; }
+  .btn-som { padding: 0; }
+}
+.links-inst { list-style: none; margin: var(--space-space_4) 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-space_3); }
+
+/* ---- Estádio e bola: cabem na largura da tela, sem arrastar para os lados ---- */
+.estadio-svg { min-width: 0; }
+.posicao .moldura-pos .estadio-svg { min-width: 0; }
+.dica-arraste { display: none; }
+.c-figura { min-width: 0; }
+.c-figura[data-modo="estreito"] { max-width: 560px; margin-inline: auto; }
+/* no celular só o quique atual mostra o nome do setor (os seis nomes não cabem lado a lado) */
+.c-figura[data-modo="estreito"] .c-nome { display: none; width: 88px; left: -44px; }
+.c-figura[data-modo="estreito"] .c-ponto[aria-current="step"] + .c-nome { display: block; }
+.c-figura[data-modo="estreito"] .c-fim { top: 16%; right: 8px; width: 54%; font-size: 11px; }
+
+/* ---- Painel de leitura do estádio com toque ---- */
+.painel-leitura .pl-abrir { justify-self: start; margin-top: 10px; }
+@media (hover: none) { .painel-leitura { min-height: 148px; } }
+/* selo "trajetória ilustrativa" numa linha só, para não cobrir o texto do fim da linha */
+.c-figura[data-modo="estreito"] .selo-ilustrativo { font-size: 9.5px; letter-spacing: .02em; white-space: nowrap; padding: 2px 6px; top: 8px; left: 8px; right: auto; }
+.c-figura[data-modo="estreito"] .c-fim { top: 15%; }

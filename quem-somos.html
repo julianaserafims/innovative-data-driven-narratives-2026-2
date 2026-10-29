@@ -6,7 +6,8 @@
 <title>Quem Somos · Da Sorte ao Declínio</title>
 <meta name="description" content="Equipe, disciplina e orientação do dossiê Da Sorte ao Declínio.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Azeret+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Azeret+Mono:wght@400;600&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Azeret+Mono:wght@400;600&display=swap"></noscript>
 <link rel="stylesheet" href="assets/css/tokens.css">
 <link rel="stylesheet" href="assets/css/site.css">
 </head>
@@ -31,11 +32,8 @@
 
     <h2>A disciplina</h2>
     <p>Este trabalho foi produzido na disciplina Narrativas Inovadoras com Dados na Comunicação Digital, do Centro de Artes e Comunicação (CAC) da Universidade Federal de Pernambuco, no semestre <span class="pendente">[A PREENCHER]</span>.</p>
-    <div class="logos" aria-label="Instituições" style="margin-top:var(--space-space_4)">
-      <span class="logo-ph" role="img" aria-label="Logo da UFPE (espaço reservado)">UFPE</span>
-      <span class="logo-ph" role="img" aria-label="Logo do CAC (espaço reservado)">CAC</span>
-      <span class="logo-ph" role="img" aria-label="Logo do CIn (espaço reservado)">CIn</span>
-    </div>
+    <!-- Os endereços ficam em assets/js/mapa-narrativo.js (PROJETO.links); aqui só a lista visível. -->
+    <ul class="links-inst" id="links-inst" aria-label="Instituições"></ul>
 
     <h2>O projeto</h2>
     <p>São seis reportagens, ligadas por um estádio ilustrado e pela trajetória de uma bola que perde o quique: do anúncio na placa até a conta que chega ao torcedor. Os números têm fonte, os dados podem ser baixados e o código é aberto.</p>
@@ -49,6 +47,9 @@
 <script src="assets/js/site.js"></script>
 <script>
 iniciarComum();
+/* Links das instituições: os endereços ficam em assets/js/mapa-narrativo.js (PROJETO.links) */
+document.getElementById('links-inst').innerHTML = PROJETO.links.map(l =>
+  '<li><a class="btn btn-secundario" href="' + esc(l.url) + '" target="_blank" rel="noopener">' + esc(l.sigla) + ' · ' + esc(l.nome) + ' ↗<span class="sr"> (abre em nova aba)</span></a></li>').join('');
 </script>
 </body>
 </html>
