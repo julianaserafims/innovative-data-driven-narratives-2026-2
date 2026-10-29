@@ -1,7 +1,7 @@
 ano,data,evento,tipo,fonte,status
-1784,,"Primeira loteria registrada no Brasil, em Vila Rica (atual Ouro Preto), para financiar hospitais e instituições de caridade",historico,https://www.sucessosa.com.br/noticia/a-historia-das-apostas-no-brasil-evolucao-desafios-e-perspectivas,CONFERIR
-1868,,"Fundação do Jockey Club Brasileiro no Rio de Janeiro (apostas em corridas de cavalo)",historico,https://www.sucessosa.com.br/noticia/a-historia-das-apostas-no-brasil-evolucao-desafios-e-perspectivas,CONFERIR
-1934-1938,,"Era de ouro dos cassinos; jogos regulamentados no governo Vargas",historico,https://www.bbc.com/portuguese/articles/c85ydn72e632o,CONFERIR
+1784,1784-10-05,"Primeira extração de loteria no Brasil, em Vila Rica (atual Ouro Preto), para construir a nova Casa da Câmara e Cadeia",historico,https://repositorio.enap.gov.br/bitstream/1/3794/1/t2-2-l-daniela-004.pdf,OK
+1868,,"Fundação do Jockey Club no Rio de Janeiro (apostas em corridas de cavalo)",historico,https://seer.ufrgs.br/index.php/Movimento/article/view/49489,OK
+1930-1946,,"Décadas de 1930 e 1940: era de ouro dos cassinos, até a proibição de 1946",historico,https://www12.senado.leg.br/noticias/especiais/arquivo-s/por-201cmoral-e-bons-costumes201d-ha-70-anos-dutra-acabava-com-cassinos,OK
 1941,1941-10-03,"Lei das Contravenções Penais (Decreto-Lei 3.688/1941) define jogo de azar e proíbe jogos não autorizados",lei,https://www.planalto.gov.br/ccivil_03/decreto-lei/del3688.htm,OK
 1946,1946-04-30,"Governo Dutra proíbe os jogos de azar em todo o país (Decreto-Lei 9.215/1946)",lei,https://www.planalto.gov.br/ccivil_03/decreto-lei/Del9215.htm,OK
 1969,1969-05-27,"Criação da Loteria Esportiva federal (Decreto-Lei 594)",lei,https://www.planalto.gov.br/ccivil_03/decreto-lei/1965-1988/Del0594.htm,OK

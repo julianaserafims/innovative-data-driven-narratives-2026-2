@@ -1,8 +1,5 @@
 clube,divisao,tipo_patrocinio,bet,situacao,fonte,status
-Sport,Série B,máster,Betnacional,bet,Levantamento de patrocínios 2026,CONFERIR
-Náutico,Série B,máster,Esportes da Sorte,bet,Levantamento de patrocínios 2026,CONFERIR
-Santa Cruz,Série C,máster,Bet dá Sorte,bet,Rascunho da equipe,SEM FONTE
-Maguary,outra divisão,secundário,Bet dá Sorte,secundario,Rascunho da equipe,SEM FONTE
-Central,outra divisão,nenhum,,nenhum,Rascunho da equipe,SEM FONTE
-Retrô,outra divisão,nenhum,,nenhum,Rascunho da equipe,SEM FONTE
-Decisão,outra divisão,nenhum,,nenhum,Rascunho da equipe,SEM FONTE
+Sport,Série B,máster,Betnacional,bet,Propmark (10/02/2025): https://propmark.com.br/anunciantes/betnacional-reassume-patrocinio-master-do-sport/; Meio & Mensagem (18/09/2026): https://www.meioemensagem.com.br/marketing/quem-sao-as-bets-que-patrocinam-o-futebol-brasileiro,OK
+Náutico,Série B,máster e naming rights dos Aflitos,Esportes da Sorte,bet,Máquina do Esporte (15/04/2026): https://maquinadoesporte.com.br/?p=227442; Diario de Pernambuco (mar/2026),OK
+Santa Cruz,Série C,"acordo de patrocínio, tipo não divulgado em 2026 (máster em 2025)",Bet dá Sorte,secundario,Focus GN (06/03/2026): https://focusgn.com/brasil/paysandu-anuncia-plataforma-de-apostas-bet-da-sorte-como-nova-patrocinadora-master; Focus GN (dez/2024): https://focusgn.com/brasil/santa-cruz-clube-pernambucano-anuncia-bet-da-sorte-como-patrocinador-master-para-2025,OK
+Maguary,outra divisão,"acordo de patrocínio, tipo não divulgado",Bet dá Sorte,secundario,Focus GN (06/03/2026): https://focusgn.com/brasil/paysandu-anuncia-plataforma-de-apostas-bet-da-sorte-como-nova-patrocinadora-master,OK

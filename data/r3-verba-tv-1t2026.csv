@@ -1,5 +1,4 @@
-emissora,participacao_verba_tv_pct,valor_1t2026_mi,modelo_de_ativacao,fonte,status
-Globo,59,193,"Brasileirão, Copa do Brasil, Libertadores, inserções fixas, BBB",Tunad (citado no levantamento da equipe),SEM FONTE
-SBT,22,72,"programas de auditório, madrugadas dedicadas, Bet do Milhão",Tunad (citado no levantamento da equipe),SEM FONTE
-Band,6,19.6,"naming rights e cotas máster de Jogo Aberto e Os Donos da Bola",Tunad (citado no levantamento da equipe),SEM FONTE
-Outras,13,42.6,"diferença calculada até o total de R$ 327,2 mi",Cálculo da equipe sobre dados Tunad,SEM FONTE
+emissora,participacao_verba_tv_pct,observacao,fonte,status
+Globo,59,fatia da verba das bets destinada à televisão,"Tunad, via Meio & Mensagem (24/04/2026): https://www.meioemensagem.com.br/midia/bets-investiram-r-327-mi-em-midia-no-trimestre-diz-estudo",OK
+SBT,22,fatia da verba das bets destinada à televisão,"Tunad, via Meio & Mensagem (24/04/2026): https://www.meioemensagem.com.br/midia/bets-investiram-r-327-mi-em-midia-no-trimestre-diz-estudo",OK
+Demais emissoras,19,"Band, Record, ESPN e outras, com ""parcelas menores""; calculado pela diferença","Cálculo da equipe sobre Tunad, via Meio & Mensagem (24/04/2026): https://www.meioemensagem.com.br/midia/bets-investiram-r-327-mi-em-midia-no-trimestre-diz-estudo",OK

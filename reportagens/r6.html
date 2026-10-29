@@ -170,24 +170,6 @@
 
     </div>
 
-    <!-- ================= GRÁFICO: pesquisa ================= -->
-    <figure class="grafico" id="fig-pesquisa" aria-labelledby="t-pesquisa">
-      <h3 id="t-pesquisa">Na pesquisa da equipe, as redes sociais aparecem como principal porta de entrada</h3>
-      <p class="linha-fina-graf">Como os respondentes conheceram as bets (pergunta 11 do questionário da equipe). Amostra não probabilística: não representa a população.</p>
-      <p class="selo-dado selo-ficticio">Dado fictício para protótipo · pesquisa da equipe em andamento</p>
-      
-      <div class="graf-caixa"><div id="g-pesquisa" style="position:relative"><p class="legenda">Carregando o gráfico…</p></div></div>
-      <p class="nota-fonte legenda">
-        <span>Fonte: Pesquisa própria da equipe, em andamento. Coleta: out/2026.</span>
-        <a href="../metodologia.html#dados">Nota metodológica</a>
-        <a class="btn btn-secundario btn-pequeno" href="../data/r6-pesquisa-propria-q11-FICTICIO.csv" download><svg class="icone" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg> Baixar dados (CSV)</a>
-      </p>
-      <details>
-        <summary>Ler descrição do gráfico</summary>
-        <p class="coluna">Dados fictícios para teste do protótipo. Quando as respostas chegarem, substitua o arquivo CSV pelos totais reais da pergunta 11 e reescreva este título.</p>
-        <div class="tab-rolagem"><table class="tabela-dados" id="tab-pesquisa"><caption class="sr">Na pesquisa da equipe, as redes sociais aparecem como principal porta de entrada</caption></table></div>
-      </details>
-    </figure>
 
     <!-- ================= CAIXA "EM NÚMEROS" ================= -->
     <section class="em-numeros-rep" aria-labelledby="t-num">
@@ -219,7 +201,6 @@
           <li>LENAD III, caderno Jogos de Aposta (Unifesp).</li>
           <li>Ministério da Saúde, <i>Guia de cuidado para pessoas com problemas relacionados a jogos de apostas</i> (2026): <a href="https://www.gov.br/saude/pt-br/centrais-de-conteudo/publicacoes/guias-e-manuais/2026/guia-de-cuidado-para-pessoas-com-problemas-relacionados-a-jogos-de-apostas.pdf/view">gov.br/saude</a>.</li>
           <li>Dossiê IEPS (2025); Made-USP e Comsefaz/Cicef, via Nexo (set/2026); O Globo (set/2026).</li>
-          <li>Pesquisa própria da equipe (em andamento; dados ainda fictícios no protótipo).</li>
         </ul>
       </section>
 
@@ -280,10 +261,6 @@ graficoDeCSV('r6-custo-x-arrecadacao.csv', $('#g-custo'), linhas => Graficos.bar
   estilo: l => l.indicador.startsWith('Custo') ? 'dano' : '', nota: l => l.periodo
 }), $('#tab-custo'), [['indicador', 'Indicador'], ['valor_rs_bi', 'R$ bilhões'], ['periodo', 'Período'], ['fonte', 'Fonte']]);
 
-/* ---------- Pesquisa própria (DADO FICTÍCIO PARA PROTÓTIPO) ---------- */
-graficoDeCSV('r6-pesquisa-propria-q11-FICTICIO.csv', $('#g-pesquisa'), linhas => Graficos.barras($('#g-pesquisa'), linhas, {
-  rotulo: 'resposta', valor: 'quantidade', formato: v => v + ' respostas (fictício)', estilo: (l, i) => i === 0 ? 'destaque' : ''
-}), $('#tab-pesquisa'), [['resposta', 'Resposta'], ['quantidade', 'Quantidade'], ['observacao', 'Observação']]);
 
 </script>
 </body>
