@@ -448,11 +448,28 @@ function escalaMarcador(svg) {
 }
 function ajustarMarcadores(svg) {
   const s = escalaMarcador(svg);
-  $$('.mk', svg).forEach(m => {
+  const mks = $$('.mk', svg);
+  /* mantém o marcador inteiro dentro do desenho (o do gramado ficava cortado embaixo) */
+  const prender = p => [Math.max(24 * s, Math.min(960 - 24 * s, p[0])), Math.max(24 * s, Math.min(540 - 24 * s, p[1]))];
+  const pos = mks.map(m => {
     if (!m.dataset.x0) { m.dataset.x0 = m.dataset.x; m.dataset.y0 = m.dataset.y; }
-    /* mantém o marcador inteiro dentro do desenho (o do gramado ficava cortado embaixo) */
-    const x = Math.max(24 * s, Math.min(960 - 24 * s, +m.dataset.x0));
-    const y = Math.max(24 * s, Math.min(540 - 24 * s, +m.dataset.y0));
+    return prender([+m.dataset.x0, +m.dataset.y0]);
+  });
+  /* Ampliados, o 4 (gramado) e o 5 (VAR) se encostavam e um toque no 4 abria o 5:
+     afasta cada par que se sobrepõe ao longo da linha entre os centros, só o necessário.
+     O halo tem raio 27,5; com escala 1 (telas largas) nenhum par encosta e nada muda. */
+  const minimo = 2 * 27.5 * s + 12;
+  for (let volta = 0; volta < 4; volta++) {
+    for (let i = 0; i < pos.length; i++) for (let j = i + 1; j < pos.length; j++) {
+      const dx = pos[j][0] - pos[i][0], dy = pos[j][1] - pos[i][1], d = Math.hypot(dx, dy) || 1;
+      if (d >= minimo) continue;
+      const k = (minimo - d) / 2 / d;
+      pos[i] = prender([pos[i][0] - dx * k, pos[i][1] - dy * k]);
+      pos[j] = prender([pos[j][0] + dx * k, pos[j][1] + dy * k]);
+    }
+  }
+  mks.forEach((m, i) => {
+    const [x, y] = pos[i];
     m.dataset.x = x; m.dataset.y = y;
     m.setAttribute('transform', 'translate(' + f1(x) + ' ' + f1(y) + ') scale(' + s.toFixed(2) + ')');
   });

@@ -184,17 +184,23 @@
 const R = iniciarReportagem();
 
 /* ---------- Esquema do scrollytelling (valores fictícios) ---------- */
+const T = 'var(--color-texto)', AZ = 'var(--color-tinta_azul)', AL = 'var(--color-alerta)', W = 'var(--color-superficie)';
+const seta = (x1, y1, x2, y2, cor) => {
+  const a = Math.atan2(y2 - y1, x2 - x1), p = (dx, dy) => [x2 + dx * Math.cos(a) - dy * Math.sin(a), y2 + dx * Math.sin(a) + dy * Math.cos(a)];
+  return '<line x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '" stroke="' + cor + '" stroke-width="2.5"/>' +
+    '<polygon points="' + [p(0, 0), p(-11, -6), p(-11, 6)].map(q => q.map(f1).join(',')).join(' ') + '" fill="' + cor + '"/>';
+};
+/* t2: segunda linha opcional, menor (usada na versão estreita) */
+const caixa = (x, y, w, h, t1, ico, t2) => '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" fill="' + W + '" stroke="' + T + '" stroke-width="2.5"/>' +
+  '<g transform="translate(' + (x + 14) + ' ' + (y + h / 2 - 12) + ')" fill="none" stroke="' + T + '" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + ICONES[ico] + '</g>' +
+  (t2 ? '<text class="t-disp" x="' + (x + 48) + '" y="' + (y + h / 2 + 1) + '" font-size="20" fill="' + T + '">' + t1 + '</text>' +
+        '<text x="' + (x + 48) + '" y="' + (y + h / 2 + 17) + '" font-size="13" font-weight="600" fill="' + T + '">' + t2 + '</text>'
+      : '<text class="t-disp" x="' + (x + 48) + '" y="' + (y + h / 2 + 7) + '" font-size="20" fill="' + T + '">' + t1 + '</text>');
+const chances = [['A', '2,10', 47.6], ['B', '3,30', 30.3], ['C', '3,40', 29.4]];
+
 function desenharEsquema() {
-  const T = 'var(--color-texto)', AZ = 'var(--color-tinta_azul)', AL = 'var(--color-alerta)', W = 'var(--color-superficie)';
-  const seta = (x1, y1, x2, y2, cor) => {
-    const a = Math.atan2(y2 - y1, x2 - x1), p = (dx, dy) => [x2 + dx * Math.cos(a) - dy * Math.sin(a), y2 + dx * Math.sin(a) + dy * Math.cos(a)];
-    return '<line x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '" stroke="' + cor + '" stroke-width="2.5"/>' +
-      '<polygon points="' + [p(0, 0), p(-11, -6), p(-11, 6)].map(q => q.map(f1).join(',')).join(' ') + '" fill="' + cor + '"/>';
-  };
-  const caixa = (x, y, w, h, t1, ico) => '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" fill="' + W + '" stroke="' + T + '" stroke-width="2.5"/>' +
-    '<g transform="translate(' + (x + 14) + ' ' + (y + h / 2 - 12) + ')" fill="none" stroke="' + T + '" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + ICONES[ico] + '</g>' +
-    '<text class="t-disp" x="' + (x + 48) + '" y="' + (y + h / 2 + 7) + '" font-size="20" fill="' + T + '">' + t1 + '</text>';
-  const chances = [['A', '2,10', 47.6], ['B', '3,30', 30.3], ['C', '3,40', 29.4]];
+  if (telaEstreita()) return desenharEsquemaEstreito();
+  $('#svg-esquema').setAttribute('viewBox', '0 0 600 560');
   const esc100 = 3.4;      /* 1 ponto percentual = 3,4 px no esquema */
   let s = '<title id="esq-t">Esquema ilustrativo: o caminho do dinheiro numa aposta de quota fixa</title>' +
     '<defs><pattern id="ret-esq" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.4" fill="var(--color-tinta_azul)"/></pattern></defs>' +
@@ -233,8 +239,75 @@ function desenharEsquema() {
     '<text x="22" y="478" font-size="14" font-weight="600" fill="' + T + '">15% de IR sobre</text><text x="22" y="494" font-size="14" font-weight="600" fill="' + T + '">o prêmio líquido</text></g>';
   $('#svg-esquema').innerHTML = s;
 }
+
+/* Celular: o desenho de 600 de largura encolhia para ~0,55× e o texto ficava com ~7 px.
+   Aqui o mesmo esquema é reorganizado em 360 de largura e empilhado (360 × 600); como o bloco fixo
+   só comporta 360 × 360 em tamanho legível, a "câmera" mostra o trecho do passo atual
+   (1 a 3 em cima, 4 no meio, 5 embaixo), como a câmera da abertura. O cartão do passo cobre
+   o terço de baixo do bloco fixo, então cada janela deixa o seu grupo no alto; a do passo 5
+   passa do fim do desenho (o fundo da moldura é da mesma cor). */
+const JANELAS_ESQUEMA = { cima: [0, 8, 360, 360], resultado: [0, 44, 360, 360], meio: [0, 250, 360, 360], baixo: [0, 420, 360, 360] };
+function desenharEsquemaEstreito() {
+  const svg = $('#svg-esquema');
+  svg.setAttribute('viewBox', JANELAS_ESQUEMA.cima.join(' '));
+  let s = '<title id="esq-t">Esquema ilustrativo: o caminho do dinheiro numa aposta de quota fixa</title>' +
+    '<defs><pattern id="ret-esq" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.4" fill="var(--color-tinta_azul)"/></pattern></defs>' +
+    '<rect width="360" height="600" fill="' + W + '"/>';
+  /* passo 1 */
+  s += '<g class="grupo" data-g="1">' + caixa(16, 40, 140, 56, 'TORCEDOR', 'users') + caixa(204, 40, 140, 56, 'CASA', 'megaphone', '(BET X)') +
+    seta(158, 68, 200, 68, T) + '<text x="180" y="28" text-anchor="middle" font-size="14" font-weight="600" fill="' + T + '">R$ 10 no time A</text></g>';
+  /* passo 2 */
+  s += '<g class="grupo" data-g="2"><rect x="117" y="110" width="126" height="32" fill="var(--color-faixa_amarela)" stroke="' + T + '" stroke-width="2"/>' +
+    '<text x="180" y="131" text-anchor="middle" font-size="14" font-weight="600" fill="' + T + '">cotação 2,10</text>' +
+    '<text x="180" y="160" text-anchor="middle" font-size="14" fill="var(--color-texto_suave)">fixada no momento da aposta</text></g>';
+  /* passo 3 */
+  s += '<g class="grupo" data-g="3"><text x="180" y="188" text-anchor="middle" font-size="14" font-weight="600" fill="' + AZ + '">A vence: R$ 21 (10 × 2,10)</text>' + seta(270, 198, 90, 198, AZ) +
+    '<text x="180" y="228" text-anchor="middle" font-size="14" fill="var(--color-texto_suave)">B ou C: R$ 0</text>' + seta(270, 238, 90, 238, 'var(--color-texto_suave)') + '</g>';
+  /* passo 4: 1 ponto percentual = 2,2 no esquema */
+  const e = 2.2, x0 = 96, yT = 380;
+  s += '<g class="grupo" data-g="4"><text x="20" y="272" font-size="14" font-weight="600" fill="' + T + '">CHANCE EM CADA COTAÇÃO (1 ÷ COTAÇÃO)</text>';
+  chances.forEach(([n, c, pc], i) => {
+    const y = 286 + i * 30;
+    s += '<text x="20" y="' + (y + 15) + '" font-size="14" fill="' + T + '">' + n + ' · ' + c + '</text>' +
+      '<rect x="' + x0 + '" y="' + y + '" width="' + f1(pc * e) + '" height="20" fill="url(#ret-esq)" stroke="' + AZ + '" stroke-width="1"/>' +
+      '<text x="' + f1(x0 + 6 + pc * e) + '" y="' + (y + 15) + '" font-size="14" font-weight="600" fill="' + T + '">' + String(pc).replace('.', ',') + '%</text>';
+  });
+  s += '<text x="20" y="' + (yT + 15) + '" font-size="14" font-weight="600" fill="' + T + '">Soma</text>' +
+    '<rect x="' + x0 + '" y="' + yT + '" width="' + f1(100 * e) + '" height="22" fill="' + AZ + '"/>' +
+    '<rect x="' + f1(x0 + 100 * e) + '" y="' + yT + '" width="' + f1(7.3 * e) + '" height="22" fill="' + AL + '"/>' +
+    '<line x1="' + f1(x0 + 100 * e) + '" y1="' + (yT - 6) + '" x2="' + f1(x0 + 100 * e) + '" y2="' + (yT + 30) + '" stroke="' + T + '" stroke-width="1.5" stroke-dasharray="3 3"/>' +
+    '<text x="' + f1(x0 + 100 * e) + '" y="' + (yT + 44) + '" text-anchor="middle" font-size="13" fill="' + T + '">100%</text>' +
+    '<line x1="' + f1(x0 + 103.6 * e) + '" y1="' + (yT + 22) + '" x2="' + f1(x0 + 103.6 * e) + '" y2="' + (yT + 56) + '" stroke="' + T + '" stroke-width="1"/>' +
+    '<text x="' + f1(x0 + 103.6 * e - 4) + '" y="' + (yT + 70) + '" text-anchor="end" font-size="14" font-weight="600" fill="' + AL + '">107,3%: 7,3 pontos</text>' +
+    '<text x="' + f1(x0 + 103.6 * e - 4) + '" y="' + (yT + 86) + '" text-anchor="end" font-size="14" font-weight="600" fill="' + AL + '">de margem da casa</text></g>';
+  /* passo 5 */
+  s += '<g class="grupo" data-g="5">' + caixa(92, 528, 176, 56, 'ESTADO', 'landmark') +
+    '<path d="M344,68 H352 V556 H290" fill="none" stroke="' + T + '" stroke-width="2.5"/>' + seta(296, 556, 272, 556, T) +
+    '<text x="344" y="492" text-anchor="end" font-size="14" font-weight="600" fill="' + T + '">12% da receita</text><text x="344" y="508" text-anchor="end" font-size="14" font-weight="600" fill="' + T + '">bruta de jogo</text>' +
+    '<path d="M16,68 H8 V556 H70" fill="none" stroke="' + T + '" stroke-width="2.5"/>' + seta(64, 556, 88, 556, T) +
+    '<text x="20" y="492" font-size="14" font-weight="600" fill="' + T + '">15% de IR sobre</text><text x="20" y="508" font-size="14" font-weight="600" fill="' + T + '">o prêmio líquido</text></g>';
+  svg.innerHTML = s;
+}
+/* leva a câmera do esquema estreito para a metade do passo n */
+let janelaAtual = JANELAS_ESQUEMA.cima;
+function moverJanela(n) {
+  const svg = $('#svg-esquema'), alvo = n >= 5 ? JANELAS_ESQUEMA.baixo : n === 4 ? JANELAS_ESQUEMA.meio : n === 3 ? JANELAS_ESQUEMA.resultado : JANELAS_ESQUEMA.cima, de = janelaAtual;
+  if (!telaEstreita() || alvo === de) return;
+  janelaAtual = alvo;
+  animar(600, k => svg.setAttribute('viewBox', de.map((v, i) => f1(v + (alvo[i] - v) * k)).join(' ')));
+}
+
+let passoAtual = 1;
 desenharEsquema();
+/* ao girar a tela ou cruzar 760 px, troca o desenho e volta ao passo em que o leitor estava */
+{
+  const mq = matchMedia('(max-width: 759px)');
+  const trocou = () => { janelaAtual = JANELAS_ESQUEMA.cima; desenharEsquema(); mostrarPasso(passoAtual); };
+  if (mq.addEventListener) mq.addEventListener('change', trocou); else if (mq.addListener) mq.addListener(trocou);
+}
 function mostrarPasso(n) {
+  passoAtual = n;
+  moverJanela(n);
   /* Todas as partes do esquema ficam sempre visíveis (seção H: nada fica invisível esperando
      a rolagem). O passo atual ganha um marca-texto amarelo por trás. */
   $$('#svg-esquema .grupo').forEach(g => {
