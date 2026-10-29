@@ -632,13 +632,14 @@ details > summary:hover { color: var(--color-destaque_interativo_hover); }
 
 /* unidades: camisas e pontos */
 .gu { list-style: none; margin: 0; padding: 0; display: grid; }
-.gu-camisa { grid-template-columns: repeat(auto-fill, minmax(74px, 1fr)); gap: 12px 8px; }
+/* 88px: cabe "Internacional" (13 letras em mono de 11px, ~86px) sem quebrar no meio da palavra */
+.gu-camisa { grid-template-columns: repeat(auto-fill, minmax(88px, 1fr)); gap: 12px 8px; }
 .gu-ponto { grid-template-columns: repeat(var(--colunas, 10), minmax(0, 1fr)); gap: 6px; max-width: 420px; }
 .gu-item { display: grid; justify-items: center; gap: 4px; min-width: 0; }
 .gu-camisa svg { width: 44px; height: 44px; }
 .gu-camisa .u-tecido { fill: var(--color-superficie); stroke: var(--color-texto); stroke-width: 1.2; stroke-linejoin: round; }
 .gu-camisa .u-peito { fill: var(--color-superficie); stroke: var(--color-texto); stroke-width: .8; transition: fill var(--motion-duration-duracao_lenta) var(--motion-easing-easing_padrao); }
-.gu-rot { font-family: var(--font-family-mono); font-size: 11px; line-height: 1.2; text-align: center; overflow-wrap: anywhere; }
+.gu-rot { font-family: var(--font-family-mono); font-size: 11px; line-height: 1.2; text-align: center; overflow-wrap: break-word; }
 .gu-marca { display: block; width: 100%; aspect-ratio: 1; border-radius: 999px; border: 1.5px solid var(--color-tinta_azul); background: var(--color-superficie);
   transition: background-color var(--motion-duration-duracao_lenta) var(--motion-easing-easing_padrao), border-color var(--motion-duration-duracao_lenta) var(--motion-easing-easing_padrao), opacity var(--motion-duration-duracao_lenta) var(--motion-easing-easing_padrao); }
 .gu-quadrado .gu-marca { border-radius: 0; }
@@ -785,9 +786,16 @@ a, button, summary, .c-ponto, .hs { touch-action: manipulation; -webkit-tap-high
 }
 .inst-link::after { content: ''; position: absolute; inset: -5px 0; }      /* alvo de toque de 44 px de altura */
 .inst-link:hover { background: var(--color-faixa_amarela); border-color: var(--color-faixa_amarela); color: var(--color-texto); }
-.inst-link .nome-longo { display: none; font-weight: 400; }
-@media (min-width: 1500px) { .inst-link .nome-longo { display: inline; } }   /* só cabe em telas bem largas; nas outras o nome completo está no título do link, no menu e no rodapé */
+/* Só a sigla no topo, em qualquer largura: o conteúdo do topo tem no máximo 1200 px e o nome completo
+   não cabia (a partir de 1500 px de tela ele aparecia e cortava o "CIn"). O nome completo está no
+   title e no aria-label do link, no menu e no rodapé. */
 .inst { overflow: hidden; }
+/* abaixo de 360 px faltavam ~33 px e o "CIn" saía cortado: links mais justos (o alvo continua com 44 px de altura) */
+@media (max-width: 359px) {
+  .topo-esq { gap: 6px; }
+  .inst { gap: 4px; }
+  .inst-link { padding: 0 6px; letter-spacing: 0; }
+}
 .cabecalho :focus-visible { box-shadow: 0 0 0 3px var(--color-faixa_amarela); outline-offset: 2px; }
 .cabecalho .btn-icone { border-color: #fff; color: #fff; background: transparent; }
 .cabecalho .btn-icone:hover { background: rgba(255, 255, 255, .18); }
@@ -815,3 +823,9 @@ a, button, summary, .c-ponto, .hs { touch-action: manipulation; -webkit-tap-high
 /* selo "trajetória ilustrativa" numa linha só, para não cobrir o texto do fim da linha */
 .c-figura[data-modo="estreito"] .selo-ilustrativo { font-size: 9.5px; letter-spacing: .02em; white-space: nowrap; padding: 2px 6px; top: 8px; left: 8px; right: auto; }
 .c-figura[data-modo="estreito"] .c-fim { top: 15%; }
+
+/* ---- Esquema da r1 no celular: o selo quebrava em duas linhas e cobria o topo do desenho ---- */
+@media (max-width: 759px) {
+  .esquema-moldura { padding-top: 0; }
+  .esquema-moldura .selo-ilustrativo { position: static; display: inline-block; margin: 8px 8px 4px; }
+}
