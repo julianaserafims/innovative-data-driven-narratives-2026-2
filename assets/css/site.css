@@ -786,8 +786,9 @@ a, button, summary, .c-ponto, .hs { touch-action: manipulation; -webkit-tap-high
 }
 .inst-link::after { content: ''; position: absolute; inset: -5px 0; }      /* alvo de toque de 44 px de altura */
 .inst-link:hover { background: var(--color-faixa_amarela); border-color: var(--color-faixa_amarela); color: var(--color-texto); }
-.inst-link .nome-longo { display: none; font-weight: 400; }
-@media (min-width: 1500px) { .inst-link .nome-longo { display: inline; } }   /* só cabe em telas bem largas; nas outras o nome completo está no título do link, no menu e no rodapé */
+/* Só a sigla no topo, em qualquer largura: o conteúdo do topo tem no máximo 1200 px e o nome completo
+   não cabia (a partir de 1500 px de tela ele aparecia e cortava o "CIn"). O nome completo está no
+   title e no aria-label do link, no menu e no rodapé. */
 .inst { overflow: hidden; }
 /* abaixo de 360 px faltavam ~33 px e o "CIn" saía cortado: links mais justos (o alvo continua com 44 px de altura) */
 @media (max-width: 359px) {

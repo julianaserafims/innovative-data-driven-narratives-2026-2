@@ -808,7 +808,7 @@ function montarCasca() {
         <span class="marca-nome">Da Sorte ao Declínio</span>
       </a>
       <nav class="inst" aria-label="Instituições">
-        ${PROJETO.links.map(l => '<a class="inst-link" href="' + esc(l.url) + '" target="_blank" rel="noopener" title="' + esc(l.nome) + '" aria-label="' + esc(l.nome) + ' (abre em nova aba)"><span class="sigla">' + esc(l.sigla) + '</span><span class="nome-longo"> · ' + esc(l.nome) + '</span></a>').join('')}
+        ${PROJETO.links.map(l => '<a class="inst-link" href="' + esc(l.url) + '" target="_blank" rel="noopener" title="' + esc(l.nome) + '" aria-label="' + esc(l.nome) + ' (abre em nova aba)"><span class="sigla">' + esc(l.sigla) + '</span></a>').join('')}
       </nav>
     </div>
     <div class="acoes-cabecalho">
