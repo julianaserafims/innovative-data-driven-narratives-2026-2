@@ -767,7 +767,7 @@ a, button, summary, .c-ponto, .hs { touch-action: manipulation; -webkit-tap-high
   box-shadow: 0 3px 0 var(--color-tinta_verde);
 }
 .topo-esq { display: flex; align-items: center; gap: 8px; min-width: 0; }
-.marca-topo { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; flex: none; color: #fff; text-decoration: none; }
+.marca-topo { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; min-width: 44px; flex: none; color: #fff; text-decoration: none; }
 .marca-topo:hover { color: #fff; }
 .bola-topo { width: 36px; height: 36px; flex: none; }
 .marca-nome {
