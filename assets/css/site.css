@@ -389,6 +389,10 @@ a:hover { color: var(--color-destaque_interativo_hover); }
 .rodape dd { margin: 0 0 6px; }
 .rodape .pendente { color: var(--color-faixa_amarela); }
 .rodape .fino { font-family: var(--font-family-mono); font-size: 12px; line-height: 1.6; color: #C9CBD3; margin-top: var(--space-space_6); border-top: 1px solid #3A3D46; padding-top: var(--space-space_4); }
+/* link no meio do texto miúdo do rodapé (repositório): sublinhado, para não depender só da cor (axe: link-in-text-block) */
+.rodape .fino a { color: inherit; text-decoration: underline; text-underline-offset: 2px; overflow-wrap: anywhere; }
+/* endereços longos (site e repositório) quebram em qualquer ponto em vez de estourar a largura do celular */
+#url-site a, .pagina-simples p a[href^="http"] { overflow-wrap: anywhere; }
 .rodape ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; font-size: 14px; }
 .rodape ul a { display: inline-flex; min-height: 32px; align-items: center; }
 

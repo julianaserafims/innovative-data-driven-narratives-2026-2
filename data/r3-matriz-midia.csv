@@ -1,11 +1,6 @@
-veiculo,tipo_vinculo,descricao,fonte_sugerida,status
-Globo,Marca de apostas própria ou associada,Joint venture com a MGM; BetMGM vira a marca de apostas ligada ao grupo (fim de 2025),Comunicados do Grupo Globo,SEM FONTE
-Globo,Patrocínio de programa,Big Brother Brasil patrocinado por casa de apostas,Site do programa,SEM FONTE
-Globo,Transmissão esportiva,"Inserções em Brasileirão, Copa do Brasil e Libertadores",Tunad,SEM FONTE
-SBT,Marca de apostas própria ou associada,Bet do Milhão como plataforma oficial,Site da emissora,SEM FONTE
-SBT,Patrocínio de programa,Programas de auditório e madrugadas dedicadas,Tunad,SEM FONTE
-Band,Marca de apostas própria ou associada,Bandbet,Site da emissora,SEM FONTE
-Band,Patrocínio de programa,Cotas máster de Jogo Aberto e Os Donos da Bola,Tunad,SEM FONTE
-Record,Patrocínio de programa,A Fazenda patrocinada por casa de apostas,Site do programa,SEM FONTE
-CazéTV,Transmissão esportiva,"Copa do Mundo 2026: cerca de R$ 555 mi de bets em pacotes de R$ 2 bi (com YouTube)",Imprensa especializada,SEM FONTE
-CazéTV,Palpite ao vivo na narração,Narradores davam palpites e sugeriam cotações ao vivo; alertas de Senacon e Conar,Senacon; Conar,SEM FONTE
+veiculo,tipo_vinculo,descricao,fonte,status
+Globo,Marca de apostas própria ou associada,"BetMGM, de joint venture com a MGM anunciada em 15/08/2024",Máquina do Esporte (15/08/2024): https://maquinadoesporte.com.br/apostas/mgm-e-globo-anunciam-joint-venture-para-exploracao-de-apostas-no-brasil/,OK
+SBT,Marca de apostas própria ou associada,"Bet do Milhão, da TQJ, empresa do Grupo Silvio Santos",Meio & Mensagem (23/06/2025): https://www.meioemensagem.com.br/midia/grupo-silvio-santos-prepara-estreia-da-bet-do-milhao,OK
+Band,Marca de apostas própria ou associada,"BandBet, marca licenciada pela Band e operada pela Bell Ventures Digital",Meio & Mensagem (09/10/2024): https://www.meioemensagem.com.br/midia/band-licencia-marca-bet-openbet,OK
+CazéTV,Transmissão esportiva,"Copa do Mundo 2026: R$ 555 mi de Betnacional, Bet365 e KTO em cotas de cerca de R$ 2 bi",Agência Pública (30/06/2026): https://apublica.org/2026/06/cazetv-aporte-da-xp-e-dinheiro-das-bets-ajudam-canal/; Poder360 (15/10/2025),OK
+CazéTV,Comentário de cotações ao vivo,Equipe comentava cotações e apostas ao vivo; investigação da Senacon e liminar do Conar,Bloomberg Línea (10/07/2026): https://www.bloomberglinea.com.br/linha-esportiva/cazetv-entra-na-mira-de-reguladores-por-publicidade-de-bets-durante-a-copa/; Propmark (26/06/2026); Meio & Mensagem (27/06/2026),OK

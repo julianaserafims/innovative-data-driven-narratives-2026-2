@@ -23,8 +23,8 @@
         <h1 class="titulo-rep">Da torcida à aposta: quem paga a conta</h1>
         <p class="linha-fina">O torcedor que virou apostador, o dinheiro que sai do orçamento da casa e o custo que fica para a saúde pública.</p>
         <div class="creditos legenda">
-          <span>Texto e reportagem: <span class="pendente">[A PREENCHER]</span> · Dados: <span class="pendente">[A PREENCHER]</span> · Design e desenvolvimento: <span class="pendente">[A PREENCHER]</span></span>
-          <span>Publicado em <span class="pendente">[A PREENCHER]</span> · Atualizado em <time datetime="2026-10-14">14/10/2026</time> · <span id="tempo-leitura">leitura de alguns minutos</span></span>
+          <span id="creditos-rep"><!-- preenchido pelo script a partir de PROJETO.equipe e PROJETO.creditos --></span>
+          <span>Publicado em <span id="publicado-rep"></span> · Atualizado em <time id="atualizado-rep"></time> · <span id="tempo-leitura">leitura de alguns minutos</span></span>
         </div>
       </div>
       <figure style="margin:0">
@@ -150,7 +150,7 @@
       </blockquote>
 
       <h2>Uma questão de saúde pública</h2>
-      <p>O transtorno do jogo é reconhecido como dependência comportamental no DSM-5 e está na CID-11. Entre janeiro de 2018 e maio de 2025, o SUS registrou 10.553 atendimentos por jogo patológico; a projeção do governo é chegar a 21.949 até 2028. <span class="pendente">[CONFERIR: o “aumento de 104%” é do período 2018–2025 ou da projeção?]</span> Para cada pessoa com jogo problemático, cerca de seis pessoas ao redor são afetadas.</p>
+      <p>O transtorno do jogo é reconhecido como dependência comportamental no DSM-5 e está na CID-11. Entre janeiro de 2018 e maio de 2025, o SUS registrou 10.553 atendimentos por jogo patológico, um aumento de 104% no período, segundo o Ministério da Saúde. A projeção do governo é chegar a 21.949 atendimentos até 2028. Para cada pessoa com jogo problemático, cerca de seis pessoas ao redor são afetadas.</p>
 
       <!-- ================= CITAÇÃO / DEPOIMENTO ================= -->
       <blockquote class="citacao">
@@ -159,7 +159,7 @@
         <footer class="legenda">Nome preservado · Pessoa atendida na Rede de Atenção Psicossocial (Raps). Relato publicado no <i>Guia de cuidado para pessoas com problemas relacionados a jogos de apostas</i> (Ministério da Saúde, 2026), licença CC BY-NC-SA 4.0.</footer>
       </blockquote>
 
-      <p>A rede pública tem 3.061 CAPS em funcionamento, 177 deles habilitados entre 2024 e 2025. Desde março de 2026, o Ministério da Saúde oferece teleatendimento; até setembro, 27.703 pessoas tinham se cadastrado. Mais de 1 milhão de pessoas se inscreveram na ferramenta nacional de autoexclusão, criada em dezembro de 2025.</p>
+      <p>A rede pública tem 3.061 CAPS em funcionamento, 177 deles habilitados entre 2024 e 2025. Desde março de 2026, o Ministério da Saúde oferece teleatendimento; até setembro, 27.703 pessoas tinham se cadastrado. Mais de 1 milhão de pessoas se inscreveram na ferramenta nacional de autoexclusão, criada em dezembro de 2025; desde a MP de setembro de 2026, ela está fora do ar.</p>
 
       <!-- ================= CITAÇÃO / DEPOIMENTO ================= -->
       <blockquote class="citacao">
@@ -170,24 +170,6 @@
 
     </div>
 
-    <!-- ================= GRÁFICO: pesquisa ================= -->
-    <figure class="grafico" id="fig-pesquisa" aria-labelledby="t-pesquisa">
-      <h3 id="t-pesquisa">Na pesquisa da equipe, as redes sociais aparecem como principal porta de entrada</h3>
-      <p class="linha-fina-graf">Como os respondentes conheceram as bets (pergunta 11 do questionário da equipe). Amostra não probabilística: não representa a população.</p>
-      <p class="selo-dado selo-ficticio">Dado fictício para protótipo · pesquisa da equipe em andamento</p>
-      
-      <div class="graf-caixa"><div id="g-pesquisa" style="position:relative"><p class="legenda">Carregando o gráfico…</p></div></div>
-      <p class="nota-fonte legenda">
-        <span>Fonte: Pesquisa própria da equipe, em andamento. Coleta: out/2026.</span>
-        <a href="../metodologia.html#dados">Nota metodológica</a>
-        <a class="btn btn-secundario btn-pequeno" href="../data/r6-pesquisa-propria-q11-FICTICIO.csv" download><svg class="icone" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg> Baixar dados (CSV)</a>
-      </p>
-      <details>
-        <summary>Ler descrição do gráfico</summary>
-        <p class="coluna">Dados fictícios para teste do protótipo. Quando as respostas chegarem, substitua o arquivo CSV pelos totais reais da pergunta 11 e reescreva este título.</p>
-        <div class="tab-rolagem"><table class="tabela-dados" id="tab-pesquisa"><caption class="sr">Na pesquisa da equipe, as redes sociais aparecem como principal porta de entrada</caption></table></div>
-      </details>
-    </figure>
 
     <!-- ================= CAIXA "EM NÚMEROS" ================= -->
     <section class="em-numeros-rep" aria-labelledby="t-num">
@@ -204,9 +186,9 @@
         <h2 id="t-ajuda">Onde pedir ajuda</h2>
         <ul>
           <li><strong>CAPS e UBS do SUS:</strong> serviços de porta aberta, sem precisar de encaminhamento.</li>
-          <li><strong>Teleatendimento do Ministério da Saúde</strong> para problemas com jogos e apostas: <span class="pendente">[A CONFIRMAR: canal oficial]</span></li>
-          <li><strong>Autoexclusão nacional</strong> de plataformas de apostas: <span class="pendente">[A CONFIRMAR: endereço oficial]</span></li>
-          <li><strong>Jogadores Anônimos:</strong> grupos de apoio. <span class="pendente">[A CONFIRMAR: contato]</span></li>
+          <li><strong>Teleatendimento gratuito do SUS</strong> para problemas com jogos e apostas, a partir de 18 anos, também para familiares: entre no aplicativo ou no site do <strong>Meu SUS Digital</strong> com a conta gov.br e faça o <a href="https://miniapps.saude.gov.br/teste-jogo/">autoteste “Problemas com jogos de apostas?”</a>. <a href="https://www.gov.br/saude/pt-br/assuntos/noticias/2026/marco/ministerio-da-saude-inicia-teleatendimento-gratuito-pelo-sus-para-quem-enfrenta-problemas-com-jogos-e-apostas">Como funciona</a>.</li>
+          <li><strong>Autoexclusão nacional</strong> de plataformas de apostas: <a href="https://www.gov.br/fazenda/pt-br/composicao/orgaos/secretaria-de-premios-e-apostas/autoexclusao/autoexclusao">fora do ar</a> desde a MP 1.394, de 25/09/2026, segundo o Ministério da Fazenda.</li>
+          <li><strong>Jogadores Anônimos:</strong> grupos de apoio gratuitos; <a href="https://www.jogadoresanonimos.com.br/enderecos">lista de reuniões</a> no site da entidade.</li>
           <li><strong>CVV, 188:</strong> apoio emocional, 24 horas, ligação gratuita.</li>
         </ul>
       </section>
@@ -217,9 +199,8 @@
         <ul>
           <li>Ipsos-Ipec para O Globo (set/2025) e Quaest para CNN/Itatiaia (2024).</li>
           <li>LENAD III, caderno Jogos de Aposta (Unifesp).</li>
-          <li>Ministério da Saúde, <i>Guia de cuidado para pessoas com problemas relacionados a jogos de apostas</i> (2026).</li>
+          <li>Ministério da Saúde, <i>Guia de cuidado para pessoas com problemas relacionados a jogos de apostas</i> (2026): <a href="https://www.gov.br/saude/pt-br/centrais-de-conteudo/publicacoes/guias-e-manuais/2026/guia-de-cuidado-para-pessoas-com-problemas-relacionados-a-jogos-de-apostas.pdf/view">gov.br/saude</a>.</li>
           <li>Dossiê IEPS (2025); Made-USP e Comsefaz/Cicef, via Nexo (set/2026); O Globo (set/2026).</li>
-          <li>Pesquisa própria da equipe (em andamento; dados ainda fictícios no protótipo).</li>
         </ul>
       </section>
 
@@ -280,10 +261,6 @@ graficoDeCSV('r6-custo-x-arrecadacao.csv', $('#g-custo'), linhas => Graficos.bar
   estilo: l => l.indicador.startsWith('Custo') ? 'dano' : '', nota: l => l.periodo
 }), $('#tab-custo'), [['indicador', 'Indicador'], ['valor_rs_bi', 'R$ bilhões'], ['periodo', 'Período'], ['fonte', 'Fonte']]);
 
-/* ---------- Pesquisa própria (DADO FICTÍCIO PARA PROTÓTIPO) ---------- */
-graficoDeCSV('r6-pesquisa-propria-q11-FICTICIO.csv', $('#g-pesquisa'), linhas => Graficos.barras($('#g-pesquisa'), linhas, {
-  rotulo: 'resposta', valor: 'quantidade', formato: v => v + ' respostas (fictício)', estilo: (l, i) => i === 0 ? 'destaque' : ''
-}), $('#tab-pesquisa'), [['resposta', 'Resposta'], ['quantidade', 'Quantidade'], ['observacao', 'Observação']]);
 
 </script>
 </body>

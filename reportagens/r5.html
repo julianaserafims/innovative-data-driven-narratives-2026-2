@@ -23,8 +23,8 @@
         <h1 class="titulo-rep">Quem revisa o lance das bets</h1>
         <p class="linha-fina">Leis, portarias e fiscalização: o que a regulamentação mudou e o que ficou de fora.</p>
         <div class="creditos legenda">
-          <span>Texto e reportagem: <span class="pendente">[A PREENCHER]</span> · Dados: <span class="pendente">[A PREENCHER]</span> · Design e desenvolvimento: <span class="pendente">[A PREENCHER]</span></span>
-          <span>Publicado em <span class="pendente">[A PREENCHER]</span> · Atualizado em <time datetime="2026-10-14">14/10/2026</time> · <span id="tempo-leitura">leitura de alguns minutos</span></span>
+          <span id="creditos-rep"><!-- preenchido pelo script a partir de PROJETO.equipe e PROJETO.creditos --></span>
+          <span>Publicado em <span id="publicado-rep"></span> · Atualizado em <time id="atualizado-rep"></time> · <span id="tempo-leitura">leitura de alguns minutos</span></span>
         </div>
       </div>
       <figure style="margin:0">
@@ -47,7 +47,7 @@
       </section>
 
       <h2>A regra chegou com o jogo andando</h2>
-      <p>A Lei 14.790/2023 definiu critérios para licença: outorga, sede no Brasil, capacidade técnica e financeira, combate à lavagem de dinheiro e proteção a menores. Cada licença custa R$ 30 milhões e vale cinco anos; a casa paga 12% sobre a receita bruta de jogo, e quem ganha paga 15% de Imposto de Renda sobre o prêmio líquido.</p>
+      <p>A Lei 14.790/2023 definiu critérios para licença: outorga, sede no Brasil, capacidade técnica e financeira, combate à lavagem de dinheiro e proteção a menores. Cada licença custa R$ 30 milhões e vale cinco anos; a casa paga 12% sobre a receita bruta de jogo, e quem ganha paga 15% de Imposto de Renda sobre o prêmio líquido. Em julho de 2026, a Lei 15.480 acrescentou mais 3% da receita para o fundo da Polícia Federal, com transição: 1% em 2026 e 2% em 2027.</p>
     </div>
 
     <!-- ================= SCROLLYTELLING: var ================= -->
@@ -128,18 +128,17 @@
     <!-- ================= GRÁFICO: destinacao ================= -->
     <figure class="grafico" id="fig-destinacao" aria-labelledby="t-destinacao">
       <h3 id="t-destinacao">Pela lei de 2018, só 1% da arrecadação ia para a saúde</h3>
-      <p class="linha-fina-graf">Destinação da arrecadação das apostas de quota fixa segundo a Lei 13.756/2018, art. 30. Cada quadrado é 1 ponto percentual.</p>
-      <p class="selo-dado selo-confirmar">Dado a conferir: soma parcial de 85%</p>
+      <p class="linha-fina-graf">Como a lei divide os 12% da receita das apostas que não ficam com as empresas, depois de pagos os prêmios e o imposto de renda. Cada quadrado é 1 ponto percentual.</p>
       <div class="legenda-graf" id="leg-destinacao"></div>
       <div class="graf-caixa"><div id="g-destinacao" style="position:relative"><p class="legenda">Carregando o gráfico…</p></div></div>
       <p class="nota-fonte legenda">
-        <span>Fonte: Lei 13.756/2018, conforme o Dossiê IEPS. <span class="pendente">[CONFERIR: a lista do material soma 85%; completar com o texto vigente da lei]. Coleta: out/2026.</span></span>
+        <span>Fonte: Lei 13.756/2018, art. 30, § 1º-A, com a redação da Lei 14.790/2023 (Planalto). Coleta: out/2026.</span>
         <a href="../metodologia.html#dados">Nota metodológica</a>
         <a class="btn btn-secundario btn-pequeno" href="../data/r5-destinacao-arrecadacao.csv" download><svg class="icone" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg> Baixar dados (CSV)</a>
       </p>
       <details>
         <summary>Ler descrição do gráfico</summary>
-        <p class="coluna">Cem quadrados. Um, em destaque, é a saúde (prevenção e redução de danos do jogo). Oitenta e quatro são os demais destinos listados: esporte (36), turismo (28), educação (10) e seguridade social (10). Quinze correspondem a destinos não listados no material da equipe.</p>
+        <p class="coluna">Cem quadrados. Um, em destaque, é a saúde (prevenção e redução de danos do jogo). Os demais são esporte (36), turismo (28), segurança pública (13,6), educação (10), seguridade social (10) e, somados, sociedade civil (0,5), Funapol (0,5) e ABDI (0,4).</p>
         <div class="tab-rolagem"><table class="tabela-dados" id="tab-destinacao"><caption class="sr">Pela lei de 2018, só 1% da arrecadação ia para a saúde</caption></table></div>
       </details>
     </figure>
@@ -172,8 +171,8 @@
 
     <div class="corpo">
       <h2>O que a proposta de punição prevê</h2>
-      <p>A proposta do governo prevê de 4 a 6 anos de prisão para quem operar ou explorar bets e de 2 a 4 anos para publicidade, captação de apostadores, influenciadores pagos e uso de dados pessoais para atrair apostadores. <span class="pendente">[CONFERIR: se as penas estão na MP 1.394 ou num projeto de lei separado]</span></p>
-      <div class="tab-rolagem"><table class="tabela-dados" id="tab-penas"><caption class="legenda" style="text-align:left;caption-side:bottom;padding-top:6px">Fonte: O Globo; Congresso em Foco. <a class="btn btn-secundario btn-pequeno" href="../data/r5-penas-propostas.csv" download>Baixar dados (CSV)</a></caption></table></div>
+      <p>A MP só prevê sanções administrativas, como multas e bloqueio de sites. As penas de prisão estão num projeto de lei separado, o PL 5.477/2026, enviado ao Congresso no mesmo dia: de 4 a 6 anos para quem operar ou explorar bets e de 2 a 4 anos para publicidade, captação de apostadores, uso de dados pessoais para atrair apostadores e facilitação financeira, com agravantes. O projeto começa a tramitar pela Câmara dos Deputados.</p>
+      <div class="tab-rolagem"><table class="tabela-dados" id="tab-penas"><caption class="legenda" style="text-align:left;caption-side:bottom;padding-top:6px">Fonte: Projeto de Lei 5.477/2026, conforme a Agência Câmara (28/09/2026); O Globo. <a class="btn btn-secundario btn-pequeno" href="../data/r5-penas-propostas.csv" download>Baixar dados (CSV)</a></caption></table></div>
     </div>
 
     <!-- ================= CAIXA "EM NÚMEROS" ================= -->
@@ -194,8 +193,10 @@
         <ul>
           <li>Lei 13.756/2018 e Lei 14.790/2023 (Planalto).</li>
           <li>Dossiê IEPS (2025): arrecadação, repasses, projetos de lei e CPI das Bets.</li>
-          <li>Congresso em Foco e BBC Brasil: MP 1.394/2026.</li>
-          <li>O Globo: penas propostas <span class="pendente">[URL truncada; corrigir]</span>.</li>
+          <li>Medida Provisória 1.394, de 25/09/2026, no Planalto: <a href="https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2026/mpv/mpv1394.htm">planalto.gov.br</a>; Congresso em Foco e BBC Brasil.</li>
+          <li>Agência Câmara, “Projeto de lei apresentado pelo governo torna crime a exploração e a publicidade de bets” (28/09/2026): <a href="https://www.camara.leg.br/noticias/1307129-projeto-de-lei-apresentado-pelo-governo-torna-crime-a-exploracao-e-a-publicidade-de-bets">camara.leg.br</a>.</li>
+          <li>Lei 13.756/2018, art. 30 (destinação da arrecadação), no Planalto: <a href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13756.htm">planalto.gov.br</a>.</li>
+          <li>O Globo, “Governo Lula vai propor pena de até 6 anos de prisão para quem explorar ou operar bets no Brasil” (25/09/2026): <a href="https://oglobo.globo.com/economia/noticia/2026/09/25/governo-lula-vai-propor-pena-de-ate-6-anos-de-prisao-para-quem-explorar-ou-operar-bets-no-brasil.ghtml">oglobo.globo.com</a>.</li>
           <li>Folha de Pernambuco: declaração do presidente Lula.</li>
         </ul>
       </section>
@@ -246,13 +247,10 @@ graficoDeCSV('r5-arrecadacao.csv', $('#g-arrecadacao'), linhas => Graficos.barra
 
 /* ---------- Pictograma: destinação da arrecadação ---------- */
 graficoDeCSV('r5-destinacao-arrecadacao.csv', $('#g-destinacao'), linhas => {
-  const itens = [];
-  linhas.forEach(l => {
-    const classe = l.destino.startsWith('Saúde') ? 'u-solido' : l.destino.startsWith('Outros') ? 'u-vazio' : 'u-retic';
-    for (let i = 0; i < +l.percentual; i++) itens.push({ classe });
-  });
-  itens.sort((a, b) => ['u-solido', 'u-retic', 'u-vazio'].indexOf(a.classe) - ['u-solido', 'u-retic', 'u-vazio'].indexOf(b.classe));
-  Graficos.legenda($('#leg-destinacao'), [['u-solido', 'saúde: 1'], ['u-retic', 'esporte, turismo, educação e seguridade: 84'], ['u-vazio', 'não listado no material: 15']]);
+  /* 100 quadrados fixos: há destinos fracionados (13,6; 0,5; 0,4), então não dá um quadrado por linha */
+  const saude = linhas.filter(l => l.destino.startsWith('Saúde')).reduce((s, l) => s + +l.percentual, 0);
+  const itens = Array.from({ length: 100 }, (_, i) => ({ classe: i < Math.round(saude) ? 'u-solido' : 'u-retic' }));
+  Graficos.legenda($('#leg-destinacao'), [['u-solido', 'saúde: ' + Graficos.fmt(saude, saude % 1 ? 1 : 0)], ['u-retic', 'esporte, turismo, segurança pública, educação, seguridade e outros: ' + Graficos.fmt(100 - saude, (100 - saude) % 1 ? 1 : 0)]]);
   Graficos.unidades($('#g-destinacao'), itens, { forma: 'quadrado' });
   $('#g-destinacao .gu').classList.add('gu-quadrado');
 }, $('#tab-destinacao'), [['destino', 'Destino'], ['percentual', '%'], ['status', 'Status']]);
