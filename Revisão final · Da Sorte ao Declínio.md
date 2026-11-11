@@ -4,7 +4,7 @@ Oct 21, 2026 · @Juliana
 
 O site passa na auditoria de acessibilidade (0 violações em 9 páginas), segue o pacote de design e cumpre as regras de ética. O que ainda separa o dossiê da publicação e da inscrição no prêmio é conteúdo da equipe: créditos, data de publicação e a checagem de 11 grupos de dados.
 
-> **Atualização de 30/10/2026 (PRs #1, #2 e #3, já no ar):** responsividade no celular revisada; créditos centralizados em `PROJETO.equipe`; 14 das 23 pendências resolvidas, cada dado com fonte; as demais dependem da equipe. As 20 planilhas com dados estão com todas as linhas OK. O que não teve fonte saiu do texto e está listado na Metodologia, em "O que foi retirado por falta de fonte". Auditoria axe-core refeita em 29/10: 0 violações nas 9 páginas, em 1280px e 390px. O status de cada item está na coluna Status da tabela de pendências.
+> **Atualização de 30/10/2026 (PRs #1, #2 e #3, já no ar):** responsividade no celular revisada; créditos centralizados em `PROJETO.equipe`; 14 das 23 pendências resolvidas, cada dado com fonte; as 7 que faltam dependem da equipe (veja "Pendências"). As 20 planilhas com dados estão com todas as linhas OK. O que não teve fonte saiu do texto e está listado na Metodologia, em "O que foi retirado por falta de fonte". Auditoria axe-core refeita em 29/10: 0 violações nas 9 páginas, em 1280px e 390px. O status de cada item está na coluna Status da tabela de pendências.
 >
 > **Atualização de 11/11/2026 (PR #4, já no ar, e PR "conferir-dados", aguardando merge):** o PR #4 corrigiu bugs técnicos: fonte inválida na linha do tempo, ids duplicados nos dois estádios das reportagens, menu como diálogo modal, posição mantida ao recarregar ou voltar e mensagem de erro para CSV com defeito. Ele também passou a esconder do rodapé e da abertura os créditos ainda `[A PREENCHER]`. O PR seguinte faz o `[A CONFIRMAR]` dos rótulos da trajetória obedecer a `rotulo_confirmado`, aceita CSV com BOM e tira os falsos alertas do script `ferramentas/conferir-dados.py`. Auditoria refeita em 11/11: 0 violações do axe nas 9 páginas, sem rolagem lateral de 320 a 1280px.
 
@@ -113,19 +113,34 @@ Todos os critérios de ética estão cumpridos. O único ponto de atenção é o
 
 Situação da MP em 21/10/2026: editada em 25/09/2026, em vigor, operadoras tiveram até 06/10/2026 para encerrar, 94 emendas no Congresso e pedido de suspensão no STF (ADI 7721) sem decisão. Revisem o texto do aviso e das reportagens 1 e 5 na semana da publicação.
 
-## Pendências de apuração
+## Pendências
 
-São 23 itens; a coluna Status serve para a equipe marcar o andamento direto no documento. Situação em 30/10/2026: 14 resolvidos, 1 parcial (créditos), 1 aguardando dados (pesquisa própria), 1 mantido fora do site (Quaest) e 6 a fazer, todos dependentes da equipe. Os itens 1 e 2 continuam bloqueando a inscrição no prêmio.
+Situação em 11/11/2026. **A apuração das reportagens está concluída:** os 14 itens de dados foram resolvidos, cada um com fonte. Falta o que depende da equipe: **7 itens**, quase todos decisões rápidas, e 1 lembrete para a semana da publicação. Os números (#) são os mesmos da primeira versão desta revisão.
 
-| # | Reportagem | O que falta | Onde está | Fonte sugerida | Status |
+### O que falta
+
+| # | O que fazer | Onde | Tipo | O que bloqueia |
+| --- | --- | --- | --- | --- |
+| 1 | Créditos: função de 8 pessoas da Computação (Alexandre, Cleber, Guilherme, Luan, Maria Clara, Mariana Beatriz, Mariana Melo, Vinicius), função de Maria Rita, orientação e a ordem dos nomes no "Como citar" | `assets/js/mapa-narrativo.js` e `quem-somos.html` | Decisão da equipe | Entrega e prêmio. Enquanto vazios, somem do rodapé e da abertura (PR #4), mas aparecem em vermelho no Quem somos |
+| 2 | Data de publicação | `PROJETO.publicado_em` | Decisão da equipe | Prêmio. Enquanto vazia, "Publicado em" não aparece |
+| 7 | Aprovar ou reescrever os 7 rótulos da trajetória (6 quiques e o fim da linha) | `mapa-narrativo.js`: `rotulo_confirmado` e `FIM_DA_LINHA.confirmado` passam a `true` | Decisão da equipe | Nada; mas a home mostra `[A CONFIRMAR]` até lá |
+| 18 | Pesquisa própria: só 4 respostas. Escolher entre publicá-las como relato (recomendado), simulação com selo de "dado simulado" ou deixar fora | r6 | Decisão da equipe + planilha de respostas | Nada; hoje a pesquisa está fora do site |
+| 20 | E-mail para correções e seção de pedidos via LAI (Fala.BR) | `metodologia.html` | Tarefa | Prêmio (a metodologia está "✔ com ressalva" por causa disso) |
+| 21 | Ouvir a home e uma reportagem com leitor de tela (NVDA ou VoiceOver), cerca de 30 minutos | — | Tarefa | Prêmio e boas práticas; o axe automático já passa |
+| 22 | Conferir no regulamento do prêmio o período de publicação aceito e o limite de inscrições por categoria | Site do Prêmio Cláudio Weber Abramo | Tarefa | Inscrição no prêmio |
+
+**Lembrete para a semana da publicação (#23):** revisar o status da MP 1.394 no Congresso e no STF (ADIs 8.024 e 8.027, entre outras). Se a MP cair ou mudar, atualizar o aviso de jogo responsável, a r1, a r5 e a caixa "Onde pedir ajuda" da r6 (a autoexclusão pode voltar).
+
+Para ver o que ainda está pendente no próprio site, rode `python3 ferramentas/conferir-dados.py`.
+
+### Concluído
+
+| # | Reportagem | O que era | Onde está | Fonte | Status |
 | --- | --- | --- | --- | --- | --- |
-| 1 | Geral | Créditos: nomes, cursos, funções, orientação e semestre | `assets/js/mapa-narrativo.js` (`PROJETO.equipe` e `PROJETO.creditos`) | Equipe | ◐ Parcial: autoria dos 6 textos, 24 nomes e cursos, semestre 2026.2, URL do site e do repositório; Pericles entrou como Desenvolvimento (PR #4). Faltam funções de 8 pessoas da Computação, função de Maria Rita, orientação e a ordem dos nomes no "Como citar". Desde o PR #4, o que está `[A PREENCHER]` some do rodapé e da abertura, mas continua em vermelho no Quem somos |
-| 2 | Geral | Data de publicação | `PROJETO.publicado_em` (aparece no rodapé e na abertura de cada reportagem) | Equipe | A fazer (enquanto vazia, "Publicado em" não aparece; PR #4) |
 | 3 | Geral | Logos oficiais da UFPE, do CAC e do CIn | Topo, menu, rodapé e Quem somos | — | ✔ Encerrado: a equipe decidiu manter links de texto (PR #1); endereços conferidos em 28/10 |
 | 4 | Geral | Canais de ajuda | Aviso de jogo responsável e caixa "Onde pedir ajuda" da r6 | gov.br/saude; Fazenda; Jogadores Anônimos | ✔ Feito: teleatendimento pelo Meu SUS Digital (autoteste), lista de reuniões dos Jogadores Anônimos; autoexclusão fora do ar desde a MP |
 | 5 | Geral | URL oficial do Dossiê IEPS e do Guia do Ministério da Saúde | Fontes da r1, r3, r6 e Metodologia | ieps.org.br; gov.br/saude | ✔ Feito: o link da BVS impresso no Guia dá 404; usado o do gov.br |
 | 6 | 1 | Datas históricas e origem do termo "bet" | Texto da r1; `data/linha-do-tempo-geral.csv` | Planalto; ENAP; Agência Senado; UFJF | ✔ Feito: 1941, 1946 e 1969 no Planalto; Vila Rica 1784 era para a Casa da Câmara e Cadeia, não caridade; cassinos nas décadas de 1930 e 1940 |
-| 7 | 1 | Texto dos rótulos temporais da trajetória (proposta S2) | `mapa-narrativo.js` (`rotulo_temporal` e `FIM_DA_LINHA`) | Equipe | A fazer: ao aprovar cada rótulo, trocar `rotulo_confirmado: false` por `true` (e `confirmado` no `FIM_DA_LINHA`); o `[A CONFIRMAR]` some da home depois do PR "conferir-dados" |
 | 8 | 2 | Série A 2026 com link encurtado; divergências | `data/r2-serie-a-2026.csv` | Meio & Mensagem, Máquina do Esporte, Poder360 e outros | ✔ Feito: um link por clube. Correção: 14 de 20 clubes com bet máster na data da MP (Grêmio fechou com a Pitaco em 23/09). Valores de São Paulo e Cruzeiro retirados por falta de fonte |
 | 9 | 2 | Vínculo dos clubes pernambucanos com bets | `data/r2-pernambuco.csv` | Propmark, Máquina do Esporte, Focus GN | ✔ Feito: Sport, Náutico, Santa Cruz e Maguary confirmados; Central, Retrô e Decisão retirados por falta de fonte |
 | 10 | 2 | Flamengo no STF; garotos-propaganda; "paralisar o Brasileirão" | Texto da r2 | Poder360; Estadão; Focus GN | ✔ Feito. Correção: o Flamengo não entrou com ação; pediu para participar das ações como parte interessada (aceito por Fux em 30/09) |
@@ -136,12 +151,7 @@ São 23 itens; a coluna Status serve para a equipe marcar o andamento direto no 
 | 15 | 5 | Destinação da arrecadação soma 85% | `data/r5-destinacao-arrecadacao.csv` | Planalto, Lei 13.756, art. 30 | ✔ Feito: 100% dos 12% (segurança pública, sociedade civil, Funapol, ABDI); Lei 15.480/2026 citada |
 | 16 | 5 | Penas na MP ou em projeto de lei; URL do O Globo | `data/r5-penas-propostas.csv` | Agência Câmara; inteiro teor do PL | ✔ Feito: as penas estão no PL 5.477/2026, não na MP |
 | 17 | 6 | "Aumento de 104%": período ou projeção? | Texto da r6; `data/r6-saude.csv` | Guia do Ministério da Saúde | ✔ Feito: jan/2018 a mai/2025 |
-| 18 | 6 | Pesquisa própria com dados reais | r6 | Respostas do Google Forms da equipe | Pendente: o formulário teve só 4 respostas. Proposta: publicá-las como relato (unidades e respostas abertas anônimas, com aviso de que não representam o público) em vez de gráfico estatístico; dado inventado não entra. Aguardando a planilha de respostas |
-| 19 | 6 | Recortes da Quaest 2026 | Fora do site | g1 (17/04/2026) | Mantido fora do site; só entra se alguém conferir |
-| 20 | Metodologia | Pedidos via LAI e e-mail para correções | `metodologia.html` | Fala.BR | A fazer |
-| 21 | Acessibilidade | Teste com leitor de tela real | Home e uma reportagem | NVDA ou VoiceOver | A fazer |
-| 22 | Prêmio | Período de publicação aceito e limite de inscrições | Regulamento da edição | Site do prêmio | A fazer |
-| 23 | Publicação | Revisar o status da MP 1.394 na semana da publicação | Aviso; r1; r5; caixa de ajuda da r6 | Congresso; STF (ADIs 8.024 e 8.027, entre outras) | A fazer (rever também a autoexclusão, se a MP cair) |
+| 19 | 6 | Recortes da Quaest 2026 que não batem com o total de 9% | Fora do site | g1 (17/04/2026) | ✔ Encerrado: ficam fora do site; só entram se alguém conferir |
 
 ## Como levar as correções para o GitHub
 
