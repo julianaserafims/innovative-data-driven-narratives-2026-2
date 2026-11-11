@@ -175,6 +175,20 @@ function iniciarReportagem() {
     const io = new IntersectionObserver(e => { if (e[0].isIntersecting) { io.disconnect(); transformar(); } }, { threshold: 0.4 });
     io.observe(svgPos.parentElement);   /* observa a moldura: no celular o SVG é mais largo que a tela */
   }
+  nomearDownloads();
   atualizarVisitados();
   return R;
+}
+
+/* Todos os botões se chamam "Baixar dados (CSV)": na lista de links do leitor de tela, ninguém sabia
+   de qual gráfico era cada um. O nome acessível ganha o título do gráfico; o texto na tela não muda. */
+function nomearDownloads() {
+  $$('a[download]').forEach(a => {
+    if (a.hasAttribute('aria-label') || !/Baixar dados/.test(a.textContent)) return;
+    const fig = a.closest('figure');
+    /* gráfico de scrollytelling: a nota com o botão vem logo depois da seção que tem o título */
+    const secao = !fig && a.closest('.grafico') && a.closest('.grafico').previousElementSibling;
+    const tit = (fig && fig.querySelector('h3, h2')) || (secao && secao.querySelector('h2')) || intertituloAnterior(a);
+    if (tit) a.setAttribute('aria-label', 'Baixar dados (CSV): ' + tit.textContent.trim());
+  });
 }

@@ -780,20 +780,28 @@ function ligarEntrada(alvo) {
 
 /* Áreas com rolagem lateral (estádio, tabelas, gráficos largos) recebem foco de teclado
    e um nome, para quem navega sem mouse conseguir rolá-las com as setas (WCAG 2.1.1). */
+/* Intertítulo (h2/h3) mais próximo acima de el, subindo pelos ancestrais */
+function intertituloAnterior(el) {
+  for (let no = el; no && no !== document.body; no = no.parentElement) {
+    for (let ant = no.previousElementSibling; ant; ant = ant.previousElementSibling) if (/^H[23]$/.test(ant.tagName)) return ant;
+  }
+  return null;
+}
 function tornarRolaveisFocaveis() {
   $$('.estadio-rolagem, .c-rolagem, .graf-rolagem, .tab-rolagem, .tl-rolagem, .moldura-pos, #g-matriz').forEach(el => {
     if (el.dataset.rolavel) return;
     el.dataset.rolavel = '1';
     el.tabIndex = 0;
     el.setAttribute('role', 'region');
-    const fig = el.closest('figure, section, details');
-    let tit = fig && fig.querySelector('h2, h3, summary');
-    if (!tit) {                                  /* sem figura: usa o intertítulo anterior */
-      let ant = el.previousElementSibling;
-      while (ant && !/^H[23]$/.test(ant.tagName)) ant = ant.previousElementSibling;
-      tit = ant || el.querySelector('caption');
-    }
-    el.setAttribute('aria-label', 'Área com rolagem lateral' + (tit ? ': ' + tit.textContent.trim() : ''));
+    /* O nome diz o que está dentro: a legenda escondida da tabela ou o título do desenho. O "Ler
+       descrição do gráfico" do <summary> e a legenda visível de fonte não servem (eram anunciados). */
+    let tit = el.querySelector('caption.sr') || el.querySelector('svg > title');
+    /* o estádio final das reportagens só é desenhado perto da rolagem: ainda não tem <title> aqui */
+    if (!tit && el.querySelector('.estadio-svg')) tit = { textContent: 'Estádio do dossiê' };
+    if (!tit) { const fig = el.closest('figure, section'); tit = fig && fig.querySelector('h2, h3'); }
+    if (!tit) tit = intertituloAnterior(el);
+    const nome = tit ? tit.textContent.trim() : '';
+    el.setAttribute('aria-label', 'Área com rolagem lateral' + (nome ? ': ' + nome : ''));
   });
 }
 
