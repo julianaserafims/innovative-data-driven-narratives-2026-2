@@ -20,20 +20,22 @@ let CAMINHO_REPORTAGENS = RAIZ + 'reportagens/';
    por software a cada quadro da animação e trava celulares de entrada. */
 const APARELHO_LEVE = window.matchMedia('(max-width: 759px), (hover: none) and (pointer: coarse)').matches;
 
-/* Toda página abre no topo, mesmo quando o navegador (ou o visualizador do artefato)
-   tenta devolver a posição de rolagem da visita anterior. Exceção: links com âncora
-   de propósito, como "metodologia.html#dados", continuam levando à seção indicada. */
-if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+/* Página aberta por um link começa no topo. Recarregar ou voltar pelo histórico
+   devolve a posição em que o leitor estava. Âncora, como metodologia.html#dados,
+   continua levando à seção indicada. */
+const TIPO_NAVEGACAO = (performance.getEntriesByType('navigation')[0] || {}).type || 'navigate';
+if ('scrollRestoration' in history) history.scrollRestoration = (TIPO_NAVEGACAO === 'reload' || TIPO_NAVEGACAO === 'back_forward') ? 'auto' : 'manual';
 function irAoTopo() {
-  if (!location.hash) { window.scrollTo(0, 0); return; }
-  /* com âncora, garante a chegada à seção mesmo se a página mudou de altura ao carregar */
-  const alvo = document.getElementById(decodeURIComponent(location.hash.slice(1)));
-  if (alvo) alvo.scrollIntoView({ block: 'start' });
+  if (location.hash) {
+    const alvo = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (alvo) alvo.scrollIntoView({ block: 'start' });
+    return;
+  }
+  if (TIPO_NAVEGACAO === 'navigate') window.scrollTo(0, 0);
 }
 irAoTopo();
 addEventListener('DOMContentLoaded', irAoTopo);
-addEventListener('load', () => { irAoTopo(); requestAnimationFrame(irAoTopo); });
-addEventListener('pageshow', (e) => { if (e.persisted) irAoTopo(); });  /* volta pelo botão "voltar" do navegador */
+addEventListener('load', irAoTopo);
 
 /* ---------------------------------------------------------------------
    4. ÍCONES (desenhos da biblioteca Lucide, licença ISC, copiados aqui
@@ -197,14 +199,23 @@ function montarMenu() {
     '</a></li>').join('');
 
   const botao = $('#btn-menu'), painel = $('#menu-lateral'), fundo = $('#menu-fundo'), fechar = $('#btn-fechar-menu');
+  function inerteForaDoMenu(ligado) {
+    Array.from(document.body.children).forEach(el => {
+      if (el === painel || el === fundo) return;
+      if (ligado) el.setAttribute('inert', '');
+      else el.removeAttribute('inert');
+    });
+  }
   function abrir() {
     painel.hidden = false; fundo.hidden = false; botao.setAttribute('aria-expanded', 'true');
     document.body.style.overflow = 'hidden';
+    inerteForaDoMenu(true);
     fechar.focus();
   }
   function fecharMenu() {
     painel.hidden = true; fundo.hidden = true; botao.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
+    inerteForaDoMenu(false);
     botao.focus();
   }
   botao.addEventListener('click', abrir);
@@ -256,23 +267,25 @@ function poliUV(lista) { return lista.map(([u, v]) => pt(u, v)).join(' '); }
 
 function desenharEstadio(opcoes) {
   opcoes = opcoes || {};
+  const pfx = opcoes.prefixo || 'estadio';
+  const pid = nome => pfx + '-' + nome;
   const rnd = aleatorio(42);
   const W = 'var(--color-superficie)', T = 'var(--color-texto)';
   let s = '';
 
   /* --- 9.1 Padrões de retícula (pontos 5–6px) --- */
   s += '<defs>' +
-    '<pattern id="ret-azul" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.4" fill="var(--color-tinta_azul)"/></pattern>' +
-    '<pattern id="ret-azul-densa" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="2.5" cy="2.5" r="1.7" fill="var(--color-tinta_azul)"/></pattern>' +
-    '<pattern id="ret-verde" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.25" fill="var(--color-tinta_verde)" opacity=".55"/></pattern>' +
-    '<clipPath id="clip-campo"><polygon points="' + poliUV([[0, 0], [1, 0], [1, 1], [0, 1]]) + '"/></clipPath>' +
+    '<pattern id="' + pid('ret-azul') + '" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.4" fill="var(--color-tinta_azul)"/></pattern>' +
+    '<pattern id="' + pid('ret-azul-densa') + '" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="2.5" cy="2.5" r="1.7" fill="var(--color-tinta_azul)"/></pattern>' +
+    '<pattern id="' + pid('ret-verde') + '" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.25" fill="var(--color-tinta_verde)" opacity=".55"/></pattern>' +
+    '<clipPath id="' + pid('clip-campo') + '"><polygon points="' + poliUV([[0, 0], [1, 0], [1, 1], [0, 1]]) + '"/></clipPath>' +
     '</defs>';
 
   s += '<g class="cenario" aria-hidden="true">';
   s += '<rect x="0" y="0" width="960" height="540" fill="var(--color-superficie)"/>';
 
   /* --- 9.2 Cobertura cortada no topo, com treliça --- */
-  s += '<polygon points="24,38 936,38 952,98 8,98" fill="url(#ret-azul-densa)" stroke="' + T + '" stroke-width="2.5"/>';
+  s += '<polygon points="24,38 936,38 952,98 8,98" fill="url(#' + pid('ret-azul-densa') + ')" stroke="' + T + '" stroke-width="2.5"/>';
   let trel = 'M24,40'; for (let x = 24, k = 0; x <= 936; x += 26, k++) trel += ' L' + x + ',' + (k % 2 ? 94 : 42);
   s += '<path d="' + trel + '" fill="none" stroke="' + T + '" stroke-width="1.5"/>';
   s += '<path d="M14 34 L40 30 L70 36 L120 29 L180 35 L260 30 L340 36 L420 30 L500 35 L580 29 L660 36 L740 30 L820 35 L900 29 L946 34" fill="none" stroke="' + T + '" stroke-width="2.5"/>';
@@ -281,7 +294,7 @@ function desenharEstadio(opcoes) {
 
   /* --- 9.3 Anel superior --- */
   s += '<polygon points="52,106 908,106 940,216 20,216" fill="var(--color-superficie)"/>';
-  s += '<polygon points="52,106 908,106 940,216 20,216" fill="url(#ret-azul)" stroke="' + T + '" stroke-width="2.5"/>';
+  s += '<polygon points="52,106 908,106 940,216 20,216" fill="url(#' + pid('ret-azul') + ')" stroke="' + T + '" stroke-width="2.5"/>';
   for (let y = 120; y < 216; y += 12) s += '<line x1="' + f1(52 - (y - 106) * 0.29) + '" y1="' + y + '" x2="' + f1(908 + (y - 106) * 0.29) + '" y2="' + y + '" stroke="' + T + '" stroke-width="1" opacity=".35"/>';
 
   /* --- 9.4 Faixa LED entre os anéis (marcas fictícias) --- */
@@ -291,13 +304,13 @@ function desenharEstadio(opcoes) {
 
   /* --- 9.5 Anel inferior e arquibancadas atrás dos gols --- */
   s += '<rect x="0" y="236" width="960" height="118" fill="var(--color-superficie)"/>';
-  s += '<rect x="0" y="236" width="960" height="118" fill="url(#ret-azul)"/>';
+  s += '<rect x="0" y="236" width="960" height="118" fill="url(#' + pid('ret-azul') + ')"/>';
   for (let y = 248; y < 352; y += 11) s += '<line x1="0" y1="' + y + '" x2="960" y2="' + y + '" stroke="' + T + '" stroke-width="1" opacity=".35"/>';
   const fundoEsq = '0,236 62,236 62,352 110,360 58,470 28,540 0,540';
   const fundoDir = '960,236 898,236 898,352 850,360 902,470 932,540 960,540';
   [fundoEsq, fundoDir].forEach(pp => {
     s += '<polygon points="' + pp + '" fill="var(--color-superficie)"/>';
-    s += '<polygon points="' + pp + '" fill="url(#ret-azul)" stroke="' + T + '" stroke-width="2.5"/>';
+    s += '<polygon points="' + pp + '" fill="url(#' + pid('ret-azul') + ')" stroke="' + T + '" stroke-width="2.5"/>';
   });
   s += '<line x1="0" y1="352" x2="960" y2="352" stroke="' + T + '" stroke-width="2.5"/>';
 
@@ -332,7 +345,7 @@ function desenharEstadio(opcoes) {
   /* --- 9.8 Cabine de imprensa (anel superior, centro) --- */
   s += '<rect x="514" y="146" width="124" height="54" fill="var(--color-superficie)" stroke="' + T + '" stroke-width="2.5"/>' +
        '<rect x="508" y="140" width="136" height="9" fill="' + T + '"/>';
-  for (let i = 0; i < 4; i++) s += '<rect x="' + (522 + i * 29) + '" y="156" width="22" height="16" fill="url(#ret-azul-densa)" stroke="' + T + '" stroke-width="1.5"/>';
+  for (let i = 0; i < 4; i++) s += '<rect x="' + (522 + i * 29) + '" y="156" width="22" height="16" fill="url(#' + pid('ret-azul-densa') + ')" stroke="' + T + '" stroke-width="1.5"/>';
   s += '<line x1="514" y1="182" x2="638" y2="182" stroke="' + T + '" stroke-width="1.5"/>';
 
   /* --- 9.9 Gramado em perspectiva (105 × 68 m) com listras e retícula verde --- */
@@ -340,7 +353,7 @@ function desenharEstadio(opcoes) {
   for (let i = 0; i < N; i++) {
     s += '<polygon points="' + poliUV([[i / N, 0], [(i + 1) / N, 0], [(i + 1) / N, 1], [i / N, 1]]) + '" fill="var(--color-' + (i % 2 ? 'gramado_escuro' : 'gramado_claro') + ')"/>';
   }
-  s += '<rect x="0" y="370" width="960" height="170" fill="url(#ret-verde)" clip-path="url(#clip-campo)"/>';
+  s += '<rect x="0" y="370" width="960" height="170" fill="url(#' + pid('ret-verde') + ')" clip-path="url(#' + pid('clip-campo') + ')"/>';
 
   /* Linhas do campo (stroke_forte, branco) */
   const linhas = [];
@@ -367,7 +380,7 @@ function desenharEstadio(opcoes) {
     /* Rede (para fora do campo) */
     const v0 = 0.5 - 3.66 / 68, v1 = 0.5 + 3.66 / 68, h = 17, ur = u0 + d * 0.02;
     const b0 = p(u0, v0), b1 = p(u0, v1), r0 = p(ur, v0), r1 = p(ur, v1);
-    s += '<polygon points="' + [b0, [b0[0], b0[1] - h], [b1[0], b1[1] - h], b1, r1, [r1[0], r1[1] - h + 4], [r0[0], r0[1] - h + 4], r0].map(q => q.map(f1).join(',')).join(' ') + '" fill="url(#ret-azul)" stroke="' + T + '" stroke-width="1.5" opacity=".9"/>';
+    s += '<polygon points="' + [b0, [b0[0], b0[1] - h], [b1[0], b1[1] - h], b1, r1, [r1[0], r1[1] - h + 4], [r0[0], r0[1] - h + 4], r0].map(q => q.map(f1).join(',')).join(' ') + '" fill="url(#' + pid('ret-azul') + ')" stroke="' + T + '" stroke-width="1.5" opacity=".9"/>';
     const trave = 'M' + f1(b0[0]) + ',' + f1(b0[1]) + ' L' + f1(b0[0]) + ',' + f1(b0[1] - h) + ' L' + f1(b1[0]) + ',' + f1(b1[1] - h) + ' L' + f1(b1[0]) + ',' + f1(b1[1]);
     s += '<path d="' + trave + '" fill="none" stroke="' + T + '" stroke-width="5" stroke-linejoin="round"/>';
     s += '<path d="' + trave + '" fill="none" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/>';
@@ -388,7 +401,7 @@ function desenharEstadio(opcoes) {
   s += '</g>';
   s += '<path d="M440,330 Q480,300 520,330 L520,336 L440,336 Z" fill="' + T + '"/>';
   s += '<path d="M452,376 L452,340 Q480,320 508,340 L508,376 Z" fill="' + T + '" stroke="' + T + '" stroke-width="2"/>';
-  s += '<path d="M459,376 L459,344 Q480,330 501,344 L501,376 Z" fill="url(#ret-azul-densa)" opacity=".55"/>';
+  s += '<path d="M459,376 L459,344 Q480,330 501,344 L501,376 Z" fill="url(#' + pid('ret-azul-densa') + ')" opacity=".55"/>';
   s += '<path d="M452,376 L446,392 M508,376 L514,392" stroke="#fff" stroke-width="2" opacity=".8"/>';
 
   /* --- 9.12 Jogadores perfilados atrás da faixa CAMPEONATO --- */
@@ -406,7 +419,7 @@ function desenharEstadio(opcoes) {
   s += '<rect x="336" y="494" width="100" height="8" fill="' + T + '"/>' +
        '<rect x="342" y="502" width="88" height="44" fill="var(--color-superficie)" stroke="' + T + '" stroke-width="2.5"/>' +
        '<g transform="translate(398 510) scale(1.05)" fill="none" stroke="' + T + '" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + ICONES.landmark + '</g>' +
-       '<rect x="350" y="512" width="38" height="20" fill="url(#ret-azul-densa)" stroke="' + T + '" stroke-width="1.5"/>';
+       '<rect x="350" y="512" width="38" height="20" fill="url(#' + pid('ret-azul-densa') + ')" stroke="' + T + '" stroke-width="1.5"/>';
   s += '</g>'; /* fim do cenário */
 
   /* --- 9.14 Hotspots: <a> em ordem r1 → r6 (ordem de tabulação) --- */
@@ -421,7 +434,7 @@ function desenharEstadio(opcoes) {
   reportagensEmOrdem().forEach(r => {
     const setor = setorDe(r); const [mx, my] = setor.marcador;
     const rotuloAria = r.numero + '. ' + setor.area + ': abrir reportagem ' + r.numero + ', ' + r.titulo_provisorio;
-    s += '<a class="hs" id="' + r.hotspot_estadio + '" data-rep="' + r.id + '" data-abre="' + r.id + '" href="' + urlReportagem(r) + '" aria-label="' + esc(rotuloAria) + '">' +
+    s += '<a class="hs" id="' + pid(r.hotspot_estadio) + '" data-rep="' + r.id + '" data-abre="' + r.id + '" href="' + urlReportagem(r) + '" aria-label="' + esc(rotuloAria) + '">' +
       '<path class="zona" d="' + zonas[r.hotspot_estadio] + '"/>' +
       '<g class="mk" data-x="' + mx + '" data-y="' + my + '" transform="translate(' + mx + ' ' + my + ')">' +
         '<circle r="31" fill="#000" fill-opacity="0"/>' +
@@ -482,7 +495,7 @@ function ativarEstadio(svg, painel, opcoes) {
   opcoes = opcoes || {};
   svg.innerHTML = '<title id="' + svg.id + '-t">Estádio do dossiê, visto da beira do campo</title>' +
     '<desc id="' + svg.id + '-d">Ilustração da metade de lá de um estádio, com seis setores numerados. 1, placas de publicidade; 2, túnel do vestiário; 3, cabine de imprensa; 4, gramado e faixa do campeonato; 5, cabine do VAR; 6, arquibancada. Cada número abre uma reportagem. A mesma lista está logo abaixo da ilustração.</desc>' +
-    desenharEstadio();
+    desenharEstadio({ prefixo: svg.id || 'estadio' });
   svg.setAttribute('aria-labelledby', svg.id + '-t ' + svg.id + '-d');
   if (opcoes.ajustar !== false) {
     ajustarMarcadores(svg);
@@ -700,7 +713,7 @@ function prepararMorfose(svg, opcoes) {
   svg.insertBefore(g, svg.querySelector('.hs'));
   const traco = g.querySelector('.m-traco'), ponta = g.querySelector('.m-ponta');
   const reps = reportagensEmOrdem();
-  const mks = reps.map(r => svg.querySelector('#' + r.hotspot_estadio + ' .mk'));
+  const mks = reps.map(r => svg.querySelector('#' + (svg.id || 'estadio') + '-' + r.hotspot_estadio + ' .mk'));
   const de = mks.map(m => [+m.dataset.x, +m.dataset.y]);
   const C = T.CHAO + DY;
   const para = T.POUSOS.map(x => [x, C]);
@@ -823,7 +836,7 @@ function montarCasca() {
   </div>
 </header>
 <div id="menu-fundo" class="menu-fundo" hidden></div>
-<aside id="menu-lateral" class="menu-lateral" hidden aria-label="Menu do dossiê">
+<aside id="menu-lateral" class="menu-lateral" hidden role="dialog" aria-modal="true" aria-label="Menu do dossiê">
   <div class="menu-topo">
     <a class="eyebrow" href="${RAIZ}index.html">Da Sorte ao Declínio</a>
     <button id="btn-fechar-menu" class="btn-icone" type="button">${icone('x')}<span class="sr">Fechar menu</span></button>
@@ -857,7 +870,7 @@ function montarCasca() {
     <div class="rodape-grade">
       <section aria-labelledby="rod-cred">
         <h2 id="rod-cred">Créditos</h2>
-        <dl>${[['Reportagem e texto', autores()]].concat(PROJETO.creditos).map(([f, n]) => '<dt>' + esc(f) + '</dt><dd>' + pend(n) + '</dd>').join('')}</dl>
+        <dl>${[['Reportagem e texto', autores()]].concat(PROJETO.creditos).filter(([, n]) => !/^\[/.test(n)).map(([f, n]) => '<dt>' + esc(f) + '</dt><dd>' + pend(n) + '</dd>').join('')}</dl>
       </section>
       <section aria-labelledby="rod-disc">
         <h2 id="rod-disc">Disciplina</h2>
@@ -877,7 +890,7 @@ function montarCasca() {
         </ul>
       </section>
     </div>
-    <p class="fino">Publicado em ${pend(PROJETO.publicado_em)} · Atualizado em ${esc(PROJETO.atualizado_em)} · ${esc(PROJETO.licenca_conteudo)} ${esc(PROJETO.licenca_codigo)} · Código aberto: ${/^\[/.test(PROJETO.repositorio) ? pend(PROJETO.repositorio) : '<a href="' + esc(PROJETO.repositorio) + '">' + esc(PROJETO.repositorio.replace(/^https:\/\//, '')) + '</a>'} · As marcas BET X, BET Y e BET Z das ilustrações são fictícias.</p>
+    <p class="fino">${/^\[/.test(PROJETO.publicado_em) ? '' : 'Publicado em ' + pend(PROJETO.publicado_em) + ' · '}Atualizado em ${esc(PROJETO.atualizado_em)} · ${esc(PROJETO.licenca_conteudo)} ${esc(PROJETO.licenca_codigo)} · Código aberto: ${/^\[/.test(PROJETO.repositorio) ? pend(PROJETO.repositorio) : '<a href="' + esc(PROJETO.repositorio) + '">' + esc(PROJETO.repositorio.replace(/^https:\/\//, '')) + '</a>'} · As marcas BET X, BET Y e BET Z das ilustrações são fictícias.</p>
   </div>
 </footer>`;
   main.insertAdjacentHTML('beforebegin', cab);

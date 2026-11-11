@@ -61,6 +61,10 @@ Os gráficos leem os arquivos de `data/`, e o navegador bloqueia isso quando a p
 3. No navegador, abra `http://localhost:8000`.
 4. Para parar, volte ao terminal e aperte Ctrl+C.
 
+No Windows, se `python3` não existir, use `python` no lugar.
+
+Antes de publicar, rode `python ferramentas/conferir-dados.py` (ou `python3`). O script confere se cada CSV abre com vírgula e UTF-8 sem BOM, se as colunas que os gráficos leem continuam lá, se as fatias que deveriam somar 100 fecham, e se ainda há `[A PREENCHER]`, `[A CONFIRMAR]` ou `[NOMES DA EQUIPE]` no HTML ou no JavaScript.
+
 ## Publicar no GitHub Pages
 
 1. Entre em github.com e clique em **New repository**. Nome sugerido: `da-sorte-ao-declinio`. Marque **Public**. Clique em **Create repository**.

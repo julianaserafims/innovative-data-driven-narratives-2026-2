@@ -250,7 +250,6 @@ graficoDeCSV('r6-perfil-apostador.csv', $('#g-renda'), linhas => {
   const renda = linhas.filter(l => l.pesquisa === 'O Globo/Ipsos-Ipec' && l.recorte === 'renda');
   Graficos.barras($('#g-renda'), renda, { rotulo: 'categoria', valor: 'valor_pct', maximo: 25,
     formato: v => Graficos.fmt(v, 1) + '%', estilo: l => l.categoria === '2 a 5 SM' ? 'destaque' : '' });
-  $('#tab-renda').innerHTML = '';
   Graficos.tabela($('#tab-renda'), renda, [['categoria', 'Renda familiar'], ['valor_pct', '% que já apostou'], ['margem_erro_pp', 'Margem (p.p.)']]);
 });
 

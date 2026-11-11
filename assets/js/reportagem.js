@@ -15,6 +15,12 @@ async function carregarCSV(nome) {
   return null;
 }
 function lerCSV(texto) {          /* CSV com aspas e vírgulas dentro de campos */
+  if (texto.charCodeAt(0) === 0xFEFF) return null;
+  const cabeca = (texto.split(/\r?\n/, 1)[0] || '');
+  const virgulas = (cabeca.match(/,/g) || []).length;
+  const pontoEVirgula = (cabeca.match(/;/g) || []).length;
+  /* Excel em português grava com ponto e vírgula; o gráfico só lê vírgula */
+  if (!cabeca.trim() || pontoEVirgula > virgulas) return null;
   const linhas = []; let campo = '', linha = [], aspas = false;
   for (let i = 0; i < texto.length; i++) {
     const c = texto[i];
@@ -26,17 +32,25 @@ function lerCSV(texto) {          /* CSV com aspas e vírgulas dentro de campos 
   }
   if (campo || linha.length) { linha.push(campo); linhas.push(linha); }
   const cab = linhas.shift();
-  return linhas.filter(l => l.length > 1).map(l => Object.fromEntries(cab.map((k, i) => [k, l[i]])));
+  if (!cab || cab.length < 2 || cab.some(k => !String(k).trim())) return null;
+  const dados = linhas.filter(l => l.length > 1 && l.some(c => String(c).trim())).map(l => Object.fromEntries(cab.map((k, i) => [k, l[i]])));
+  return dados.length ? dados : null;
+}
+function csvOk(linhas, colunas) {
+  return Array.isArray(linhas) && linhas.length > 0 &&
+    (!colunas || colunas.every(([k]) => Object.prototype.hasOwnProperty.call(linhas[0], k)));
 }
 /* Mensagem de erro/vazio (seção B) */
 function erroGrafico(el) {
-  el.innerHTML = '<p class="erro-grafico">Este gráfico não carregou. Os mesmos dados estão no botão “Baixar dados”. ' +
-    '<span class="legenda">Se você abriu o arquivo direto do computador, rode um servidor local (veja o README).</span></p>';
+  const html = '<p class="erro-grafico">Este gráfico não carregou. Os mesmos dados estão no botão “Baixar dados”. ' +
+    '<span class="legenda">Se você abriu o arquivo direto do computador, rode um servidor local (veja o README). Se a planilha foi salva com ponto e vírgula, grave de novo em CSV separado por vírgula, em UTF-8.</span></p>';
+  if (el && el.tagName === 'TABLE') el.insertAdjacentHTML('beforebegin', html);
+  else if (el) el.innerHTML = html;
 }
 /* Carrega um CSV, desenha e monta a tabela acessível; mostra erro se falhar */
 async function graficoDeCSV(nome, elGrafico, desenhar, tabela, colunas) {
   const linhas = await carregarCSV(nome);
-  if (!linhas) { erroGrafico(elGrafico); return null; }
+  if (!csvOk(linhas, colunas)) { erroGrafico(elGrafico); return null; }
   desenhar(linhas);
   if (tabela && colunas) Graficos.tabela(tabela, linhas, colunas);
   tornarRolaveisFocaveis();
@@ -93,9 +107,15 @@ function iniciarReportagem() {
   $$('.menu-item[data-abre="' + R.id + '"]').forEach(a => a.setAttribute('aria-current', 'page'));
 
   /* créditos e datas da abertura: vêm de PROJETO (mapa-narrativo.js), como o rodapé */
-  $('#creditos-rep').innerHTML = [['Texto e reportagem', autores(R.id)]].concat(PROJETO.creditos.filter(([f]) => f !== 'Orientação'))
+  $('#creditos-rep').innerHTML = [['Texto e reportagem', autores(R.id)]].concat(PROJETO.creditos.filter(([f, n]) => f !== 'Orientação' && !/^\[/.test(n)))
     .map(([f, n]) => esc(f) + ': ' + pend(n)).join(' · ');
-  $('#publicado-rep').innerHTML = pend(PROJETO.publicado_em);
+  const publicado = $('#publicado-rep');
+  if (/^\[/.test(PROJETO.publicado_em)) {
+    const antes = publicado.previousSibling, depois = publicado.nextSibling;
+    if (antes && antes.nodeType === 3) antes.textContent = antes.textContent.replace(/Publicado em\s*$/, '');
+    if (depois && depois.nodeType === 3) depois.textContent = depois.textContent.replace(/^\s*·\s*/, '');
+    publicado.remove();
+  } else publicado.innerHTML = pend(PROJETO.publicado_em);
   const atualizado = $('#atualizado-rep');
   atualizado.textContent = PROJETO.atualizado_em;
   atualizado.dateTime = PROJETO.atualizado_em.split('/').reverse().join('-');
@@ -108,7 +128,7 @@ function iniciarReportagem() {
   /* 1. câmera da abertura: estádio inteiro → setor desta reportagem */
   const svgCam = $('#svg-camera');
   ativarEstadio(svgCam, null, { ajustar: false });   /* a câmera da abertura controla o tamanho dos marcadores */
-  $('#' + R.hotspot_estadio, svgCam).classList.add('atual');
+  $('#' + (svgCam.id || 'estadio') + '-' + R.hotspot_estadio, svgCam).classList.add('atual');
   svgCam.setAttribute('inert', '');   /* ilustração: os números desta figura não são clicáveis */
   const vbFim = VISTAS_CAMERA[R.hotspot_estadio], vbIni = [0, 0, 960, 540];
   setTimeout(() => animar(1200, k => enquadrar(svgCam, vbIni.map((v, i) => v + (vbFim[i] - v) * k)), () => {
@@ -134,7 +154,7 @@ function iniciarReportagem() {
   const montarPosicao = () => {
     if (morf) return morf;
     ativarEstadio(svgPos, null, { resize: false });
-    $('#' + R.hotspot_estadio, svgPos).classList.add('atual');
+    $('#' + (svgPos.id || 'estadio') + '-' + R.hotspot_estadio, svgPos).classList.add('atual');
     morf = prepararMorfose(svgPos);
     centralizarRolagem(svgPos.parentElement);
     atualizarVisitados();

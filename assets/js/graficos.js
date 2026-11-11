@@ -58,7 +58,8 @@ const CAMISA = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><p
 Graficos.unidades = function (el, itens, o) {
   o = o || {};
   const forma = o.forma || 'ponto';
-  el.innerHTML = (forma === 'camisa' ? '<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><pattern id="retic-camisa" width="2.2" height="2.2" patternUnits="userSpaceOnUse"><rect width="2.2" height="2.2" fill="#fff"/><circle cx="1.1" cy="1.1" r=".55" fill="var(--color-tinta_azul)"/></pattern></defs></svg>' : '') +
+  const pid = 'retic-camisa-' + (el.id || Math.random().toString(36).slice(2, 7));
+  el.innerHTML = (forma === 'camisa' ? '<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><pattern id="' + pid + '" width="2.2" height="2.2" patternUnits="userSpaceOnUse"><rect width="2.2" height="2.2" fill="#fff"/><circle cx="1.1" cy="1.1" r=".55" fill="var(--color-tinta_azul)"/></pattern></defs></svg><style>#' + (el.id || '') + ' .u-retic .u-peito{fill:url(#' + pid + ')}</style>' : '') +
     '<ul class="gu gu-' + forma + '"' + (o.colunas ? ' style="--colunas:' + o.colunas + '"' : '') + '>' +
     itens.map(it => '<li class="gu-item ' + (it.classe || '') + '">' +
       (forma === 'camisa' ? CAMISA + '<span class="gu-rot">' + esc(it.rotulo) + '</span>' : '<span class="gu-marca" aria-hidden="true"></span>') +
@@ -132,9 +133,9 @@ Graficos.linhaDoTempo = function (el, dados, o) {
       '<text x="' + f1(xa) + '" y="' + (H - M.b + 19) + '" text-anchor="middle" font-size="' + (13 * k) + '" fill="var(--color-texto_suave)">' + ano + '</text>';
   }
   s += '<line x1="' + M.e + '" y1="' + (H - M.b) + '" x2="' + (W - M.d) + '" y2="' + (H - M.b) + '" stroke="var(--color-texto)" stroke-width="1"/>';
-  o.faixas.forEach(([k, nome]) => {
-    s += '<line x1="' + M.e + '" y1="' + Y(k) + '" x2="' + (W - M.d) + '" y2="' + Y(k) + '" stroke="var(--color-linha)" stroke-width="1"/>' +
-      '<text x="12" y="' + (Y(k) + 5) + '" font-size="' + (13 * k) + '" font-weight="600" fill="var(--color-texto)">' + esc(nome) + '</text>';
+  o.faixas.forEach(([tipo, nome]) => {
+    s += '<line x1="' + M.e + '" y1="' + Y(tipo) + '" x2="' + (W - M.d) + '" y2="' + Y(tipo) + '" stroke="var(--color-linha)" stroke-width="1"/>' +
+      '<text x="12" y="' + (Y(tipo) + 5) + '" font-size="' + (13 * k) + '" font-weight="600" fill="var(--color-texto)">' + esc(nome) + '</text>';
   });
   if (o.anotacao) {
     const a = X(o.anotacao.de), b = X(o.anotacao.ate), yb = M.t - 4;

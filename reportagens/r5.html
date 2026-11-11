@@ -261,7 +261,11 @@ graficoDeCSV('r5-projetos-de-lei.csv', $('#g-pls'), linhas => Graficos.barras($(
 }), $('#tab-pls'), [['casa', 'Casa'], ['projetos_de_lei', 'Projetos'], ['periodo', 'Período']]);
 
 /* ---------- Tabela das penas propostas ---------- */
-carregarCSV('r5-penas-propostas.csv').then(l => { if (l) Graficos.tabela($('#tab-penas'), l, [['conduta', 'Conduta'], ['pena_min_anos', 'Pena mínima (anos)'], ['pena_max_anos', 'Pena máxima (anos)'], ['agravante', 'Agravante'], ['status', 'Status']]); });
+carregarCSV('r5-penas-propostas.csv').then(l => {
+  const cols = [['conduta', 'Conduta'], ['pena_min_anos', 'Pena mínima (anos)'], ['pena_max_anos', 'Pena máxima (anos)'], ['agravante', 'Agravante'], ['status', 'Status']];
+  if (!csvOk(l, cols)) { erroGrafico($('#tab-penas')); return; }
+  Graficos.tabela($('#tab-penas'), l, cols);
+});
 
 </script>
 </body>

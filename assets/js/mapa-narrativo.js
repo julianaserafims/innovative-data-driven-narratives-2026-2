@@ -39,7 +39,7 @@ const PROJETO = {
     { nome: 'Maria Clara Gomes Alves', curso: 'Computação', funcao: '[A PREENCHER: função]' },
     { nome: 'Mariana Beatriz Campêlo Ferreira', curso: 'Computação', funcao: '[A PREENCHER: função]' },
     { nome: 'Mariana Melo dos Santos', curso: 'Computação', funcao: '[A PREENCHER: função]' },
-    { nome: 'Pericles Ferreira Sardinha', curso: 'Computação', funcao: '[A PREENCHER: função]' },
+    { nome: 'Pericles Ferreira Sardinha', curso: 'Computação', funcao: 'Desenvolvimento' },
     { nome: 'Vinicius Alves Fialho', curso: 'Computação', funcao: '[A PREENCHER: função]' }
   ],
   /* Demais créditos do rodapé e da abertura das reportagens ("Reportagem e texto" vem da equipe). */
@@ -59,7 +59,7 @@ const PROJETO = {
   ],
   semestre: '2026.2',
   publicado_em: '[A PREENCHER]',
-  atualizado_em: '29/10/2026',
+  atualizado_em: '10/11/2026',
   site: 'https://julianaserafims.github.io/innovative-data-driven-narratives-2026-2/',
   repositorio: 'https://github.com/julianaserafims/innovative-data-driven-narratives-2026-2',
   licenca_conteudo: 'Textos e dados: CC BY 4.0. Os relatos do Guia do Ministério da Saúde seguem CC BY-NC-SA 4.0.',
