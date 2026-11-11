@@ -72,7 +72,7 @@ function mostrarCartao() {
     c.dataset.rep = '';
     c.innerHTML = '<p class="eyebrow">A bola parou</p><h3>' + esc(FIM_DA_LINHA.rotulo) + '</h3>' +
       '<p>' + esc(FIM_DA_LINHA.nota) + ' O Congresso pode manter, mudar ou rejeitar a proibição.</p>' +
-      '<p class="legenda">Fonte: Congresso em Foco; BBC Brasil. Rótulo provisório <span class="pendente">[A CONFIRMAR]</span>.</p>' +
+      '<p class="legenda">Fonte: Congresso em Foco; BBC Brasil. ' + (FIM_DA_LINHA.confirmado ? '' : 'Rótulo provisório <span class="pendente">[A CONFIRMAR]</span>.') + '</p>' +
       '<p><button class="btn btn-secundario" type="button" id="btn-recomecar">Voltar ao primeiro quique</button></p>';
     $('#btn-recomecar').addEventListener('click', () => irPara(0));
   } else {
@@ -83,7 +83,7 @@ function mostrarCartao() {
       '<h3>' + esc(r.titulo_provisorio) + '</h3>' +
       '<p class="linha-fina">' + esc(r.linha_fina) + '</p>' +
       '<div class="em-numeros"><p class="eyebrow">Em números</p><p class="dado">' + esc(a.valor) + '</p><p style="font-size:15px;line-height:1.45">' + esc(a.rotulo) + '</p><p class="legenda">Fonte: ' + esc(a.fonte) + '.</p></div>' +
-      '<p class="legenda">' + esc(r.rotulo_temporal) + ' <span class="pendente">[A CONFIRMAR]</span></p>' +
+      '<p class="legenda">' + esc(r.rotulo_temporal) + (r.rotulo_confirmado ? '' : ' <span class="pendente">[A CONFIRMAR]</span>') + '</p>' +
       '<p><a class="btn btn-primario" data-abre="' + r.id + '" href="' + urlReportagem(r) + '">Ler reportagem ' + icone('arrow-right') + '</a></p>';
   }
   $$('.c-ponto').forEach((b, i) => { if (i === estado) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current'); });

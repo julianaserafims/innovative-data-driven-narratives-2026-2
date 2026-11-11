@@ -145,7 +145,8 @@ const MAPA = {
 /* A ponta da seta da linha de declínio (suposição S2). */
 const FIM_DA_LINHA = {
   rotulo: "set/2026 · MP 1.394 proíbe as apostas de quota fixa",
-  nota: "A medida ainda está em análise no Congresso."
+  nota: "A medida ainda está em análise no Congresso.",
+  confirmado: false          /* true quando a equipe aprovar o rótulo (some o [A CONFIRMAR] da home) */
 };
 
 /* ---------------------------------------------------------------------

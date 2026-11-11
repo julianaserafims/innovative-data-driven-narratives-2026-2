@@ -63,7 +63,7 @@ Os gráficos leem os arquivos de `data/`, e o navegador bloqueia isso quando a p
 
 No Windows, se `python3` não existir, use `python` no lugar.
 
-Antes de publicar, rode `python ferramentas/conferir-dados.py` (ou `python3`). O script confere se cada CSV abre com vírgula e UTF-8 sem BOM, se as colunas que os gráficos leem continuam lá, se as fatias que deveriam somar 100 fecham, e se ainda há `[A PREENCHER]`, `[A CONFIRMAR]` ou `[NOMES DA EQUIPE]` no HTML ou no JavaScript.
+Antes de publicar, rode `python ferramentas/conferir-dados.py` (ou `python3`). O script confere se cada CSV abre com vírgula e em UTF-8 (com ou sem BOM), se as colunas que os gráficos leem continuam lá, se as fatias que deveriam somar 100 fecham, se ainda há `[A PREENCHER]`, `[A CONFIRMAR]` ou `[NOMES DA EQUIPE]` nas páginas ou em `assets/js/mapa-narrativo.js`, e se algum rótulo da trajetória continua com `rotulo_confirmado: false`.
 
 ## Publicar no GitHub Pages
 

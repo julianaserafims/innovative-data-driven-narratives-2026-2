@@ -15,7 +15,7 @@ async function carregarCSV(nome) {
   return null;
 }
 function lerCSV(texto) {          /* CSV com aspas e vírgulas dentro de campos */
-  if (texto.charCodeAt(0) === 0xFEFF) return null;
+  texto = texto.replace(/^\uFEFF/, '');   /* BOM do Excel ("CSV UTF-8"): o navegador já costuma tirar; garante */
   const cabeca = (texto.split(/\r?\n/, 1)[0] || '');
   const virgulas = (cabeca.match(/,/g) || []).length;
   const pontoEVirgula = (cabeca.match(/;/g) || []).length;
