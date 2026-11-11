@@ -71,7 +71,7 @@ const PROJETO = {
 
 /* ---------------------------------------------------------------------
    1. MAPA NARRATIVO (seção L). rotulo_temporal traz a proposta S2,
-      ainda a confirmar pela equipe (rotulo_confirmado: false).
+      aprovada pela equipe em 11/11/2026 (rotulo_confirmado: true).
    --------------------------------------------------------------------- */
 const MAPA = {
   titulo: "Da Sorte ao Declínio",
@@ -84,7 +84,7 @@ const MAPA = {
       linha_fina: "O que são as bets, como funciona uma aposta de quota fixa e como o setor foi legalizado no Brasil.",
       tema: "Introdução: o que são as bets e como funcionam",
       hotspot_estadio: "hs_r1", posicao_na_linha_declinio: 1,
-      rotulo_temporal: "2018 · Lei 13.756 legaliza a aposta de quota fixa", rotulo_confirmado: false,
+      rotulo_temporal: "2018 · Lei 13.756 legaliza a aposta de quota fixa", rotulo_confirmado: true,
       cor_token: "cat_r1",
       pergunta_central: "O que é uma aposta de quota fixa e como ela chegou ao futebol brasileiro?"
     },
@@ -94,7 +94,7 @@ const MAPA = {
       linha_fina: "Patrocínios, contratos e jogadores-garotos-propaganda: como as bets entraram nos clubes.",
       tema: "Bets nos clubes",
       hotspot_estadio: "hs_r2", posicao_na_linha_declinio: 2,
-      rotulo_temporal: "2019–2022 · Patrocínios tomam as camisas", rotulo_confirmado: false,
+      rotulo_temporal: "2019–2022 · Patrocínios tomam as camisas", rotulo_confirmado: true,
       cor_token: "cat_r2",
       pergunta_central: "Quantos clubes passaram a depender do dinheiro das bets, e em que condições?"
     },
@@ -104,7 +104,7 @@ const MAPA = {
       linha_fina: "Quem narra a partida também anuncia a aposta, e o torcedor ouve as duas coisas no mesmo tom.",
       tema: "Veículos de comunicação patrocinados",
       hotspot_estadio: "hs_r3", posicao_na_linha_declinio: 3,
-      rotulo_temporal: "2024–2026 · A transmissão vira vitrine", rotulo_confirmado: false,
+      rotulo_temporal: "2024–2026 · A transmissão vira vitrine", rotulo_confirmado: true,
       cor_token: "cat_r3",
       pergunta_central: "Quanto da cobertura esportiva é financiada por casas de aposta?"
     },
@@ -114,7 +114,7 @@ const MAPA = {
       linha_fina: "Quando a competição inteira tem patrocinador e o resultado vira mercadoria.",
       tema: "Competições e federações (inclui manipulação de resultados)",
       hotspot_estadio: "hs_r4", posicao_na_linha_declinio: 4,
-      rotulo_temporal: "2024 · O Brasileirão ganha nome de bet", rotulo_confirmado: false,
+      rotulo_temporal: "2024 · O Brasileirão ganha nome de bet", rotulo_confirmado: true,
       cor_token: "cat_r4",
       pergunta_central: "Como as bets chegaram às competições e onde a integridade do jogo foi posta em risco?"
     },
@@ -124,7 +124,7 @@ const MAPA = {
       linha_fina: "Leis, portarias e fiscalização: o que a regulamentação mudou e o que ficou de fora.",
       tema: "Regulamentação das bets",
       hotspot_estadio: "hs_r5", posicao_na_linha_declinio: 5,
-      rotulo_temporal: "2023–2025 · Lei 14.790 e mercado regulado", rotulo_confirmado: false,
+      rotulo_temporal: "2023–2025 · Lei 14.790 e mercado regulado", rotulo_confirmado: true,
       cor_token: "cat_r5",
       pergunta_central: "O Estado chegou a tempo de frear o setor?"
     },
@@ -134,7 +134,7 @@ const MAPA = {
       linha_fina: "O torcedor que virou apostador, o dinheiro que sai do orçamento da casa e o custo que fica para a saúde pública.",
       tema: "Torcedores como apostadores (lado social)",
       hotspot_estadio: "hs_r6", posicao_na_linha_declinio: 6,
-      rotulo_temporal: "2025–2026 · A conta chega à saúde pública", rotulo_confirmado: false,
+      rotulo_temporal: "2025–2026 · A conta chega à saúde pública", rotulo_confirmado: true,
       cor_token: "cat_r6",
       pergunta_central: "Quem aposta, quanto gasta e qual é o custo social?"
     }
@@ -146,7 +146,7 @@ const MAPA = {
 const FIM_DA_LINHA = {
   rotulo: "set/2026 · MP 1.394 proíbe as apostas de quota fixa",
   nota: "A medida ainda está em análise no Congresso.",
-  confirmado: false          /* true quando a equipe aprovar o rótulo (some o [A CONFIRMAR] da home) */
+  confirmado: true           /* true quando a equipe aprovar o rótulo (some o [A CONFIRMAR] da home) */
 };
 
 /* ---------------------------------------------------------------------
