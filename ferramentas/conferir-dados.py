@@ -5,11 +5,15 @@ Uso, na pasta do site:
   python ferramentas/conferir-dados.py
   python3 ferramentas/conferir-dados.py
 
-Sai com código 1 se alguma planilha quebrou ou se ainda há
-[A PREENCHER], [A CONFIRMAR] ou [NOMES DA EQUIPE] no HTML ou no JavaScript.
-O README fica de fora: ele ensina a trocar esses marcadores.
+Sai com código 1 se alguma planilha quebrou, se ainda há
+[A PREENCHER], [A CONFIRMAR] ou [NOMES DA EQUIPE] no conteúdo
+(páginas HTML e assets/js/mapa-narrativo.js) ou se algum rótulo da
+trajetória ainda está com rotulo_confirmado: false.
+O README e o restante do JavaScript ficam de fora: eles têm esses
+marcadores como modelo de texto, não como pendência.
 """
 import csv
+import re
 import sys
 from pathlib import Path
 
@@ -49,10 +53,8 @@ MARCADORES = ('[A PREENCHER', '[A CONFIRMAR', '[NOMES DA EQUIPE]')
 
 
 def ler(caminho):
-    bruto = caminho.read_bytes()
-    if bruto.startswith(b'\xef\xbb\xbf'):
-        raise ValueError('arquivo com BOM; grave de novo em UTF-8 sem BOM')
-    texto = bruto.decode('utf-8')
+    # utf-8-sig tira o BOM que o Excel grava em "CSV UTF-8"; o site também lê esses arquivos
+    texto = caminho.read_bytes().decode('utf-8-sig')
     primeira = texto.splitlines()[0] if texto.splitlines() else ''
     if primeira.count(';') > primeira.count(','):
         raise ValueError('separador é ponto e vírgula; o site só lê vírgula')
@@ -102,22 +104,35 @@ def conferir_csv():
     return erros
 
 
+def sem_comentarios(js):
+    """Tira os comentários /* ... */ do mapa-narrativo.js: eles explicam os marcadores e não são pendência."""
+    return re.sub(r'/\*.*?\*/', '', js, flags=re.S)
+
+
 def conferir_marcadores():
     erros = []
-    arquivos = list(RAIZ.glob('*.html')) + list((RAIZ / 'reportagens').glob('*.html'))
-    arquivos += list((RAIZ / 'assets' / 'js').glob('*.js'))
+    # Só onde mora o conteúdo. Os outros .js usam os marcadores como modelo de texto
+    # (ex.: o [A CONFIRMAR] que a home mostra enquanto um rótulo não é confirmado).
+    mapa = RAIZ / 'assets' / 'js' / 'mapa-narrativo.js'
+    arquivos = list(RAIZ.glob('*.html')) + list((RAIZ / 'reportagens').glob('*.html')) + [mapa]
     for caminho in arquivos:
         texto = caminho.read_text(encoding='utf-8')
+        if caminho == mapa:
+            texto = sem_comentarios(texto)
         for marca in MARCADORES:
             if marca in texto:
                 erros.append(caminho.relative_to(RAIZ).as_posix() + ': ainda contém ' + marca)
+    # Rótulos da trajetória: a home mostra [A CONFIRMAR] enquanto estiverem false
+    provisorios = len(re.findall(r'\b(?:rotulo_)?confirmado:\s*false', sem_comentarios(mapa.read_text(encoding='utf-8'))))
+    if provisorios:
+        erros.append('assets/js/mapa-narrativo.js: %d rótulo(s) da trajetória ainda com confirmado: false' % provisorios)
     return erros
 
 
 def main():
     erros = conferir_csv() + conferir_marcadores()
     if not erros:
-        print('Conferência ok: CSV, somas de 100 e ausência de placeholder no HTML e no JavaScript.')
+        print('Conferência ok: CSV, somas de 100, conteúdo sem placeholder e rótulos da trajetória confirmados.')
         return 0
     print('A publicação ainda tem %d pendência(s):' % len(erros))
     for e in erros:
