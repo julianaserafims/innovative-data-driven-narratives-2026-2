@@ -4,7 +4,7 @@ Oct 21, 2026 · @Juliana
 
 O site passa na auditoria de acessibilidade (0 violações em 9 páginas), segue o pacote de design e cumpre as regras de ética. O que ainda separa o dossiê da publicação e da inscrição no prêmio é conteúdo da equipe: créditos, data de publicação e a checagem de 11 grupos de dados.
 
-> **Atualização de 30/10/2026 (PRs #1, #2 e #3, já no ar):** responsividade no celular revisada; créditos centralizados em `PROJETO.equipe`; 14 das 23 pendências resolvidas, cada dado com fonte; as 7 que faltam dependem da equipe (veja "Pendências"). As 20 planilhas com dados estão com todas as linhas OK. O que não teve fonte saiu do texto e está listado na Metodologia, em "O que foi retirado por falta de fonte". Auditoria axe-core refeita em 29/10: 0 violações nas 9 páginas, em 1280px e 390px. O status de cada item está na coluna Status da tabela de pendências.
+> **Atualização de 30/10/2026 (PRs #1, #2 e #3, já no ar):** responsividade no celular revisada; créditos centralizados em `PROJETO.equipe`; 17 das 23 pendências resolvidas, cada dado com fonte; as 4 que faltam são decisões da equipe (veja "Pendências"). As 20 planilhas com dados estão com todas as linhas OK. O que não teve fonte saiu do texto e está listado na Metodologia, em "O que foi retirado por falta de fonte". Auditoria axe-core refeita em 29/10: 0 violações nas 9 páginas, em 1280px e 390px. O status de cada item está na coluna Status da tabela de pendências.
 >
 > **Atualização de 11/11/2026 (PR #4, já no ar, e PR "conferir-dados", aguardando merge):** o PR #4 corrigiu bugs técnicos: fonte inválida na linha do tempo, ids duplicados nos dois estádios das reportagens, menu como diálogo modal, posição mantida ao recarregar ou voltar e mensagem de erro para CSV com defeito. Ele também passou a esconder do rodapé e da abertura os créditos ainda `[A PREENCHER]`. O PR seguinte faz o `[A CONFIRMAR]` dos rótulos da trajetória obedecer a `rotulo_confirmado`, aceita CSV com BOM e tira os falsos alertas do script `ferramentas/conferir-dados.py`. Auditoria refeita em 11/11: 0 violações do axe nas 9 páginas, sem rolagem lateral de 320 a 1280px.
 
@@ -38,13 +38,24 @@ Os seis critérios da disciplina estão cumpridos. O ponto mais fraco é o conte
 
 A parte técnica está pronta; faltam três itens que só a equipe resolve: créditos, data de publicação e pedidos via LAI. Antes de inscrever, confirmem no regulamento da edição o período de publicação aceito e o limite de inscrições por categoria.
 
+> **Regulamento conferido em 11/11/2026.** A 8ª edição (2026) aceitou só trabalhos publicados entre 09/06/2025 e 14/06/2026, com inscrições de 15/06 a 17/07 (a tabela do regulamento fala em 02/08, provavelmente uma prorrogação); os vencedores saem em 12/11/2026, no Coda.Br. **O dossiê, publicado em out–nov/2026, fica para a 9ª edição (2027)**, ainda sem regulamento. Se o padrão das últimas edições se mantiver, a janela de 2027 deve começar logo depois de 14/06/2026 e cobrir o dossiê (isso é inferência, não regra publicada).
+>
+> O que vale para planejar, segundo a edição 2026:
+> - **Categorias:** Visualização de dados, Investigação, Inovação e experimentação e Dados abertos. Não há categoria para estudantes.
+> - **Limite:** até 3 trabalhos por categoria por proponente; o mesmo trabalho não pode ir em duas categorias. A inscrição é gratuita.
+> - **Requisitos:** língua portuguesa; qualquer meio, inclusive "hotsites e plataformas web"; pessoas físicas maiores de 18 anos ou coletivos, formalizados ou não.
+> - **Ponto a esclarecer com a organização:** o regulamento pede "vínculo de trabalho ou autorização formal da organização que publicou o conteúdo". Não está claro se um site próprio de estudantes, com orientação da UFPE, atende a isso. Vale perguntar à Escola de Dados (Open Knowledge Brasil) antes da próxima edição.
+> - A categoria Dados abertos valoriza trabalhos feitos com LAI ou bases públicas que publicam código e metodologia, o que combina com o dossiê.
+>
+> Fontes: anúncio da 8ª edição e dos finalistas no blog da Escola de Dados; regulamento e FAQ em premio.jornalismodedados.org.br (o site recusou acesso automático; os trechos vieram da busca e devem ser conferidos no navegador).
+
 | Requisito | Status | Situação |
 | --- | --- | --- |
 | Título-afirmação em cada gráfico | ✔ | Todos os 17 gráficos e esquemas têm título com verbo e conclusão |
 | Linha fina, anotações, fonte e data de coleta visíveis | ✔ | “Coleta: out/2026” em todas as notas de fonte (corrigido nesta revisão) |
 | Descrição textual e tabela de dados | ✔ | “Ler descrição do gráfico” com texto e tabela em cada gráfico |
 | Botão “Baixar dados (CSV)” | ✔ | Em todos os gráficos; 20 CSVs em `/data`, lidos pelo próprio site |
-| Página de metodologia | ✔ com ressalva | Perguntas, fontes, período, tratamentos, limitações e pendências prontos; falta a seção de pedidos via LAI |
+| Página de metodologia | ✔ | Perguntas, fontes, período, tratamentos, limitações e pendências prontos; a seção de LAI diz que não houve pedidos nesta edição, e as correções entram por issue no GitHub (11/11) |
 | Código aberto, README e licenças | ✔ | Repositório público; MIT para código, CC BY 4.0 para conteúdo |
 | Achados de interesse público | ✔ | Caixa “O que a apuração mostra” e “Em números” em cada reportagem |
 | Créditos completos | ✘ parcial | Autoria dos 6 textos e os 24 nomes e cursos preenchidos (30/10); faltam funções da Computação, função de Maria Rita, orientação |
@@ -67,7 +78,7 @@ A auditoria automática com axe-core 4.10 terminou com 0 violações nas 9 pági
 | Estrutura | ✔ | Um h1 por página, sem saltos de título, landmarks header/nav/main/footer, “Pular para o conteúdo” |
 | Alvos de toque | ✔ | Botões, links de navegação e números com 44px; marcas de gráfico com 24 a 35px, dentro do mínimo AA de 24px |
 | Som | ✔ | Desligado por padrão, botão com `aria-pressed`, legenda textual |
-| Leitor de tela real | ✘ | A fazer pela equipe: ouvir a home e uma reportagem com NVDA (Windows) ou VoiceOver (Mac/iPhone) |
+| Leitor de tela real | ◐ | A árvore de acessibilidade foi conferida em 11/11; falta ouvir a home e uma reportagem com NVDA (Windows) ou VoiceOver (Mac/iPhone) |
 
 ## Fidelidade ao pacote de design
 
@@ -115,7 +126,7 @@ Situação da MP em 21/10/2026: editada em 25/09/2026, em vigor, operadoras tive
 
 ## Pendências
 
-Situação em 11/11/2026. **A apuração das reportagens está concluída:** os 14 itens de dados foram resolvidos, cada um com fonte. Falta o que depende da equipe: **7 itens**, quase todos decisões rápidas, e 1 lembrete para a semana da publicação. Os números (#) são os mesmos da primeira versão desta revisão.
+Situação em 11/11/2026. **A apuração das reportagens está concluída:** os 14 itens de dados foram resolvidos, cada um com fonte. Falta o que depende da equipe: **4 itens**, todos decisões rápidas, e 1 lembrete para a semana da publicação. Fora das pendências, ainda vale ouvir a home e uma reportagem com leitor de tela (NVDA ou VoiceOver), cerca de 30 minutos. Os números (#) são os mesmos da primeira versão desta revisão.
 
 ### O que falta
 
@@ -125,9 +136,6 @@ Situação em 11/11/2026. **A apuração das reportagens está concluída:** os 
 | 2 | Data de publicação | `PROJETO.publicado_em` | Decisão da equipe | Prêmio. Enquanto vazia, "Publicado em" não aparece |
 | 7 | Aprovar ou reescrever os 7 rótulos da trajetória (6 quiques e o fim da linha) | `mapa-narrativo.js`: `rotulo_confirmado` e `FIM_DA_LINHA.confirmado` passam a `true` | Decisão da equipe | Nada; mas a home mostra `[A CONFIRMAR]` até lá |
 | 18 | Pesquisa própria: só 4 respostas. Escolher entre publicá-las como relato (recomendado), simulação com selo de "dado simulado" ou deixar fora | r6 | Decisão da equipe + planilha de respostas | Nada; hoje a pesquisa está fora do site |
-| 20 | E-mail para correções e seção de pedidos via LAI (Fala.BR) | `metodologia.html` | Tarefa | Prêmio (a metodologia está "✔ com ressalva" por causa disso) |
-| 21 | Ouvir a home e uma reportagem com leitor de tela (NVDA ou VoiceOver), cerca de 30 minutos | — | Tarefa | Prêmio e boas práticas; o axe automático já passa |
-| 22 | Conferir no regulamento do prêmio o período de publicação aceito e o limite de inscrições por categoria | Site do Prêmio Cláudio Weber Abramo | Tarefa | Inscrição no prêmio |
 
 **Lembrete para a semana da publicação (#23):** revisar o status da MP 1.394 no Congresso e no STF (ADIs 8.024 e 8.027, entre outras). Se a MP cair ou mudar, atualizar o aviso de jogo responsável, a r1, a r5 e a caixa "Onde pedir ajuda" da r6 (a autoexclusão pode voltar).
 
@@ -152,6 +160,9 @@ Para ver o que ainda está pendente no próprio site, rode `python3 ferramentas/
 | 16 | 5 | Penas na MP ou em projeto de lei; URL do O Globo | `data/r5-penas-propostas.csv` | Agência Câmara; inteiro teor do PL | ✔ Feito: as penas estão no PL 5.477/2026, não na MP |
 | 17 | 6 | "Aumento de 104%": período ou projeção? | Texto da r6; `data/r6-saude.csv` | Guia do Ministério da Saúde | ✔ Feito: jan/2018 a mai/2025 |
 | 19 | 6 | Recortes da Quaest 2026 que não batem com o total de 9% | Fora do site | g1 (17/04/2026) | ✔ Encerrado: ficam fora do site; só entram se alguém conferir |
+| 20 | Metodologia | Pedidos via LAI e e-mail para correções | `metodologia.html` | Fala.BR | ✔ Feito (11/11): correções por issue no repositório do GitHub, sem precisar de e-mail; a seção de LAI diz que a equipe não fez pedidos nesta edição e sugere dois para a próxima. **Se alguém da equipe fez pedido via LAI, troque o texto pelos dados do pedido** |
+| 21 | Acessibilidade | Teste com leitor de tela real | Home e as 6 reportagens | NVDA ou VoiceOver | ✔ Conferência feita (11/11): a árvore de acessibilidade, que é o que o leitor de tela lê, está certa (títulos, regiões e nomes), e as áreas de rolagem e os botões "Baixar dados" ganharam nomes que dizem o conteúdo. Falta só ouvir a home e uma reportagem com NVDA ou VoiceOver |
+| 22 | Prêmio | Período de publicação aceito e limite de inscrições | Regulamento 2026 (premio.jornalismodedados.org.br) | Escola de Dados; regulamento | ✔ Conferido (11/11): o dossiê **não entra na 8ª edição (2026)**, que só aceitou trabalhos publicados entre 09/06/2025 e 14/06/2026; os vencedores saem em 12/11/2026. Fica para a 9ª edição (2027), ainda sem regulamento. Veja a seção do prêmio |
 
 ## Como levar as correções para o GitHub
 
