@@ -29,14 +29,14 @@ const PROJETO = {
     { nome: 'Isaura Maria Santos Barbosa de Brito', curto: 'Isaura Maria', curso: 'Jornalismo', rep: 'r6' },
     { nome: 'Luana Vitória Santos de Araújo', curto: 'Luana Araújo', curso: 'Jornalismo', rep: 'r6' },
     { nome: 'Maria Rita Cavalcante de Oliveira Trajano', curso: 'Jornalismo', funcao: '[A CONFIRMAR: função]' },
-    { nome: 'Alexandre Candido Souza', curso: 'Computação', funcao: '[A PREENCHER: função]' },
+    { nome: 'Alexandre Candido Souza', curso: 'Computação', funcao: 'Revisão e Testes' },
     { nome: 'Cleber Victor da Silva Júnior', curso: 'Computação', funcao: '[A PREENCHER: função]' },
     { nome: 'Gabriel Vinicius Ayres Barbosa', curso: 'Computação', funcao: 'Desenvolvimento' },
     { nome: 'Guilherme Montenegro de Albuquerque', curso: 'Computação', funcao: '[A PREENCHER: função]' },
-    { nome: 'Juliana Serafim da Silva', curso: 'Computação', funcao: 'Desenvolvimento' },
+    { nome: 'Juliana Serafim da Silva', curso: 'Computação', funcao: 'Design e Desenvolvimento' },
     { nome: 'Luan de Oliveira Romancini Leite', curso: 'Computação', funcao: '[A PREENCHER: função]' },
-    { nome: 'Marcos Christopher de Sousa Martins', curso: 'Computação', funcao: 'Desenvolvimento' },
-    { nome: 'Maria Clara Gomes Alves', curso: 'Computação', funcao: '[A PREENCHER: função]' },
+    { nome: 'Marcos Christopher de Sousa Martins', curso: 'Computação', funcao: 'Design e Desenvolvimento' },
+    { nome: 'Maria Clara Gomes Alves', curso: 'Computação', funcao: 'Design' },
     { nome: 'Mariana Beatriz Campêlo Ferreira', curso: 'Computação', funcao: '[A PREENCHER: função]' },
     { nome: 'Mariana Melo dos Santos', curso: 'Computação', funcao: '[A PREENCHER: função]' },
     { nome: 'Pericles Ferreira Sardinha', curso: 'Computação', funcao: 'Desenvolvimento' },
@@ -45,8 +45,8 @@ const PROJETO = {
   /* Demais créditos do rodapé e da abertura das reportagens ("Reportagem e texto" vem da equipe). */
   creditos: [
     ['Dados', '[A PREENCHER: nomes]'],
-    ['Design e desenvolvimento', '[A PREENCHER: nomes]'],
-    ['Orientação', '[A PREENCHER: professor(a)]']
+    ['Design e Desenvolvimento', '[A PREENCHER: nomes]'],
+    ['Orientação', 'Prof. Dr. Guilherme Ranoya Seixas Lins (Departamento de Design, CAC/UFPE), Prof. Dr. Nivan Roberto Ferreira Júnior (Centro de Informática, UFPE) e Prof. Dr. Rodrigo do Espírito Santo da Cunha (Departamento de Comunicação Social, CAC/UFPE), com apoio de Maria Carolina Santiago Dantas da Silva (mestranda do PPGDesign/UFPE)']
   ],
   disciplina: 'Narrativas Inovadoras com Dados na Comunicação Digital',
   instituicao: 'UFPE · Centro de Artes e Comunicação (CAC)',
