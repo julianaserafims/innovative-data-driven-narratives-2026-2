@@ -507,12 +507,17 @@ a:hover { color: var(--color-destaque_interativo_hover); }
 .coluna { max-width: var(--font-maxLineLength); }
 .corpo > * + * { margin-top: var(--space-space_5); }
 .corpo h2 { margin-top: var(--space-space_8); }
+.corpo > h3 { color: var(--color-tinta_azul); margin-top: var(--space-space_7); }
+.corpo > h4 { font-family: var(--font-family-display); font-size: calc(var(--fs-h3) * .82); line-height: 1.1; text-transform: uppercase; color: var(--color-texto); margin-top: var(--space-space_6); }
 .corpo p { max-width: var(--font-maxLineLength); }
 .sangra { max-width: 1000px; }
 
 .achados { background: var(--color-superficie); border: 2px solid var(--color-texto); padding: var(--space-space_5); max-width: var(--font-maxLineLength); }
 .achados h2 { font-size: var(--fs-h3); color: var(--color-texto); margin: 0 0 var(--space-space_3); }
+.achados h3 { font-size: var(--fs-h3); color: var(--color-texto); margin: 0 0 var(--space-space_3); }
 .achados ol { margin: 0; padding-left: 1.3em; display: grid; gap: var(--space-space_3); }
+.achados ul { margin: 0; padding-left: 1.3em; display: grid; gap: var(--space-space_3); }
+.achados p { margin-top: var(--space-space_3); }
 .achados li::marker { font-family: var(--font-family-mono); font-weight: 600; }
 
 .definicao { border-left: 3px solid var(--cat); background: var(--color-superficie); border-top: 2px solid var(--color-texto); border-right: 2px solid var(--color-texto); border-bottom: 2px solid var(--color-texto); padding: var(--space-space_4) var(--space-space_5); max-width: var(--font-maxLineLength); }
