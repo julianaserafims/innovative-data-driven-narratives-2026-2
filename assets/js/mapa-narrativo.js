@@ -29,7 +29,7 @@ const PROJETO = {
     { nome: 'Isaura Maria Santos Barbosa de Brito', curto: 'Isaura Maria', curso: 'Jornalismo', rep: 'r6' },
     { nome: 'Luana Vitória Santos de Araújo', curto: 'Luana Araújo', curso: 'Jornalismo', rep: 'r6' },
     { nome: 'Maria Rita Cavalcante de Oliveira Trajano', curso: 'Jornalismo', funcao: '[A CONFIRMAR: função]' },
-    { nome: 'Alexandre Candido Souza', curso: 'Computação', funcao: 'Revisão e Testes' },
+    { nome: 'Alexandre Candido Souza', curso: 'Computação', funcao: 'Desenvolvimento e Revisão' },
     { nome: 'Cleber Victor da Silva Júnior', curso: 'Computação', funcao: 'Desenvolvimento' },
     { nome: 'Gabriel Vinicius Ayres Barbosa', curso: 'Computação', funcao: 'Desenvolvimento' },
     { nome: 'Guilherme Montenegro de Albuquerque', curso: 'Computação', funcao: '[A PREENCHER: função]' },
