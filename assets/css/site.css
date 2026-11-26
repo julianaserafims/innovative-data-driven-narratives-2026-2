@@ -770,11 +770,11 @@ a, button, summary, .c-ponto, .hs { touch-action: manipulation; -webkit-tap-high
    CELULAR 2: barra do topo colorida, estádio e bola que cabem na tela, toque no lugar do mouse
    ===================================================================== */
 
-/* ---- Barra do topo: azul, com friso amarelo e verde, e links da UFPE e dos centros ---- */
+/* ---- Barra do topo: verde gramado, com friso amarelo e azul, e links da UFPE e dos centros ---- */
 .cabecalho {
-  background: var(--color-tinta_azul); color: #fff;
+  background: var(--color-destaque_interativo); color: #fff;
   border-bottom: 3px solid var(--color-faixa_amarela);
-  box-shadow: 0 3px 0 var(--color-tinta_verde);
+  box-shadow: 0 3px 0 var(--color-tinta_azul);
 }
 .topo-esq { display: flex; align-items: center; gap: 8px; min-width: 0; }
 .marca-topo { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; min-width: 44px; flex: none; color: #fff; text-decoration: none; }
