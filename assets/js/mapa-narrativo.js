@@ -23,7 +23,7 @@ const PROJETO = {
     { nome: 'Arthur Wesley Andrade da Silva', curto: 'Arthur Andrade', curso: 'Jornalismo', rep: 'r3' },
     { nome: 'Larissa Labelle da Silva Gouveia Batista', curto: 'Larissa Labelle', curso: 'Jornalismo', rep: 'r3' },
     { nome: 'Manuela Vasconcelos Serpa Lopes de Souza', curto: 'Manuela Serpa', curso: 'Jornalismo', rep: 'r4' },
-    { nome: 'Ellywelton da Silva Alves', curto: 'Ellywelton Alves', curso: 'Jornalismo' },
+    { nome: 'Ellywelton da Silva Alves', curto: 'Ellywelton Alves', curso: 'Jornalismo', rep: 'r4' },
     { nome: 'Maria Candida Serpa Uchoa', curto: 'Maria Cândida', curso: 'Jornalismo', rep: 'r5' },
     { nome: 'Lays Karolline da Silva Soares', curto: 'Lays Soares', curso: 'Jornalismo', rep: 'r5' },
     { nome: 'Isaura Maria Santos Barbosa de Brito', curto: 'Isaura Maria', curso: 'Jornalismo', rep: 'r6' },
