@@ -23,7 +23,7 @@ const PROJETO = {
     { nome: 'Arthur Wesley Andrade da Silva', curto: 'Arthur Andrade', curso: 'Jornalismo', rep: 'r3' },
     { nome: 'Larissa Labelle da Silva Gouveia Batista', curto: 'Larissa Labelle', curso: 'Jornalismo', rep: 'r3' },
     { nome: 'Manuela Vasconcelos Serpa Lopes de Souza', curto: 'Manuela Serpa', curso: 'Jornalismo', rep: 'r4' },
-    { nome: 'Ellywelton da Silva Alves', curto: 'Ellywelton Alves', curso: 'Jornalismo', rep: 'r4' },
+    { nome: 'Ellywelton da Silva Alves', curto: 'Ellywelton Alves', curso: 'Jornalismo' },
     { nome: 'Maria Candida Serpa Uchoa', curto: 'Maria Cândida', curso: 'Jornalismo', rep: 'r5' },
     { nome: 'Lays Karolline da Silva Soares', curto: 'Lays Soares', curso: 'Jornalismo', rep: 'r5' },
     { nome: 'Isaura Maria Santos Barbosa de Brito', curto: 'Isaura Maria', curso: 'Jornalismo', rep: 'r6' },
@@ -80,8 +80,8 @@ const MAPA = {
   reportagens: [
     {
       id: "r1", numero: 1,
-      titulo_provisorio: "Antes do apito, a propaganda",
-      linha_fina: "O que são as bets, como funciona uma aposta de quota fixa e como o setor foi legalizado no Brasil.",
+      titulo_provisorio: "A CIVILIZAÇÃO DAS APOSTAS",
+      linha_fina: "O que são as apostas esportivas e como elas surgiram",
       tema: "Introdução: o que são as bets e como funcionam",
       hotspot_estadio: "hs_r1", posicao_na_linha_declinio: 1,
       rotulo_temporal: "2018 · Lei 13.756 legaliza a aposta de quota fixa", rotulo_confirmado: true,
@@ -90,8 +90,8 @@ const MAPA = {
     },
     {
       id: "r2", numero: 2,
-      titulo_provisorio: "O que se assina longe da torcida",
-      linha_fina: "Patrocínios, contratos e jogadores-garotos-propaganda: como as bets entraram nos clubes.",
+      titulo_provisorio: "O mal na raiz",
+      linha_fina: "Como as bets conseguiram virar pilares dos clubes, retratando a má gestão do futebol brasileiro",
       tema: "Bets nos clubes",
       hotspot_estadio: "hs_r2", posicao_na_linha_declinio: 2,
       rotulo_temporal: "2019–2022 · Patrocínios tomam as camisas", rotulo_confirmado: true,
@@ -100,8 +100,8 @@ const MAPA = {
     },
     {
       id: "r3", numero: 3,
-      titulo_provisorio: "A voz do jogo tem patrocinador",
-      linha_fina: "Quem narra a partida também anuncia a aposta, e o torcedor ouve as duas coisas no mesmo tom.",
+      titulo_provisorio: "Atenção para o toque de 5 segundos",
+      linha_fina: "Como as bets chegaram, se consolidaram e sumiram na mídia e no jornalismo esportivos",
       tema: "Veículos de comunicação patrocinados",
       hotspot_estadio: "hs_r3", posicao_na_linha_declinio: 3,
       rotulo_temporal: "2024–2026 · A transmissão vira vitrine", rotulo_confirmado: true,
@@ -110,8 +110,8 @@ const MAPA = {
     },
     {
       id: "r4", numero: 4,
-      titulo_provisorio: "O campeonato tem dono",
-      linha_fina: "Quando a competição inteira tem patrocinador e o resultado vira mercadoria.",
+      titulo_provisorio: "Muito além das placas: Como as bets ocuparam espaço nas competições do futebol brasileiro",
+      linha_fina: "Com patrocínios milionários, as bets deixaram de ser apenas anunciantes e se tornaram parte da estrutura comercial e simbólica do futebol, interferindo com a identidade do futebol brasileiro.",
       tema: "Competições e federações (inclui manipulação de resultados)",
       hotspot_estadio: "hs_r4", posicao_na_linha_declinio: 4,
       rotulo_temporal: "2024 · O Brasileirão ganha nome de bet", rotulo_confirmado: true,
@@ -120,8 +120,8 @@ const MAPA = {
     },
     {
       id: "r5", numero: 5,
-      titulo_provisorio: "Quem revisa o lance das bets",
-      linha_fina: "Leis, portarias e fiscalização: o que a regulamentação mudou e o que ficou de fora.",
+      titulo_provisorio: "Do jogo do bicho ao tigrinho",
+      linha_fina: "A trajetória da regulamentação das bets no Brasil",
       tema: "Regulamentação das bets",
       hotspot_estadio: "hs_r5", posicao_na_linha_declinio: 5,
       rotulo_temporal: "2023–2025 · Lei 14.790 e mercado regulado", rotulo_confirmado: true,
@@ -130,8 +130,8 @@ const MAPA = {
     },
     {
       id: "r6", numero: 6,
-      titulo_provisorio: "Da torcida à aposta: quem paga a conta",
-      linha_fina: "O torcedor que virou apostador, o dinheiro que sai do orçamento da casa e o custo que fica para a saúde pública.",
+      titulo_provisorio: "O rosto por trás do jogo",
+      linha_fina: "Como as Bets transformam a coletividade da torcida em estratégia para favorecer as casas de aposta no futebol",
       tema: "Torcedores como apostadores (lado social)",
       hotspot_estadio: "hs_r6", posicao_na_linha_declinio: 6,
       rotulo_temporal: "2025–2026 · A conta chega à saúde pública", rotulo_confirmado: true,
@@ -155,17 +155,17 @@ const FIM_DA_LINHA = {
    --------------------------------------------------------------------- */
 const ESTADIO = {
   hs_r1: { area: "Placas de publicidade", curto: "Placas", icone: "megaphone", marcador: [220, 402],
-           microcopy: "Antes do apito, a propaganda. Como funciona uma aposta de quota fixa." },
+           microcopy: "A civilização das apostas: o que são e como surgiram as apostas esportivas." },
   hs_r2: { area: "Túnel do vestiário", curto: "Vestiário", icone: "door-open", marcador: [480, 336],
-           microcopy: "O que se assina longe da torcida: patrocínios, jogadores e contratos." },
+           microcopy: "O mal na raiz: como as bets se tornaram pilares dos clubes." },
   hs_r3: { area: "Cabine de imprensa", curto: "Imprensa", icone: "video", marcador: [576, 172],
-           microcopy: "Quem narra o jogo também anuncia a aposta?" },
+           microcopy: "Atenção para o toque de 5 segundos: as bets na mídia esportiva." },
   hs_r4: { area: "Gramado e faixa do campeonato", curto: "Gramado", icone: "trophy", marcador: [480, 506],
-           microcopy: "Quando o campeonato inteiro tem patrocinador e o resultado vira mercadoria." },
+           microcopy: "Muito além das placas: as bets nas competições do futebol brasileiro." },
   hs_r5: { area: "Cabine do VAR", curto: "VAR", icone: "landmark", marcador: [386, 486],
-           microcopy: "Quem revisa o lance das bets: leis, portarias e fiscalização." },
+           microcopy: "Do jogo do bicho ao tigrinho: a regulamentação das bets no Brasil." },
   hs_r6: { area: "Arquibancada", curto: "Arquibancada", icone: "users", marcador: [150, 214],
-           microcopy: "Da torcida à aposta: quem paga a conta." }
+           microcopy: "O rosto por trás do jogo: os efeitos das apostas na torcida." }
 };
 
 /* ---------------------------------------------------------------------
