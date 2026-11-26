@@ -392,7 +392,7 @@ a:hover { color: var(--color-destaque_interativo_hover); }
 /* link no meio do texto miúdo do rodapé (repositório): sublinhado, para não depender só da cor (axe: link-in-text-block) */
 .rodape .fino a { color: inherit; text-decoration: underline; text-underline-offset: 2px; overflow-wrap: anywhere; }
 /* endereços longos (site e repositório) quebram em qualquer ponto em vez de estourar a largura do celular */
-#url-site a, .pagina-simples p a[href^="http"] { overflow-wrap: anywhere; }
+#url-site a, main p a[href^="http"]:not(.btn), main li a[href^="http"]:not(.btn) { overflow-wrap: anywhere; }
 .rodape ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; font-size: 14px; }
 .rodape ul a { display: inline-flex; min-height: 32px; align-items: center; }
 
@@ -791,7 +791,8 @@ a, button, summary, .c-ponto, .hs { touch-action: manipulation; -webkit-tap-high
   position: relative; display: inline-flex; align-items: center; min-height: 34px; padding: 0 10px;
   color: #fff; text-decoration: none; white-space: nowrap;
   font-family: var(--font-family-mono); font-size: 12px; font-weight: 600; letter-spacing: 0.04em;
-  border: 1.5px solid rgba(255, 255, 255, .75); background: rgba(255, 255, 255, .1);
+  /* fundo levemente escurecido: no topo verde, o clareado deixava o texto branco de 12px abaixo de 4,5:1 */
+  border: 1.5px solid rgba(255, 255, 255, .75); background: rgba(0, 0, 0, .15);
 }
 .inst-link::after { content: ''; position: absolute; inset: -5px 0; }      /* alvo de toque de 44 px de altura */
 .inst-link:hover { background: var(--color-faixa_amarela); border-color: var(--color-faixa_amarela); color: var(--color-texto); }
