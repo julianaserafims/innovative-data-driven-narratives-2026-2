@@ -42,10 +42,9 @@ const PROJETO = {
     { nome: 'Pericles Ferreira Sardinha', curso: 'Computação', funcao: 'Desenvolvimento' },
     { nome: 'Vinicius Alves Fialho', curso: 'Computação', funcao: '[A PREENCHER: função]' }
   ],
-  /* Demais créditos do rodapé e da abertura das reportagens ("Reportagem e texto" vem da equipe). */
+  /* Demais créditos do rodapé. "Reportagem e texto", "Dados" e "Design e desenvolvimento" saem
+     sozinhos da equipe acima (campos rep e funcao); aqui fica só o que não é da equipe. */
   creditos: [
-    ['Dados', '[A PREENCHER: nomes]'],
-    ['Design e Desenvolvimento', '[A PREENCHER: nomes]'],
     ['Orientação', 'Prof. Dr. Guilherme Ranoya Seixas Lins (Departamento de Design, CAC/UFPE), Prof. Dr. Nivan Roberto Ferreira Júnior (Centro de Informática, UFPE) e Prof. Dr. Rodrigo do Espírito Santo da Cunha (Departamento de Comunicação Social, CAC/UFPE), com apoio de Maria Carolina Santiago Dantas da Silva (mestranda do PPGDesign/UFPE)']
   ],
   disciplina: 'Narrativas Inovadoras com Dados na Comunicação Digital',

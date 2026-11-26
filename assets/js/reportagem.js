@@ -107,7 +107,7 @@ function iniciarReportagem() {
   $$('.menu-item[data-abre="' + R.id + '"]').forEach(a => a.setAttribute('aria-current', 'page'));
 
   /* créditos e datas da abertura: vêm de PROJETO (mapa-narrativo.js), como o rodapé */
-  $('#creditos-rep').innerHTML = [['Texto e reportagem', autores(R.id)]].concat(PROJETO.creditos.filter(([f, n]) => f !== 'Orientação' && !/^\[/.test(n)))
+  $('#creditos-rep').innerHTML = [['Texto e reportagem', autores(R.id)]].concat(creditosGerais().filter(([f, n]) => f !== 'Orientação' && !/^\[/.test(n)))
     .map(([f, n]) => esc(f) + ': ' + pend(n)).join(' · ');
   const publicado = $('#publicado-rep');
   if (/^\[/.test(PROJETO.publicado_em)) {
