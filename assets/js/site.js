@@ -817,10 +817,22 @@ function iniciarComum() {
    montados aqui para que créditos e menu sejam editados num lugar só.
    ===================================================================== */
 function pend(v) { return /^\[/.test(v) ? '<span class="pendente">' + esc(v) + '</span>' : esc(v); }
-/* "A, B e C": quem escreveu a reportagem repId (ou todas, sem repId), na ordem de PROJETO.equipe */
-function autores(repId) {
-  const n = PROJETO.equipe.filter(p => p.rep && (!repId || p.rep === repId)).map(p => p.curto);
+/* "A, B e C"; lista vazia vira pendência (o rodapé e a abertura escondem o que começa com "[") */
+function juntarNomes(n) {
   return n.length ? (n.length > 1 ? n.slice(0, -1).join(', ') + ' e ' + n[n.length - 1] : n[0]) : '[A PREENCHER: nomes]';
+}
+/* quem escreveu a reportagem repId (ou todas, sem repId), na ordem de PROJETO.equipe */
+function autores(repId) {
+  return juntarNomes(PROJETO.equipe.filter(p => p.rep && (!repId || p.rep === repId)).map(p => p.curto));
+}
+/* quem tem na função algo que casa com padrao; sem "curto", entra o nome completo */
+function comFuncao(padrao) {
+  return juntarNomes(PROJETO.equipe.filter(p => p.funcao && !/^\[/.test(p.funcao) && padrao.test(p.funcao)).map(p => p.curto || p.nome));
+}
+/* Créditos além de "Reportagem e texto": os da equipe saem das funções em PROJETO.equipe
+   (ninguém digita o nome duas vezes); os demais, como a orientação, de PROJETO.creditos */
+function creditosGerais() {
+  return [['Dados', comFuncao(/dados/i)], ['Design e desenvolvimento', comFuncao(/design|desenvolvimento/i)]].concat(PROJETO.creditos);
 }
 function montarCasca() {
   const main = document.querySelector('main');
@@ -878,7 +890,7 @@ function montarCasca() {
     <div class="rodape-grade">
       <section aria-labelledby="rod-cred">
         <h2 id="rod-cred">Créditos</h2>
-        <dl>${[['Reportagem e texto', autores()]].concat(PROJETO.creditos).filter(([, n]) => !/^\[/.test(n)).map(([f, n]) => '<dt>' + esc(f) + '</dt><dd>' + pend(n) + '</dd>').join('')}</dl>
+        <dl>${[['Reportagem e texto', autores()]].concat(creditosGerais()).filter(([, n]) => !/^\[/.test(n)).map(([f, n]) => '<dt>' + esc(f) + '</dt><dd>' + pend(n) + '</dd>').join('')}</dl>
       </section>
       <section aria-labelledby="rod-disc">
         <h2 id="rod-disc">Disciplina</h2>
